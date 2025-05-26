@@ -101,6 +101,7 @@ no_error:
     # Scenario 2: Mach, Machdep, and Diagnostics syscall
     #
     ; rax contains the return value
+
 end:
 ```
 
@@ -172,7 +173,6 @@ no_error:
     # Scenario 3: `mach_absolute_time` & `mach_continuous_time`
     #
     ; x0 contains the return value
-
 
 end:
 ```

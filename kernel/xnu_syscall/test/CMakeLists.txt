@@ -1,0 +1,9 @@
+add_executable(test_sys_exit_returns_0 "bsd/sys_exit/test_return_0.c")
+target_link_libraries(test_sys_exit_returns_0 xnu_syscall)
+
+add_executable(test_sys_exit_returns_1 "bsd/sys_exit/test_return_1.c")
+target_link_libraries(test_sys_exit_returns_1 xnu_syscall)
+
+add_test(NAME test_sys_exit_returns_0 COMMAND test_sys_exit_returns_0)
+add_test(NAME test_sys_exit_returns_1 COMMAND test_sys_exit_returns_1)
+set_property(TEST test_sys_exit_returns_1 PROPERTY WILL_FAIL true)

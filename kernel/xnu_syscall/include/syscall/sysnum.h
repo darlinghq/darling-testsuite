@@ -1,0 +1,7 @@
+#ifndef DARLING_TESTSUITE_SYSNUM
+#define DARLING_TESTSUITE_SYSNUM
+
+#define	SYSNUM_EXIT           1
+#define	SYSNUM_FORK           2
+
+#endif // DARLING_TESTSUITE_SYSNUM

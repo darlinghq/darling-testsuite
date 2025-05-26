@@ -1,0 +1,17 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        // https://stackoverflow.com/a/76447033/5988706
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug (ctest)",
+            "program": "${cmake.testProgram}",
+            "args": [ "${cmake.testArgs}" ],
+            "cwd": "${cmake.testWorkingDirectory}"
+        }
+    ]
+}

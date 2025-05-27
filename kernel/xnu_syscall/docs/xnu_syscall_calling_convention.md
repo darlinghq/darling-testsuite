@@ -53,8 +53,8 @@
 
     # While pretty much all of arguments match the C calling
     # convention, there is one exception to this rule...
-    # For some reason, Apple has decided that `r10` will be
-    # the fourth argument instead of `rcx`
+    # Due to how the `syscall` instruction works, `rcx` will
+    # be overwriten, so a different register will need to be used.
     ; movq	%rcx, %r10
 
     # Call syscall
@@ -180,6 +180,7 @@ end:
 # Sources
 
 * [x86-64 `UNIX_SYSCALL` macro](https://github.com/apple-oss-distributions/xnu/blob/xnu-7195.141.2/libsyscall/custom/SYS.h#L134-L142)
+  * [An explantion for `r10` replacing `rcx` as the fourth argument](https://stackoverflow.com/a/32480482)
 * [x86-64 `hndl_syscall` assembly method](https://github.com/apple-oss-distributions/xnu/blob/xnu-7195.141.2/osfmk/x86_64/idt64.s#L1865-L1946)
   * [x86-64 `unix_syscall64` method](https://github.com/apple-oss-distributions/xnu/blob/xnu-7195.141.2/bsd/dev/i386/systemcalls.c#L287-L504)
   * [x86-64 `mach_call_munger64` method](https://github.com/apple-oss-distributions/xnu/blob/xnu-7195.141.2/osfmk/i386/bsd_i386.c#L611-L727)

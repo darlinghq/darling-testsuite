@@ -11,7 +11,128 @@
 
 ## i386
 
-*TODO*
+```
+/*
+ * We have two entry points. int's is used for syscalls which need to preserve
+ * %ecx across the call, or return a 64-bit value in %eax:%edx. sysenter is used
+ * for the majority of syscalls which just return a value in %eax.
+ */
+```
+
+```
+#define UNIX_INT     0x80
+```
+
+```
+#define UNIX_SYSCALL_TRAP	\
+	int $(UNIX_INT)
+```
+
+```
+LABEL(__sysenter_trap)
+	popl %edx
+	movl %esp, %ecx
+	sysenter
+```
+
+```
+#define UNIX_SYSCALL_SYSENTER		call __sysenter_trap
+```
+
+```
+#if defined(__SYSCALL_32BIT_ARG_BYTES) && ((__SYSCALL_32BIT_ARG_BYTES >= 4) && (__SYSCALL_32BIT_ARG_BYTES <= 20))
+#define UNIX_SYSCALL_NONAME(name, nargs, cerror)			\
+	movl	$(SYS_##name | (__SYSCALL_32BIT_ARG_BYTES << I386_SYSCALL_ARG_BYTES_SHIFT)), %eax		;\
+	UNIX_SYSCALL_SYSENTER					;\
+	jnb	2f						;\
+	BRANCH_EXTERN(tramp_##cerror)				;\
+2:
+#else /* __SYSCALL_32BIT_ARG_BYTES < 4 || > 20 */
+#define UNIX_SYSCALL_NONAME(name, nargs, cerror)	\
+	movl	$ SYS_##name, %eax			;\
+	UNIX_SYSCALL_SYSENTER				;\
+	jnb	2f					;\
+	BRANCH_EXTERN(tramp_##cerror)			;\
+2:
+#endif
+
+
+#define UNIX_SYSCALL_INT_NONAME(name, nargs)		\
+	.globl	tramp_cerror_nocancel			;\
+	movl	$ SYS_##name, %eax			;\
+	UNIX_SYSCALL_TRAP				;\
+	jnb	2f					;\
+	BRANCH_EXTERN(tramp_cerror_nocancel) 		;\
+2:
+```
+
+On i386 macOS, There are two ways to call a syscall By using either `sysenter` or `int`.
+
+### sysenter
+
+```
+    movl	$(SYS_##name | (__SYSCALL_32BIT_ARG_BYTES << I386_SYSCALL_ARG_BYTES_SHIFT)), %eax
+    # The way the syscall number is handled is a bit 
+    # complicated... The main thing I noticed is that:
+    # --> unix syscall is a positive number
+    # --> mach syscall is a negative number
+
+    # Set the syscall number
+    movl	$0, %eax
+
+    # All arguments lives in the stack
+
+    push    N
+    ; ...
+    push    2
+    push    1
+    push    0
+
+    # Call syscall
+    call call_sysenter
+
+    # The (unix) syscall will set the carry flag:
+    # --> carry flag is set = an error has occured
+    # --> carry flag is not set = no error has occured
+    jnb	no_error
+
+    #
+    # Scenario 1: Unix syscall returns an error that is neither
+    # ERESTART nor EJUSTRETURN
+    #
+    ; eax contains the error code
+
+no_error:
+    #
+    # Scenario 1: Unix syscall
+    #
+
+    # If no error has occured
+    ; eax contains the first return value (or zero)
+    ; edx contains the second return value (or zero)
+
+    #
+    # Scenario 2: Mach syscall
+    #
+    ; eax contains the first return value
+
+    ret
+
+call_sysenter:
+    # sysenter requires that the following registers are set:
+    # --> %ecx - stack pointer for sysexit
+    # --> %edx - return address
+	popl %edx       ; Use the return address from `call``
+	movl %esp, %ecx ; Use our current stack pointer for sysexit
+	sysenter
+
+```
+
+### int
+
+```
+
+```
 
 ## arm
 
@@ -183,6 +304,10 @@ end:
 
 # Sources
 
+* [i386 `UNIX_SYSCALL_NONAME` macro](https://github.com/apple-oss-distributions/xnu/blob/xnu-7195.141.2/libsyscall/custom/SYS.h#L81-L95) & [i386 `UNIX_SYSCALL_INT_NONAME` macro](https://github.com/apple-oss-distributions/xnu/blob/xnu-7195.141.2/libsyscall/custom/SYS.h#L97-L102)
+* [i386 `idt64_..._scall` assembly methods](https://github.com/apple-oss-distributions/xnu/blob/xnu-7195.141.2/osfmk/x86_64/idt64.s#L277-L303) & [i386 `hndl_sysenter` assembly method](https://github.com/apple-oss-distributions/xnu/blob/xnu-7195.141.2/osfmk/x86_64/idt64.s#L1803-L1810)
+  * [1386 `unix_syscall` method](https://github.com/apple-oss-distributions/xnu/blob/xnu-7195.141.2/bsd/dev/i386/systemcalls.c#L80-L285)
+  * [i386 `mach_call_munger` method](https://github.com/apple-oss-distributions/xnu/blob/xnu-7195.141.2/osfmk/i386/bsd_i386.c#L487-L606)
 * [x86-64 `UNIX_SYSCALL` macro](https://github.com/apple-oss-distributions/xnu/blob/xnu-7195.141.2/libsyscall/custom/SYS.h#L134-L142)
   * [An explantion for `r10` replacing `rcx` as the fourth argument](https://stackoverflow.com/a/32480482)
 * [x86-64 `hndl_syscall` assembly method](https://github.com/apple-oss-distributions/xnu/blob/xnu-7195.141.2/osfmk/x86_64/idt64.s#L1865-L1946)

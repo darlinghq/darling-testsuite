@@ -11,76 +11,34 @@
 
 ## i386
 
-```
-/*
- * We have two entry points. int's is used for syscalls which need to preserve
- * %ecx across the call, or return a 64-bit value in %eax:%edx. sysenter is used
- * for the majority of syscalls which just return a value in %eax.
- */
-```
-
-```
-#define UNIX_INT     0x80
-```
-
-```
-#define UNIX_SYSCALL_TRAP	\
-	int $(UNIX_INT)
-```
-
-```
-LABEL(__sysenter_trap)
-	popl %edx
-	movl %esp, %ecx
-	sysenter
-```
-
-```
-#define UNIX_SYSCALL_SYSENTER		call __sysenter_trap
-```
-
-```
-#if defined(__SYSCALL_32BIT_ARG_BYTES) && ((__SYSCALL_32BIT_ARG_BYTES >= 4) && (__SYSCALL_32BIT_ARG_BYTES <= 20))
-#define UNIX_SYSCALL_NONAME(name, nargs, cerror)			\
-	movl	$(SYS_##name | (__SYSCALL_32BIT_ARG_BYTES << I386_SYSCALL_ARG_BYTES_SHIFT)), %eax		;\
-	UNIX_SYSCALL_SYSENTER					;\
-	jnb	2f						;\
-	BRANCH_EXTERN(tramp_##cerror)				;\
-2:
-#else /* __SYSCALL_32BIT_ARG_BYTES < 4 || > 20 */
-#define UNIX_SYSCALL_NONAME(name, nargs, cerror)	\
-	movl	$ SYS_##name, %eax			;\
-	UNIX_SYSCALL_SYSENTER				;\
-	jnb	2f					;\
-	BRANCH_EXTERN(tramp_##cerror)			;\
-2:
-#endif
-
-
-#define UNIX_SYSCALL_INT_NONAME(name, nargs)		\
-	.globl	tramp_cerror_nocancel			;\
-	movl	$ SYS_##name, %eax			;\
-	UNIX_SYSCALL_TRAP				;\
-	jnb	2f					;\
-	BRANCH_EXTERN(tramp_cerror_nocancel) 		;\
-2:
-```
-
-On i386 macOS, There are two ways to call a syscall By using either `sysenter` or `int`.
+On i386 macOS, There are two ways to call a syscall: `sysenter` or `int`.
 
 ### sysenter
 
+sysenter is commonly used for Unix and Mach syscalls. It's mainly used for
+syscalls that only return a value to the `%eax` register.
+
 ```
-    movl	$(SYS_##name | (__SYSCALL_32BIT_ARG_BYTES << I386_SYSCALL_ARG_BYTES_SHIFT)), %eax
-    # The way the syscall number is handled is a bit 
-    # complicated... The main thing I noticed is that:
-    # --> unix syscall is a positive number
-    # --> mach syscall is a negative number
+    # Note: Apple's create-syscalls.pl tool seems to generate a
+    # `__SYSCALL_32BIT_ARG_BYTES` macro.
+    # --> On the user space side, the macro's value may be added
+    #     on the upper 16 bits of the syscall number.
+    # --> However... the kernel space doesn't seems to care about the
+    #     appended arg bytes. It will only check the lower 16 bits.
+    #     The `sysent` table is used to determine the size of the 
+    #     arguments.
 
-    # Set the syscall number
-    movl	$0, %eax
+    #
+    # Syscall number structure
+    #
 
-    # All arguments lives in the stack
+    # --> A Unix syscall is a positive number
+    # --> A Mach syscall is a negative number
+
+    # Set syscall number
+    mov $1, %eax
+
+    # All arguments are stored in the stack
 
     push    N
     ; ...
@@ -122,9 +80,9 @@ call_sysenter:
     # sysenter requires that the following registers are set:
     # --> %ecx - stack pointer for sysexit
     # --> %edx - return address
-	popl %edx       ; Use the return address from `call``
-	movl %esp, %ecx ; Use our current stack pointer for sysexit
-	sysenter
+	  popl %edx       ; Use the return address from `call` instruction
+	  movl %esp, %ecx ; Use our current stack pointer for sysexit
+	  sysenter
 
 ```
 

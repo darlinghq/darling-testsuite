@@ -304,18 +304,46 @@ end:
 
 # Sources
 
-* [i386 `UNIX_SYSCALL_NONAME` macro](https://github.com/apple-oss-distributions/xnu/blob/xnu-7195.141.2/libsyscall/custom/SYS.h#L81-L95) & [i386 `UNIX_SYSCALL_INT_NONAME` macro](https://github.com/apple-oss-distributions/xnu/blob/xnu-7195.141.2/libsyscall/custom/SYS.h#L97-L102)
+## Universal
+* [*universal* `mach_traps.s` file](https://github.com/apple-oss-distributions/xnu/blob/xnu-7195.141.2/libsyscall/mach/mach_traps.s)
+  * [*universal* `mach/syscall_sw.h` file](https://github.com/apple-oss-distributions/xnu/blob/xnu-7195.141.2/osfmk/mach/syscall_sw.h)
+* [*universal* `syscalls.master` file](https://github.com/apple-oss-distributions/xnu/blob/xnu-7195.141.2/bsd/kern/syscalls.master)
+
+## i386
+
+### User space
+* [i386 `UNIX_SYSCALL_NONAME` macro](https://github.com/apple-oss-distributions/xnu/blob/xnu-7195.141.2/libsyscall/custom/SYS.h#L81-L95) & [i386 `UNIX_SYSCALL_INT_NONAME` macro](https://github.com/apple-oss-distributions/xnu/blob/xnu-7195.141.2/libsyscall/custom/SYS.h#L97-L103)
+* [i386 `kernel_trap` macro](https://github.com/apple-oss-distributions/xnu/blob/xnu-7195.141.2/osfmk/mach/i386/syscall_sw.h#L86-L90)
+* [i386 `MACHDEP_SYSCALL_TRAP` macro](https://github.com/apple-oss-distributions/xnu/blob/xnu-7195.141.2/osfmk/mach/i386/syscall_sw.h#L79-L80)
+
+### Kernel space
 * [i386 `idt64_..._scall` assembly methods](https://github.com/apple-oss-distributions/xnu/blob/xnu-7195.141.2/osfmk/x86_64/idt64.s#L277-L303) & [i386 `hndl_sysenter` assembly method](https://github.com/apple-oss-distributions/xnu/blob/xnu-7195.141.2/osfmk/x86_64/idt64.s#L1803-L1810)
   * [1386 `unix_syscall` method](https://github.com/apple-oss-distributions/xnu/blob/xnu-7195.141.2/bsd/dev/i386/systemcalls.c#L80-L285)
   * [i386 `mach_call_munger` method](https://github.com/apple-oss-distributions/xnu/blob/xnu-7195.141.2/osfmk/i386/bsd_i386.c#L487-L606)
+
+## x86-64
+
+### User space
 * [x86-64 `UNIX_SYSCALL` macro](https://github.com/apple-oss-distributions/xnu/blob/xnu-7195.141.2/libsyscall/custom/SYS.h#L134-L142)
   * [An explantion for `r10` replacing `rcx` as the fourth argument](https://stackoverflow.com/a/32480482)
+* [x86-64 `kernel_trap` macro](https://github.com/apple-oss-distributions/xnu/blob/xnu-7195.141.2/osfmk/mach/i386/syscall_sw.h#L105-L117)
+* [x86-64 `MACHDEP_SYSCALL_TRAP` macro](https://github.com/apple-oss-distributions/xnu/blob/xnu-7195.141.2/osfmk/mach/i386/syscall_sw.h#L102-L103)
+
+### Kernel space
 * [x86-64 `hndl_syscall` assembly method](https://github.com/apple-oss-distributions/xnu/blob/xnu-7195.141.2/osfmk/x86_64/idt64.s#L1865-L1946)
   * [x86-64 `unix_syscall64` method](https://github.com/apple-oss-distributions/xnu/blob/xnu-7195.141.2/bsd/dev/i386/systemcalls.c#L287-L504)
   * [x86-64 `mach_call_munger64` method](https://github.com/apple-oss-distributions/xnu/blob/xnu-7195.141.2/osfmk/i386/bsd_i386.c#L611-L727)
   * [x86-64 `machdep_syscall64` method](https://github.com/apple-oss-distributions/xnu/blob/xnu-7195.141.2/osfmk/i386/bsd_i386.c#L378-L480)
   * [x86-64 `diagCall64` method](https://github.com/apple-oss-distributions/xnu/blob/xnu-7195.141.2/osfmk/i386/Diagnostics.c#L128-L352)
-* [arm64 `DO_SYSCALL` macro](https://github.com/apple-oss-distributions/xnu/blob/xnu-7195.141.2/libsyscall/custom/SYS.h#L449-L458C3)
+
+## arm64
+
+### User space
+* [arm64 `DO_SYSCALL` macro](https://github.com/apple-oss-distributions/xnu/blob/xnu-7195.141.2/libsyscall/custom/SYS.h#L449-L458)
+* [arm64 `kernel_trap` macro](https://github.com/apple-oss-distributions/xnu/blob/xnu-7195.141.2/osfmk/mach/arm/syscall_sw.h#L110-L117)
+* [arm64 `_thread_set_tsd_base` assembly method](https://github.com/apple-oss-distributions/xnu/blob/xnu-7195.141.2/libsyscall/custom/custom.s#L137-L143)
+
+### Kernel space
 * [arm64 `handle_svc` method](https://github.com/apple-oss-distributions/xnu/blob/xnu-7195.141.2/osfmk/arm64/sleh.c#L1624-L1669)
   * [arm64 `platform_syscall` method](https://github.com/apple-oss-distributions/xnu/blob/xnu-7195.141.2/osfmk/arm64/machine_routines.c#L2503-L2540)
   * [arm64 `handle_mach_absolute_time_trap` & `handle_mach_continuous_time_trap` method](https://github.com/apple-oss-distributions/xnu/blob/xnu-7195.141.2/osfmk/arm64/sleh.c#L1671-L1683)

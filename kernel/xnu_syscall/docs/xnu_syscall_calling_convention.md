@@ -162,7 +162,7 @@ call_sysenter:
     #
     ; rax contains the error code (positive value)
 
-	b end
+	jmp end
 
 no_error:
     #

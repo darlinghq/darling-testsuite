@@ -88,8 +88,59 @@ call_sysenter:
 
 ### int
 
-```
+The `int` syscall is used for syscalls that need to either preserve the `%ecx` register or return a second value in the `%edx` register.
 
+```
+    # Set syscall number
+    mov $1, %eax
+
+    # All arguments are stored in the stack
+    push    N
+    ; ...
+    push    2
+    push    1
+    push    0
+
+    #
+    # Call syscall
+    #
+
+    # Mach Int
+    int $0x80
+    # Machdep Int
+    int $0x82
+
+    # The (unix) syscall will set the carry flag:
+    # --> carry flag is set = an error has occured
+    # --> carry flag is not set = no error has occured
+    jnb	no_error
+
+    #
+    # Scenario 1: Unix syscall returns an error that is neither
+    # ERESTART nor EJUSTRETURN
+    #
+    ; eax contains the error code
+
+    #
+    # Scenario 2: Machdep syscall returns an error
+    #
+    ; eax contains the error code
+
+    jmp end
+
+no_error:
+    #
+    # Scenario 1: Unix syscall
+    #
+    ; eax contains the first return value (or zero)
+    ; edx contains the second return value (or zero)
+
+    #
+    # Scenario 2: Machdep syscall
+    #
+    ; eax contains the return value
+
+end:
 ```
 
 ## arm
@@ -278,6 +329,7 @@ end:
 * [i386 `idt64_..._scall` assembly methods](https://github.com/apple-oss-distributions/xnu/blob/xnu-7195.141.2/osfmk/x86_64/idt64.s#L277-L303) & [i386 `hndl_sysenter` assembly method](https://github.com/apple-oss-distributions/xnu/blob/xnu-7195.141.2/osfmk/x86_64/idt64.s#L1803-L1810)
   * [1386 `unix_syscall` method](https://github.com/apple-oss-distributions/xnu/blob/xnu-7195.141.2/bsd/dev/i386/systemcalls.c#L80-L285)
   * [i386 `mach_call_munger` method](https://github.com/apple-oss-distributions/xnu/blob/xnu-7195.141.2/osfmk/i386/bsd_i386.c#L487-L606)
+  * [i386 `machdep_syscall` method](https://github.com/apple-oss-distributions/xnu/blob/xnu-7195.141.2/osfmk/i386/bsd_i386.c#L290-L376)
 
 ## x86-64
 

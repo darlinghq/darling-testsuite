@@ -105,7 +105,7 @@ The `int` syscall is used for syscalls that need to either preserve the `%ecx` r
     # Call syscall
     #
 
-    # Mach Int
+    # Unix Int
     int $0x80
     # Machdep Int
     int $0x82

@@ -1,7 +1,7 @@
 
-.global _call_syscall
-_call_syscall:
 #ifdef __ARM64__
+.global _call_generic_syscall
+_call_generic_syscall:
     # Preserve stack and return value
     stp fp, lr, [sp, #-16]!
 	mov fp, sp
@@ -25,6 +25,8 @@ _call_syscall:
     ret
 
 #elif defined(__x86_64__)
+.global _call_generic_syscall
+_call_generic_syscall:
     # Get syscall number, fix arguments, and activate syscall
     movl    24(%rsp), %eax
     movq	%rcx, %r10
@@ -45,6 +47,52 @@ _call_syscall:
     popq    %rbx
     retq
 
+#elif defined(__i386__)
+
+.global _call_sysenter_syscall
+_call_sysenter_syscall:
+    # Set syscall number
+    movl 36(%esp), %eax
+
+    # Call syscall
+    call sysenter_helper
+
+    # Store return value
+    movl    %eax, 40(%esp)  # 1st return value
+    movl    %edx, 44(%esp)  # 2nd return value
+
+    # Store carry flag
+    pushfd
+    popl    %eax
+    movl    %eax, 48(%esp)
+
+    retl
+
+sysenter_helper:
+    popl %edx               # Return address from `call` instruction
+	movl %esp, %ecx         # Stack pointer for sysexit
+	sysenter
+
+
+.global _call_int_unix_syscall
+_call_int_unix_syscall:
+    # Set syscall number
+    movl 36(%esp), %eax
+
+    # Unix Int 
+    int $0x80
+
+    # Store return value
+    movl    %eax, 40(%esp)  # 1st return value
+    movl    %edx, 44(%esp)  # 2nd return value
+
+    # Store carry flag
+    pushfd
+    popl    %eax
+    movl    %eax, 48(%esp)
+
+    retl
+
 #else
-#error "Missing architecture for `call_syscall`"
+#error "Missing syscall function for architecture
 #endif

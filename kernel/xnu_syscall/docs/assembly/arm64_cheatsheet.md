@@ -2,6 +2,8 @@
 
 ## Registers
 
+### General Purpose Register
+
 Register | Special | Role in the procedure call standard
 -- | -- | --
 SP |   | The Stack Pointer
@@ -14,6 +16,19 @@ r16 | IP0 | The first intra-procedure-call scratch register (can be used by call
 r9…r15 |   | Temporary registers
 r8 |   | Indirect result location register
 r0…r7 |   | Parameter/result registers
+
+### Special Registers
+
+#### NZCV | Condition Flags
+
+Bit Position | Bit Name | Description
+--- | --- | ---
+0-27 | RES0 | Reserved
+28 | V | Overflow condition flag
+29 | C | Carry condition flag
+30 | Z | Zero condition flag
+31 | N | Negative condition flag
+32-63 | RES0 | Reserved
 
 ## Calling Convention
 
@@ -379,4 +394,6 @@ flowchart TD
 * [Writing ARM64 code for Apple platforms](https://developer.apple.com/documentation/xcode/writing-arm64-code-for-apple-platforms)
 * A64 General Instructions
   * [`BL` instruction](https://developer.arm.com/documentation/dui0802/a/A64-General-Instructions/BL)
+* [AArch64 Registers](https://developer.arm.com/documentation/ddi0601/2024-09/AArch64-Registers?lang=en)
+  * [NZCV, Condition Flags](https://developer.arm.com/documentation/ddi0601/2024-09/AArch64-Registers/NZCV--Condition-Flags?lang=en)
   

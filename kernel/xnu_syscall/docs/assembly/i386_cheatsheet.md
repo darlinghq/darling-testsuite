@@ -2,6 +2,8 @@
 
 ## Registers
 
+### General Purpose Registers
+
 Register | Role in the procedure call standard
 -- | --
 `eax` | Return register (1st argument) or scratch register
@@ -23,6 +25,43 @@ Register | Role in the procedure call standard
 `edi`  | `di`   |                             | `dil`
 `esp`  | `sp`   |                             | `spl`
 `ebp`  | `bp`   |                             | `bpl`
+
+### EFlag Register
+
+Unlike the general purpose registers, this register requires the usage 
+of special instructions to manipulate the values in this register
+
+The following instructions will grab the flags off of the register. Note that not all flags can be modified by userspace.
+* `LAHF` Load flags into AH register.
+* `SAHF` Store AH register into flags.
+* `PUSHF`/`PUSHFD` Push EFLAGS onto stack.
+* `POPF`/`POPFD` Pop EFLAGS from stack.
+
+
+Bit | Label | Description | Instructions
+--- | --- | --- | ---
+0 | CF | Carry flag | `STC` - Set carry flag.<br> `CLC` - Clear the carry flag.<br> `CMC` - Complement the carry flag.
+1 | *N/A* | *Reserved bit*
+2 | PF | Parity flag |
+3 | *N/A* | *Reserved bit*
+4 | AF | Auxiliary flag |
+5 | *N/A* | *Reserved bit*
+6 | ZF | Zero flag |
+7 | SF | Sign flag |
+8 | TF | Trap flag |
+9 | IF | Interrupt enable flag | *Not always the case*<br> `STI` - Set interrupt flag.<br> `CLI` Clear the interrupt flag.
+10 | DF | Direction flag | `STD` - Set direction flag.<br> `CLD` - Clear the direction flag.
+11 | OF | Overflow flag |
+12-13 | IOPL | I/O privilege level |
+14 | NT | Nested task flag |
+15 | *N/A* | *Reserved bit*
+16 | RF | Resume flag |
+17 | VM | Virtual 8086 mode flag |
+18 | AC | Alignment check |
+19 | VIF | Virtual interrupt flag | *Not always the case*<br> `STI` - Set interrupt flag.<br> `CLI` Clear the interrupt flag.
+20 | VIP | Virtual interrupt pending |
+21 | ID | Able to use CPUID instruction |
+22-31 | *N/A* | *Reserved bit*
 
 ## Calling Convention
 
@@ -155,3 +194,9 @@ _caller_function:
 * [Mac OS X ABI Function Call Guide](https://leopard-adc.pepas.com/documentation/DeveloperTools/Conceptual/LowLevelABI/Mac_OS_X_ABI_Function_Calls.pdf)
 * [SYSTEM V APPLICATION BINARY INTERFACE - Intel386 Architecture Processor Supplement](https://www.sco.com/developers/devspecs/abi386-4.pdf)
 * [CPU Registers x86](https://wiki.osdev.org/CPU_Registers_x86)
+* [Intel® 64 and IA-32 Architectures Software Developer Manuals](https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html)
+* felixcloutier
+  * [STI — Set Interrupt Flag](https://www.felixcloutier.com/x86/sti)
+  * [CLI — Clear Interrupt Flag](https://www.felixcloutier.com/x86/cli)
+* Stack Overflow
+  * [How to read and write x86 flags registers directly?](https://stackoverflow.com/a/1419632)

@@ -2,6 +2,8 @@
 
 ## Registers
 
+### General Purpose Registers
+
 Register | Role in the procedure call standard
 -- | --
 `rax` | Return argument or temporary register
@@ -30,6 +32,12 @@ Register | Role in the procedure call standard
 `r13` | `r13d` | `r13w` |                             | `r13b`
 `r14` | `r14d` | `r14w` |                             | `r14b`
 `r15` | `r15d` | `r15w` |                             | `r15b`
+
+### RFlag Register
+
+The upper 32 bits of RFLAGS register is reserved. The lower 32 bits of RFLAGS is the same as EFLAGS.
+
+See [EFlag register section](./i386_cheatsheet.md#eflag-register) in i386 cheatsheet for more details.
 
 ## Calling Convention
 
@@ -198,3 +206,4 @@ _caller_function:
 * [Writing 64-bit Intel code for Apple Platforms](https://developer.apple.com/documentation/xcode/writing-64-bit-intel-code-for-apple-platforms)
 * [x86-64 psABI](https://gitlab.com/x86-psABIs/x86-64-ABI)
 * [CPU Registers x86-64](https://wiki.osdev.org/CPU_Registers_x86-64)
+* [Intel® 64 and IA-32 Architectures Software Developer Manuals](https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html)

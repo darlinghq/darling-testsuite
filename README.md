@@ -19,7 +19,7 @@ Make sure the following dependencies are installed
 
 ```
 mkdir build && cd build
-cmake .. -DCMAKE_BUILD_TYPE=Debug -DCMAKE_OSX_ARCHITECTURES="arm64;x86_64"
+cmake .. -DCMAKE_BUILD_TYPE=Debug -DCMAKE_OSX_ARCHITECTURES="arm64;x86_64" -GNinja
 ninja
 ninja test
 ```

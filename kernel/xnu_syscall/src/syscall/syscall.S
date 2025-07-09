@@ -1,5 +1,5 @@
 
-#ifdef __ARM64__
+#ifdef __arm64__
 .global _call_generic_syscall
 _call_generic_syscall:
     # Preserve stack and return value

@@ -1,5 +1,5 @@
 #include <syscall/cbridge_syscall.h>
 
 int main() {
-    sys_exit(1);
+    sys_exit(1, NULL);
 }

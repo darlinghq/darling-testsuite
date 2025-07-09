@@ -3,7 +3,7 @@
 #include <syscall/syscall.h>
 #include <syscall/sysnum.h>
 
-void sys_exit(int rval) {
+void sys_exit(int rval, int* errno) {
     syscall_return_args_t retargs;
     int sysnum;
     

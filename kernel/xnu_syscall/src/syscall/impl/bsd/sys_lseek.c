@@ -21,7 +21,7 @@ off_t sys_lseek(int fd, off_t offset, int whence, int* errno) {
 #endif
 
 #if defined(__i386__)
-    CALL_SYSENTER_SYSCALL_ARG3(sysnum, &retargs, fd, offset_lower, offset_upper, whence);
+    CALL_SYSENTER_SYSCALL_ARG4(sysnum, &retargs, fd, offset_lower, offset_upper, whence);
 #else // default
     CALL_GENERIC_SYSCALL_ARG3(sysnum, &retargs, fd, offset, whence);
 #endif

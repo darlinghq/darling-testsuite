@@ -5,6 +5,7 @@
 #include <syscall/types.h>
 
 #include <spawn.h>
+#include <stdbool.h>
 
 // https://github.com/apple-oss-distributions/xnu/blob/xnu-7195.141.2/bsd/sys/spawn_internal.h#L114
 #define NBINPREFS 4

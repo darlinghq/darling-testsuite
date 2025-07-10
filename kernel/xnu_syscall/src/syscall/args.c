@@ -63,7 +63,7 @@ int64_t return_int64_t(syscall_return_args_t *retargs, int* errno) {
 #if defined(__x86_64__) || defined(__arm64__)
     return (int64_t)retargs->retval[0];
 #elif defined(__i386__)
-    return *((int64_t*)retargs->retval)
+    return *((int64_t*)retargs->retval);
 #else
     #error "Missing `return_int64_t(...)` impl for arch"
 #endif

@@ -58,13 +58,14 @@ _call_sysenter_syscall:
     call sysenter_helper
 
     # Store return value
-    movl    %eax, 40(%esp)  # 1st return value
-    movl    %edx, 44(%esp)  # 2nd return value
+    movl    40(%esp), %edx
+    movl    %eax, 0(%edx)  # 1st return value
+    movl    %edx, 4(%edx)  # 2nd return value
 
     # Store carry flag
     pushfd
     popl    %eax
-    movl    %eax, 48(%esp)
+    movl    %eax, 8(%edx)
 
     retl
 

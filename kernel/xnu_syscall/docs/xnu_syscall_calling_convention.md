@@ -323,6 +323,7 @@ end:
 ### User space
 * [i386 `UNIX_SYSCALL_NONAME` macro](https://github.com/apple-oss-distributions/xnu/blob/xnu-7195.141.2/libsyscall/custom/SYS.h#L81-L95) & [i386 `UNIX_SYSCALL_INT_NONAME` macro](https://github.com/apple-oss-distributions/xnu/blob/xnu-7195.141.2/libsyscall/custom/SYS.h#L97-L103)
 * [i386 `kernel_trap` macro](https://github.com/apple-oss-distributions/xnu/blob/xnu-7195.141.2/osfmk/mach/i386/syscall_sw.h#L86-L90)
+* [i386 `__sysenter_trap` method](https://github.com/apple-oss-distributions/xnu/blob/xnu-7195.141.2/libsyscall/custom/custom.s#L60-L63)
 * [i386 `MACHDEP_SYSCALL_TRAP` macro](https://github.com/apple-oss-distributions/xnu/blob/xnu-7195.141.2/osfmk/mach/i386/syscall_sw.h#L79-L80)
 
 ### Kernel space

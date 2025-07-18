@@ -4,5 +4,6 @@ project(darling-testsuite)
 enable_language(C ASM)
 include(CTest)
 
+add_subdirectory(framework)
 add_subdirectory(library)
 add_subdirectory(kernel)

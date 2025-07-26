@@ -1,0 +1,1 @@
+cp org.darlinghq.test_basic_connection_server.plist ~/Library/LaunchAgents/

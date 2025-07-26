@@ -1,7 +1,7 @@
 #ifndef LIBXPC_SHARED_TEST_DATA_BASIC_DATA
 #define LIBXPC_SHARED_TEST_DATA_BASIC_DATA
 
-const char* service_name = "org.darlinghq.test_basic_connection_server";
+const char* SERVICE_NAME_XPC_SESSION_MACH = "@SERVICE_NAME_XPC_SESSION_MACH@";
 
 const char* CLIENT_MSG_KEY = "ClientMessage";
 const char* SERVER_MSG_KEY = "ServerMessage";

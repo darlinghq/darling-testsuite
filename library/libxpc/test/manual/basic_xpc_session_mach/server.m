@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <xpc/xpc.h>
 
+#include <test_shared_data.h>
 #include <helper/xpc_error.h>
-#include <shared_test_data/basic_connection.h>
 
 int main() {
     xpc_listener_incoming_session_handler_t session_handler = ^(xpc_session_t peer) {
@@ -40,7 +40,7 @@ int main() {
     xpc_listener_create_flags_t flags = XPC_LISTENER_CREATE_FORCE_MACH;
     xpc_rich_error_t listener_error;
     
-    xpc_listener_t listener = xpc_listener_create(service_name, target_queue, flags, session_handler, &listener_error);
+    xpc_listener_t listener = xpc_listener_create(SERVICE_NAME_XPC_SESSION_MACH, target_queue, flags, session_handler, &listener_error);
     if (listener == NULL) {
         log_xpc_error(listener_error, "Failed to create listener");
 

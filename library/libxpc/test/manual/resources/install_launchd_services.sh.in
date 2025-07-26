@@ -1,0 +1,1 @@
+cp @SERVICE_NAME_XPC_SESSION_MACH@.plist ~/Library/LaunchAgents/

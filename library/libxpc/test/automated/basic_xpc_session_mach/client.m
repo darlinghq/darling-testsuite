@@ -2,8 +2,8 @@
 #include <stdio.h>
 #include <xpc/xpc.h>
 
+#include <test_shared_data.h>
 #include <helper/xpc_error.h>
-#include <shared_test_data/basic_connection.h>
 
 int main() {
     // Connect to the XPC service
@@ -11,7 +11,7 @@ int main() {
     xpc_session_create_flags_t flags = 0;
     xpc_rich_error_t session_error;
 
-    xpc_session_t session = xpc_session_create_mach_service(service_name, target_queue, flags, &session_error);
+    xpc_session_t session = xpc_session_create_mach_service(SERVICE_NAME_XPC_SESSION_MACH, target_queue, flags, &session_error);
     if (session == NULL) {
         log_xpc_error(session_error, "Failed to create session");
 

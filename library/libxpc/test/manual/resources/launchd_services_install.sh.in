@@ -1,0 +1,1 @@
+cp @SERVICE_NAME_XPC_LISTENER_MACH@.plist ~/Library/LaunchAgents/

@@ -9,7 +9,7 @@ int main() {
     uint64_t flags = 0;
 
     // Create (suspended) connection
-    xpc_connection_t connection = xpc_connection_create_mach_service(SERVICE_NAME_XPC_SESSION_MACH, targetq, flags);
+    xpc_connection_t connection = xpc_connection_create_mach_service(SERVICE_NAME_XPC_LISTENER_MACH, targetq, flags);
     assert(connection != NULL);
 
     // Set up event handler (required)
@@ -18,7 +18,7 @@ int main() {
         if (obj_type == XPC_TYPE_ERROR) {
             const char* xpc_error_string = xpc_dictionary_get_string(xpc_obj, XPC_ERROR_KEY_DESCRIPTION);
             printf("XPC error has occured: %s\n", xpc_error_string);
-            assert(xpc_get_type(xpc_obj) == XPC_TYPE_ERROR);
+            assert(xpc_get_type(xpc_obj) != XPC_TYPE_ERROR);
         } else {
             printf("Unexpected XPC type: %s\n", xpc_type_get_name(obj_type));
             assert(false && "Unknown XPC type");

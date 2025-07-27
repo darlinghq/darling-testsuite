@@ -20,6 +20,12 @@ target_link_libraries(test_basic_xpc_session_mach_client libxpc_helper_tools)
 
 add_test(NAME test_libxpc_basic_xpc_session_mach_client COMMAND test_basic_xpc_session_mach_client)
 
+
+add_executable(test_basic_xpc_connection_mach_client test/automated/basic_xpc_connection_mach/client.m)
+target_link_libraries(test_basic_xpc_connection_mach_client libxpc_helper_tools)
+
+add_test(NAME test_libxpc_basic_xpc_connection_mach_client COMMAND test_basic_xpc_connection_mach_client)
+
 #
 # Manual Setup
 #

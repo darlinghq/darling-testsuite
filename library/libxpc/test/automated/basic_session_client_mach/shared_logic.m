@@ -5,13 +5,13 @@
 #include <test_shared_data.h>
 #include <helper/xpc_error.h>
 
-int main() {
+int basic_xpc_session_client_mach_main(const char* service_name) {
     // Connect to the XPC service
     dispatch_queue_t target_queue = NULL;
     xpc_session_create_flags_t flags = 0;
     xpc_rich_error_t session_error;
 
-    xpc_session_t session = xpc_session_create_mach_service(SERVICE_NAME_XPC_LISTENER_MACH, target_queue, flags, &session_error);
+    xpc_session_t session = xpc_session_create_mach_service(service_name, target_queue, flags, &session_error);
     if (session == NULL) {
         log_xpc_error(session_error, "Failed to create session");
 
@@ -44,4 +44,6 @@ int main() {
 
     // Close session
     xpc_session_cancel(session);
+
+    return 0;
 }

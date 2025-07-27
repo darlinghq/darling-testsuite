@@ -3,13 +3,12 @@
 
 #include <test_shared_data.h>
 
-int main() {
-    const char* service_name = NULL;
+int basic_xpc_connection_client_mach_main(const char* service_name) {
     dispatch_queue_t targetq = NULL;
     uint64_t flags = 0;
 
     // Create (suspended) connection
-    xpc_connection_t connection = xpc_connection_create_mach_service(SERVICE_NAME_XPC_LISTENER_MACH, targetq, flags);
+    xpc_connection_t connection = xpc_connection_create_mach_service(service_name, targetq, flags);
     assert(connection != NULL);
 
     // Set up event handler (required)
@@ -19,6 +18,7 @@ int main() {
             const char* xpc_error_string = xpc_dictionary_get_string(xpc_obj, XPC_ERROR_KEY_DESCRIPTION);
             printf("XPC error has occured: %s\n", xpc_error_string);
             assert(xpc_get_type(xpc_obj) != XPC_TYPE_ERROR);
+
         } else {
             printf("Unexpected XPC type: %s\n", xpc_type_get_name(obj_type));
             assert(false && "Unknown XPC type");
@@ -42,4 +42,6 @@ int main() {
     // Verify reply from server
     const char* actual_server_msg = xpc_dictionary_get_string(reply, SERVER_MSG_KEY);
     assert(strcmp(EXPECTED_SERVER_MSG, actual_server_msg) == 0);
+
+    return 0;
 }

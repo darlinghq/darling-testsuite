@@ -1,4 +1,5 @@
-set(SERVICE_NAME_XPC_LISTENER_MACH "org.darlinghq.basic_xpc_listener_server_mach")
+set(SERVICE_NAME_XPC_CONNECTION_MACH "org.darlinghq.libxpc_basic_connection_server_mach")
+set(SERVICE_NAME_XPC_LISTENER_MACH "org.darlinghq.libxpc_basic_listener_server_mach")
 
 configure_file(test/manual/resources/launchd_services_install.sh.in launchd_services_install.sh)
 configure_file(test/manual/resources/launchd_services_uninstall.sh.in launchd_services_uninstall.sh)
@@ -16,29 +17,66 @@ add_library(libxpc_helper_tools
 # Automated Testing
 #
 
-add_executable(test_basic_xpc_session_mach_client test/automated/basic_xpc_session_mach_client/client.m)
-target_link_libraries(test_basic_xpc_session_mach_client libxpc_helper_tools)
+add_executable(test_libxpc_basic_connection_client_to_connection_server_mach 
+    test/automated/basic_connection_client_mach/client_to_connection_server.m
+    test/automated/basic_connection_client_mach/shared_logic.m
+)
+target_link_libraries(test_libxpc_basic_connection_client_to_connection_server_mach libxpc_helper_tools)
 
-add_test(NAME test_libxpc_basic_xpc_session_mach_client COMMAND test_basic_xpc_session_mach_client)
+add_test(NAME test_libxpc_basic_connection_client_to_connection_server_mach COMMAND test_libxpc_basic_connection_client_to_connection_server_mach)
 
 
-add_executable(test_basic_xpc_connection_mach_client test/automated/basic_xpc_connection_mach_client/client.m)
-target_link_libraries(test_basic_xpc_connection_mach_client libxpc_helper_tools)
+add_executable(test_libxpc_basic_connection_client_to_listener_server_mach 
+    test/automated/basic_connection_client_mach/client_to_listener_server.m
+    test/automated/basic_connection_client_mach/shared_logic.m
+)
+target_link_libraries(test_libxpc_basic_connection_client_to_listener_server_mach libxpc_helper_tools)
 
-add_test(NAME test_libxpc_basic_xpc_connection_mach_client COMMAND test_basic_xpc_connection_mach_client)
+add_test(NAME test_libxpc_basic_connection_client_to_listener_server_mach COMMAND test_libxpc_basic_connection_client_to_listener_server_mach)
+
+
+add_executable(test_libxpc_basic_session_client_to_connection_server_mach
+    test/automated/basic_session_client_mach/client_to_connection_server.m
+    test/automated/basic_session_client_mach/shared_logic.m
+)
+target_link_libraries(test_libxpc_basic_session_client_to_connection_server_mach libxpc_helper_tools)
+
+add_test(NAME test_libxpc_basic_session_client_to_connection_server_mach COMMAND test_libxpc_basic_session_client_to_connection_server_mach)
+
+
+add_executable(test_libxpc_basic_session_client_to_listener_server_mach
+    test/automated/basic_session_client_mach/client_to_listener_server.m
+    test/automated/basic_session_client_mach/shared_logic.m
+)
+target_link_libraries(test_libxpc_basic_session_client_to_listener_server_mach libxpc_helper_tools)
+
+add_test(NAME test_libxpc_basic_session_client_to_listener_server_mach COMMAND test_libxpc_basic_session_client_to_listener_server_mach)
+
 
 #
 # Manual Setup
 #
 
-add_executable(basic_xpc_listener_server_mach test/manual/basic_xpc_listener_server_mach/server.m)
-target_link_libraries(basic_xpc_listener_server_mach libxpc_helper_tools)
+add_executable(libxpc_basic_listener_server_mach test/manual/basic_listener_server_mach/server.m)
+target_link_libraries(libxpc_basic_listener_server_mach libxpc_helper_tools)
 
-set(PROGRAM ${CMAKE_CURRENT_BINARY_DIR}/basic_xpc_listener_server_mach)
-set(STANDARDOUTPATH ${CMAKE_CURRENT_BINARY_DIR}/basic_xpc_listener_server_mach_stdout_log.txt)
-set(STANDARDERRORPATH ${CMAKE_CURRENT_BINARY_DIR}/basic_xpc_listener_server_mach_stderr_log.txt)
+set(PROGRAM ${CMAKE_CURRENT_BINARY_DIR}/libxpc_basic_listener_server_mach)
+set(STANDARDOUTPATH ${CMAKE_CURRENT_BINARY_DIR}/libxpc_basic_listener_server_mach_stdout_log.txt)
+set(STANDARDERRORPATH ${CMAKE_CURRENT_BINARY_DIR}/libxpc_basic_listener_server_mach_stderr_log.txt)
 set(SERVICE_NAME ${SERVICE_NAME_XPC_LISTENER_MACH})
 configure_file(
     test/manual/resources/launchd_basic_mach_service_template.plist.in
     ${SERVICE_NAME_XPC_LISTENER_MACH}.plist
+)
+
+add_executable(libxpc_basic_connection_server_mach test/manual/basic_connection_server_mach/server.m)
+target_link_libraries(libxpc_basic_connection_server_mach libxpc_helper_tools)
+
+set(PROGRAM ${CMAKE_CURRENT_BINARY_DIR}/libxpc_basic_connection_server_mach)
+set(STANDARDOUTPATH ${CMAKE_CURRENT_BINARY_DIR}/libxpc_basic_connection_server_mach_stdout_log.txt)
+set(STANDARDERRORPATH ${CMAKE_CURRENT_BINARY_DIR}/libxpc_basic_connection_server_mach_stderr_log.txt)
+set(SERVICE_NAME ${SERVICE_NAME_XPC_CONNECTION_MACH})
+configure_file(
+    test/manual/resources/launchd_basic_mach_service_template.plist.in
+    ${SERVICE_NAME_XPC_CONNECTION_MACH}.plist
 )

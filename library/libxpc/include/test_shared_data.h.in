@@ -1,12 +1,13 @@
 #ifndef LIBXPC_SHARED_TEST_DATA_BASIC_DATA
 #define LIBXPC_SHARED_TEST_DATA_BASIC_DATA
 
-const char* SERVICE_NAME_XPC_LISTENER_MACH = "@SERVICE_NAME_XPC_LISTENER_MACH@";
+#define SERVICE_NAME_XPC_LISTENER_MACH "@SERVICE_NAME_XPC_LISTENER_MACH@"
+#define SERVICE_NAME_XPC_CONNECTION_MACH "@SERVICE_NAME_XPC_CONNECTION_MACH@"
 
-const char* CLIENT_MSG_KEY = "ClientMessage";
-const char* SERVER_MSG_KEY = "ServerMessage";
+#define CLIENT_MSG_KEY "ClientMessage"
+#define SERVER_MSG_KEY "ServerMessage"
 
-const char* EXPECTED_CLIENT_MSG = "Hello from client!";
-const char* EXPECTED_SERVER_MSG = "Hello from server!";
+#define EXPECTED_CLIENT_MSG "Hello from client!"
+#define EXPECTED_SERVER_MSG "Hello from server!"
 
 #endif // LIBXPC_SHARED_TEST_DATA_BASIC_DATA

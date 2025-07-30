@@ -40,6 +40,7 @@ int basic_xpc_session_client_mach_main(const char* service_name) {
     }
 
     const char* actual_server_msg = xpc_dictionary_get_string(reply, SERVER_MSG_KEY);
+    assert(actual_server_msg != NULL);
     assert(strcmp(EXPECTED_SERVER_MSG, actual_server_msg) == 0);
 
     // Close session

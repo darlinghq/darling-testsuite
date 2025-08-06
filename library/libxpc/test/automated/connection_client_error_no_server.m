@@ -31,5 +31,5 @@ int main() {
     xpc_connection_activate(connection);
 
     sleep(5);
-    return 1;
+    abort();
 }

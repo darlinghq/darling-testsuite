@@ -31,5 +31,7 @@ int main() {
     xpc_connection_activate(connection);
 
     sleep(5);
+
+    fprintf(stderr, "XPC handler failed to execute within 5 seconds\n");
     abort();
 }

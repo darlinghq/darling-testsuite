@@ -64,9 +64,9 @@ void log_unexpected_xpc_type(xpc_object_t xpc_obj, xpc_type_t xpc_obj_type) {
 
 void read_response_and_create_reply(xpc_object_t connection, xpc_object_t message) {
     const char* actual_client_msg = xpc_dictionary_get_string(message, CLIENT_MSG_KEY);
-    printf("Recieved message from client: \"%s\"", actual_client_msg);
+    printf("Recieved message from client: \"%s\"\n", actual_client_msg);
 
-    printf("Does client message match '%s' message: %s", 
+    printf("Does client message match '%s' message: %s\n", 
         EXPECTED_CLIENT_MSG, 
         strcmp(EXPECTED_CLIENT_MSG, actual_client_msg) == 0 ? "yes" : "no"
     );

@@ -11,6 +11,7 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR}/include)
 
 add_library(libxpc_helper_tools 
     src/helper/xpc_error.c
+    src/helper/xpc_type.c
 )
 
 #
@@ -21,7 +22,7 @@ add_executable(test_libxpc_basic_connection_client_to_connection_server_mach
     test/automated/basic_connection_client_mach/client_to_connection_server.m
     test/automated/basic_connection_client_mach/shared_logic.m
 )
-target_link_libraries(test_libxpc_basic_connection_client_to_connection_server_mach libxpc_helper_tools)
+target_link_libraries(test_libxpc_basic_connection_client_to_connection_server_mach darling-testsuite-lib libxpc_helper_tools)
 
 add_test(NAME test_libxpc_basic_connection_client_to_connection_server_mach COMMAND test_libxpc_basic_connection_client_to_connection_server_mach)
 
@@ -30,7 +31,7 @@ add_executable(test_libxpc_basic_connection_client_to_listener_server_mach
     test/automated/basic_connection_client_mach/client_to_listener_server.m
     test/automated/basic_connection_client_mach/shared_logic.m
 )
-target_link_libraries(test_libxpc_basic_connection_client_to_listener_server_mach libxpc_helper_tools)
+target_link_libraries(test_libxpc_basic_connection_client_to_listener_server_mach darling-testsuite-lib libxpc_helper_tools)
 
 add_test(NAME test_libxpc_basic_connection_client_to_listener_server_mach COMMAND test_libxpc_basic_connection_client_to_listener_server_mach)
 
@@ -39,7 +40,7 @@ add_executable(test_libxpc_basic_session_client_to_connection_server_mach
     test/automated/basic_session_client_mach/client_to_connection_server.m
     test/automated/basic_session_client_mach/shared_logic.m
 )
-target_link_libraries(test_libxpc_basic_session_client_to_connection_server_mach libxpc_helper_tools)
+target_link_libraries(test_libxpc_basic_session_client_to_connection_server_mach darling-testsuite-lib libxpc_helper_tools)
 
 add_test(NAME test_libxpc_basic_session_client_to_connection_server_mach COMMAND test_libxpc_basic_session_client_to_connection_server_mach)
 
@@ -48,25 +49,25 @@ add_executable(test_libxpc_basic_session_client_to_listener_server_mach
     test/automated/basic_session_client_mach/client_to_listener_server.m
     test/automated/basic_session_client_mach/shared_logic.m
 )
-target_link_libraries(test_libxpc_basic_session_client_to_listener_server_mach libxpc_helper_tools)
+target_link_libraries(test_libxpc_basic_session_client_to_listener_server_mach darling-testsuite-lib libxpc_helper_tools)
 
 add_test(NAME test_libxpc_basic_session_client_to_listener_server_mach COMMAND test_libxpc_basic_session_client_to_listener_server_mach)
 
 
 add_executable(test_libxpc_connection_api_misuse_no_event_handler test/automated/connection_api_misuse_no_event_handler.m)
-target_link_libraries(test_libxpc_connection_api_misuse_no_event_handler libxpc_helper_tools)
+target_link_libraries(test_libxpc_connection_api_misuse_no_event_handler darling-testsuite-lib libxpc_helper_tools)
 
 add_test(NAME test_libxpc_connection_api_misuse_no_event_handler COMMAND test_libxpc_connection_api_misuse_no_event_handler)
 
 
 add_executable(test_libxpc_connection_client_error_no_server test/automated/connection_client_error_no_server.m)
-target_link_libraries(test_libxpc_connection_client_error_no_server libxpc_helper_tools)
+target_link_libraries(test_libxpc_connection_client_error_no_server darling-testsuite-lib libxpc_helper_tools)
 
 add_test(NAME test_libxpc_connection_client_error_no_server COMMAND test_libxpc_connection_client_error_no_server)
 
 
 add_executable(test_libxpc_connection_server_error_invalid_connection test/automated/connection_server_error_invalid_connection.m)
-target_link_libraries(test_libxpc_connection_server_error_invalid_connection libxpc_helper_tools)
+target_link_libraries(test_libxpc_connection_server_error_invalid_connection darling-testsuite-lib libxpc_helper_tools)
 
 add_test(NAME test_libxpc_connection_server_error_invalid_connection COMMAND test_libxpc_connection_server_error_invalid_connection)
 
@@ -76,7 +77,7 @@ add_test(NAME test_libxpc_connection_server_error_invalid_connection COMMAND tes
 #
 
 add_executable(libxpc_basic_listener_server_mach test/manual/basic_listener_server_mach/server.m)
-target_link_libraries(libxpc_basic_listener_server_mach libxpc_helper_tools)
+target_link_libraries(libxpc_basic_listener_server_mach darling-testsuite-lib libxpc_helper_tools)
 
 set(PROGRAM ${CMAKE_CURRENT_BINARY_DIR}/libxpc_basic_listener_server_mach)
 set(STANDARDOUTPATH ${CMAKE_CURRENT_BINARY_DIR}/libxpc_basic_listener_server_mach_stdout_log.txt)
@@ -88,7 +89,7 @@ configure_file(
 )
 
 add_executable(libxpc_basic_connection_server_mach test/manual/basic_connection_server_mach/server.m)
-target_link_libraries(libxpc_basic_connection_server_mach libxpc_helper_tools)
+target_link_libraries(libxpc_basic_connection_server_mach darling-testsuite-lib libxpc_helper_tools)
 
 set(PROGRAM ${CMAKE_CURRENT_BINARY_DIR}/libxpc_basic_connection_server_mach)
 set(STANDARDOUTPATH ${CMAKE_CURRENT_BINARY_DIR}/libxpc_basic_connection_server_mach_stdout_log.txt)

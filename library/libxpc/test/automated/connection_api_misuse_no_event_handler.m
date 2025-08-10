@@ -15,7 +15,11 @@ int main() {
     xpc_connection_t connection = xpc_connection_create_mach_service(service_name, targetq, flags);
     assert(connection != NULL);
 
+#if defined(__arm64__)
     signal(SIGTRAP, verify_signal);
+#elif defined(__i386__) || defined(__x86_64__)
+    signal(SIGILL, verify_signal);
+#endif
 
     // We will not set a event handler, this should cause a SIGTRAP to occur
     xpc_connection_activate(connection);
@@ -26,6 +30,11 @@ int main() {
 }
 
 void verify_signal(int signum) {
+#if defined(__arm64__)
     assert(signum == SIGTRAP);
+#elif defined(__i386__) || defined(__x86_64__)
+    assert(signum == SIGILL);
+#endif
+
     exit(0);
 }

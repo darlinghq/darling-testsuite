@@ -2,9 +2,12 @@
 #include <xpc/xpc.h>
 
 #include <test_shared_data.h>
+#include <darling-testsuite/availability.h>
+#include <darling-testsuite/unsupported.h>
 #include <helper/xpc_error.h>
 
 int main() {
+#if MIN_MACOS(VERSION_14_0)
     xpc_listener_incoming_session_handler_t session_handler = ^(xpc_session_t peer) {
         xpc_session_incoming_message_handler_t message_handler = ^(xpc_object_t message) {
             // Grab the values that were sent from the client
@@ -52,4 +55,7 @@ int main() {
     dispatch_main();
 
     return 0;
+#else
+    darling_testcase_os_doesnt_support_newer_api();
+#endif
 }

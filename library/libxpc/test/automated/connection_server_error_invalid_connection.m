@@ -1,6 +1,7 @@
 #include <xpc/xpc.h>
 
 #include <test_shared_data.h>
+#include <helper/xpc_type.h>
 
 int main() {
     // Create (inactive) connection listener
@@ -23,7 +24,7 @@ int main() {
             exit(0);
 
         } else {
-            fprintf(stderr, "Unexpected XPC type: %s\n", xpc_type_get_name(type));
+            log_unexpected_xpc_type(type);
             abort();
         }
     };

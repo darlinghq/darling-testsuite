@@ -3,9 +3,12 @@
 #include <xpc/xpc.h>
 
 #include <test_shared_data.h>
+#include <darling-testsuite/availability.h>
+#include <darling-testsuite/unsupported.h>
 #include <helper/xpc_error.h>
 
 int basic_xpc_session_client_mach_main(const char* service_name) {
+#if MIN_MACOS(VERSION_13_0)
     // Connect to the XPC service
     dispatch_queue_t target_queue = NULL;
     xpc_session_create_flags_t flags = 0;
@@ -47,4 +50,7 @@ int basic_xpc_session_client_mach_main(const char* service_name) {
     xpc_session_cancel(session);
 
     return 0;
+#else
+    darling_testcase_os_doesnt_support_newer_api();
+#endif
 }

@@ -1,7 +1,10 @@
 #include <assert.h>
+#include <stdlib.h>
 #include <xpc/xpc.h>
 
 #include <test_shared_data.h>
+#include <helper/xpc_type.h>
+#include <darling-testsuite/availability.h>
 
 int basic_xpc_connection_client_mach_main(const char* service_name) {
     dispatch_queue_t targetq = NULL;
@@ -20,8 +23,8 @@ int basic_xpc_connection_client_mach_main(const char* service_name) {
             assert(xpc_get_type(xpc_obj) != XPC_TYPE_ERROR);
 
         } else {
-            printf("Unexpected XPC type: %s\n", xpc_type_get_name(obj_type));
-            assert(false && "Unknown XPC type");
+            log_unexpected_xpc_type(obj_type);
+            abort();
         }
     };
 

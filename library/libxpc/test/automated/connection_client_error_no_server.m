@@ -3,6 +3,8 @@
 #include <unistd.h>
 #include <xpc/xpc.h>
 
+#include <helper/xpc_type.h>
+
 int main() {
     const char* service_name = "org.darlinghq.libxpc_this_server_doesnt_exist";
     dispatch_queue_t targetq = NULL;
@@ -21,7 +23,7 @@ int main() {
             exit(0);
         }
 
-        printf("Unexpected XPC type: %s\n", xpc_type_get_name(obj_type));
+        log_unexpected_xpc_type(obj_type);
         exit(1);
     };
 

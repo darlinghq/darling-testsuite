@@ -1,0 +1,6 @@
+#ifndef DARLING_TESTSUITE_LIBRARY_UNSUPPORTED
+#define DARLING_TESTSUITE_LIBRARY_UNSUPPORTED
+
+void darling_testcase_os_doesnt_support_newer_api();
+
+#endif // DARLING_TESTSUITE_LIBRARY_UNSUPPORTED

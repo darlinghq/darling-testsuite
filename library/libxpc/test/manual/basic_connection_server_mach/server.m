@@ -1,8 +1,9 @@
 #include <xpc/xpc.h>
 
 #include <test_shared_data.h>
+#include <helper/xpc_type.h>
 
-void log_unexpected_xpc_type(xpc_object_t xpc_obj, xpc_type_t xpc_obj_type);
+void log_error_or_unexpected_xpc_type(xpc_object_t xpc_obj, xpc_type_t xpc_obj_type);
 void read_response_and_create_reply(xpc_object_t connection, xpc_object_t message);
 
 int main() {
@@ -29,7 +30,7 @@ int main() {
                     read_response_and_create_reply(connection, message);
 
                 } else {
-                    log_unexpected_xpc_type(message, type);
+                    log_error_or_unexpected_xpc_type(message, type);
                 }
             };
 
@@ -39,7 +40,7 @@ int main() {
             xpc_connection_activate(connection);
 
         } else {
-            log_unexpected_xpc_type(connection, type);
+            log_error_or_unexpected_xpc_type(connection, type);
         }
     };
 
@@ -52,13 +53,13 @@ int main() {
     dispatch_main();
 }
 
-void log_unexpected_xpc_type(xpc_object_t xpc_obj, xpc_type_t xpc_obj_type) {
+void log_error_or_unexpected_xpc_type(xpc_object_t xpc_obj, xpc_type_t xpc_obj_type) {
     if (xpc_obj_type == XPC_TYPE_ERROR) {
         const char* error_reason = xpc_dictionary_get_string(xpc_obj, XPC_ERROR_KEY_DESCRIPTION);
         printf("XPC error has occured: \"%s\"\n", error_reason);
 
     } else {
-        printf("Unexpected XPC type: %s\n", xpc_type_get_name(xpc_obj_type));
+        log_unexpected_xpc_type(xpc_obj_type);
     }
 }
 

@@ -1,7 +1,8 @@
 #ifndef DARLING_TESTSUITE_LIB_AVAILABILITY_H
 #define DARLING_TESTSUITE_LIB_AVAILABILITY_H
 
-// Based on <AvailabilityVersions.h>
+#include <Availability.h>
+
 #define VERSION_10_15   101500
 #define VERSION_13_0    130000
 #define VERSION_14_0    140000

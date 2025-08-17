@@ -8,10 +8,6 @@
 	<string>@STANDARDOUTPATH@</string>
 	<key>StandardErrorPath</key>
 	<string>@STANDARDERRORPATH@</string>
-	<key>KeepAlive</key>
-	<true/>
-	<key>RunAtLoad</key>
-	<true/>
 	<key>Label</key>
 	<string>@SERVICE_NAME@</string>
 	<key>MachServices</key>

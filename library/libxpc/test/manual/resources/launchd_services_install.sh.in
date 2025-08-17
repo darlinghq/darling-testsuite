@@ -1,2 +1,11 @@
-cp @SERVICE_NAME_XPC_CONNECTION_MACH@.plist ~/Library/LaunchAgents/
-cp @SERVICE_NAME_XPC_LISTENER_MACH@.plist ~/Library/LaunchAgents/
+## For @SERVICE_NAME_XPC_CONNECTION_MACH@
+# cp ../launchd/@SERVICE_NAME_XPC_CONNECTION_MACH@.plist ~/Library/LaunchAgents/
+# launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/@SERVICE_NAME_XPC_CONNECTION_MACH@.plist
+sudo cp ../launchd/@SERVICE_NAME_XPC_CONNECTION_MACH@.plist /Library/LaunchDaemons
+sudo launchctl bootstrap system /Library/LaunchDaemons/@SERVICE_NAME_XPC_CONNECTION_MACH@.plist
+
+## For @SERVICE_NAME_XPC_LISTENER_MACH@
+# cp ../launchd/@SERVICE_NAME_XPC_LISTENER_MACH@.plist ~/Library/LaunchAgents/
+# launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/@SERVICE_NAME_XPC_LISTENER_MACH@.plist
+sudo cp ../launchd/@SERVICE_NAME_XPC_LISTENER_MACH@.plist /Library/LaunchDaemons
+sudo launchctl bootstrap system /Library/LaunchDaemons/@SERVICE_NAME_XPC_LISTENER_MACH@.plist

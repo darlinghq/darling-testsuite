@@ -1,2 +1,11 @@
-rm  ~/Library/LaunchAgents/@SERVICE_NAME_XPC_CONNECTION_MACH@.plist
-rm  ~/Library/LaunchAgents/@SERVICE_NAME_XPC_LISTENER_MACH@.plist
+## For @SERVICE_NAME_XPC_CONNECTION_MACH@
+# launchctl bootout gui/$(id -u)/@SERVICE_NAME_XPC_CONNECTION_MACH@
+# rm  ~/Library/LaunchAgents/@SERVICE_NAME_XPC_CONNECTION_MACH@.plist
+sudo launchctl bootout system/@SERVICE_NAME_XPC_CONNECTION_MACH@
+sudo rm /Library/LaunchDaemons/@SERVICE_NAME_XPC_CONNECTION_MACH@.plist
+
+## For @SERVICE_NAME_XPC_LISTENER_MACH@
+# launchctl bootout gui/$(id -u)/@SERVICE_NAME_XPC_LISTENER_MACH@
+# rm  ~/Library/LaunchAgents/@SERVICE_NAME_XPC_LISTENER_MACH@.plist
+sudo launchctl bootout system/@SERVICE_NAME_XPC_LISTENER_MACH@
+sudo rm /Library/LaunchDaemons/@SERVICE_NAME_XPC_LISTENER_MACH@.plist

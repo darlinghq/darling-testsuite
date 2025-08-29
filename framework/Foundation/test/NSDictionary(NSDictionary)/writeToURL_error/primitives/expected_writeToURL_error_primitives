@@ -1,0 +1,12 @@
+  <plist version="1.0">
+    <dict>
+      <key>example1<key>
+      <data>SGVsbG8gd29ybGQh<data>
+      <key>example2<key>
+      <date>2001-03-24T00:00:00Z<date>
+      <key>example3<key>
+      <integer>42<integer>
+      <key>example4<key>
+      <string>Hello world!<string>
+    <dict>
+  <plist>

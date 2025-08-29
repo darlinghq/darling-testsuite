@@ -1,0 +1,10 @@
+configure_file(writeToURL_error/empty_dictionary/expected_writeToURL_error_empty_dict ${CMAKE_CURRENT_BINARY_DIR} COPYONLY)
+configure_file(writeToURL_error/primitives/expected_writeToURL_error_primitives ${CMAKE_CURRENT_BINARY_DIR} COPYONLY)
+
+add_executable(test_NSDictionary_writeToURL_error_empty_dict "writeToURL_error/empty_dictionary/empty_dictionary.m")
+target_link_libraries(test_NSDictionary_writeToURL_error_empty_dict "-framework Foundation" darling-testsuite-lib)
+add_test(NAME test_NSDictionary_writeToURL_error_empty_dict COMMAND test_NSDictionary_writeToURL_error_empty_dict)
+
+add_executable(test_NSDictionary_writeToURL_error_primitives "writeToURL_error/primitives/primitives.m")
+target_link_libraries(test_NSDictionary_writeToURL_error_primitives "-framework Foundation" darling-testsuite-lib)
+add_test(NAME test_NSDictionary_writeToURL_error_primitives COMMAND test_NSDictionary_writeToURL_error_primitives)

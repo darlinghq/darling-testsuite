@@ -1,2 +1,8 @@
+add_subdirectory(AddressBook)
+add_subdirectory(CoreImage)
+add_subdirectory(CoreServices)
 add_subdirectory(Foundation)
+add_subdirectory(ImageIO)
+add_subdirectory(PDFKit)
 add_subdirectory(Security)
+add_subdirectory(WebKit)

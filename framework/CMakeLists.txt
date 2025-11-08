@@ -1,4 +1,5 @@
 add_subdirectory(AddressBook)
+add_subdirectory(Carbon)
 add_subdirectory(CoreImage)
 add_subdirectory(CoreServices)
 add_subdirectory(Foundation)

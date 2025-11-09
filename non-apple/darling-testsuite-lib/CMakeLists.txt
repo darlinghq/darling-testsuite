@@ -1,6 +1,8 @@
 include_directories(include-private)
 
 add_library(darling-testsuite-lib
+    src/darling-testsuite/assertion.m
+    src/darling-testsuite/print.m
     src/darling-testsuite/unsupported.c
     src/darling-testsuite/xml.m
 

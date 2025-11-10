@@ -16,6 +16,3 @@
 
 * NSSavePanel
   * [`beginWithCompletionHandler:`](https://developer.apple.com/documentation/appkit/nssavepanel/begin(completionhandler:)?language=objc)
-
-* NSString
-  * [`stringByRemovingPercentEncoding`](https://developer.apple.com/documentation/foundation/nsstring/removingpercentencoding?language=objc)

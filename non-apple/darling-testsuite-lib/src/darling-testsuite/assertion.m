@@ -138,3 +138,30 @@ void assert_equals_nsuinteger(char* variable_name, NSUInteger expected, NSUInteg
     assert_equals_uint32(variable_name, expected, actual);
 #endif
 }
+
+void assert_equals_BOOL(char *variable_name, BOOL expected, BOOL actual) {
+    if (expected != actual) {
+        printf("Expected does not equal actual (%s)\n", variable_name == NULL ? "" : variable_name);
+        printf("Expected: %hhu (%s)\n", expected, expected == NO ? "NO" : "YES");
+        printf("Actual: %hhu (%s)\n", actual, actual == NO ? "NO" : "YES");
+        assert(expected == actual);
+    }
+}
+
+//
+// Objective-C Exception
+//
+
+NSException* assert_exception_is_thrown(void (^function_to_execute)(void)) {
+    NSException* result = nil;
+    @try {
+        function_to_execute();
+    }
+
+    @catch (NSException* exception) {
+        result = exception;
+    }
+
+    assert(result != nil);
+    return result;
+}

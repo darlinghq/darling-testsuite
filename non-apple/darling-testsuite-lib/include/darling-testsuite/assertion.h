@@ -25,5 +25,9 @@ void assert_equals_nsstring(NSString* expected, NSString* actual);
 void assert_equals_nsarray(NSArray* expected, NSArray* actual, print_basicobj_func_t print_item);
 
 void assert_equals_nsuinteger(char* variable_name, NSUInteger expected, NSUInteger actual);
+void assert_equals_BOOL(char *variable_name, BOOL expected, BOOL actual);
+
+// Objective-C Exception
+NSException* assert_exception_is_thrown(void (^function_to_execute)(void));
 
 #endif // DARLING_TESTSUITE_LIB_ASSERTION_H

@@ -1,5 +1,6 @@
 add_subdirectory(AddressBook)
 add_subdirectory(AppKit)
+add_subdirectory(AVFoundation)
 add_subdirectory(Carbon)
 add_subdirectory(CoreImage)
 add_subdirectory(CoreServices)

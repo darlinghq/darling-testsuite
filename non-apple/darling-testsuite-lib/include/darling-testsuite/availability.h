@@ -3,6 +3,8 @@
 
 #include <Availability.h>
 
+// TODO: Change macro name
+#define VERSION_10_8    1080
 #define VERSION_10_15   101500
 #define VERSION_13_0    130000
 #define VERSION_14_0    140000
@@ -13,5 +15,7 @@
 #define MIN_TVOS(version) (__TV_OS_VERSION_MIN_REQUIRED >= version)
 #define MIN_WATCHOS(version) (__WATCH_OS_VERSION_MIN_REQUIRED >= version)
 #define MIN_VISIONOS(version) (__VISION_OS_VERSION_MIN_REQUIRED >= version)
+
+#define MACOS_SUPPORTED_ABI(min,max) (min <= __MAC_OS_X_VERSION_MIN_REQUIRED && __MAC_OS_X_VERSION_MIN_REQUIRED <= max)
 
 #endif // DARLING_TESTSUITE_LIB_AVAILABILITY_H

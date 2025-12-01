@@ -21,7 +21,7 @@ void assert_equals_int64(char* variable_name, int64_t expected, int64_t actual);
 void assert_equals_cfstringref(CFStringRef expected, CFStringRef actual);
 
 // Objective-C Comparsion
-void assert_equals_nsstring(NSString* expected, NSString* actual);
+void assert_equals_nsstring(const NSString* expected, const NSString* actual);
 void assert_equals_nsarray(NSArray* expected, NSArray* actual, print_basicobj_func_t print_item);
 
 void assert_equals_nsuinteger(char* variable_name, NSUInteger expected, NSUInteger actual);

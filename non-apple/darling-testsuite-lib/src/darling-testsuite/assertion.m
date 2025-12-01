@@ -84,7 +84,41 @@ void assert_equals_int64(char* variable_name, int64_t expected, int64_t actual) 
 //
 
 void assert_equals_cfstringref(CFStringRef expected, CFStringRef actual) {
-    if (kCFCompareEqualTo != CFStringCompare(expected,actual,0)) {
+    if (expected == nil && actual == nil) {
+        // Are equal
+        return;
+
+    } else if (expected == nil || actual == nil) {
+        const char* expectedCStr = expected == nil ? nil : CFStringGetCStringPtr(expected, kCFStringEncodingUTF8);
+        const char* actualCStr = actual == nil ? nil : CFStringGetCStringPtr(actual, kCFStringEncodingUTF8);
+
+        printf("Expected does not equal actual\n");
+        if (expected != nil) {
+            const char* expectedCStr = CFStringGetCStringPtr(expected, kCFStringEncodingUTF8);
+            if (expectedCStr != NULL) {
+                printf("Expected: %s\n", expectedCStr);
+            } else {
+                printf("Unable to grab expected result\n");
+            }
+        } else {
+            printf("Expected result is nil\n");
+        }
+
+        if (actual != nil) {
+            const char* actualCStr = CFStringGetCStringPtr(actual, kCFStringEncodingUTF8);
+            if (actualCStr != NULL) {
+                printf("Actual: %s\n", actualCStr);
+            } else {
+                printf("Unable to grab actual result\n");
+            }
+        } else {
+            printf("Actual result is nil\n");
+        }
+
+        assert(expected != nil);
+        assert(actual != nil);
+
+    } else if (kCFCompareEqualTo != CFStringCompare(expected,actual,0)) {
         const char* expectedCStr = CFStringGetCStringPtr(expected, kCFStringEncodingUTF8);
         const char* actualCStr = CFStringGetCStringPtr(actual, kCFStringEncodingUTF8);
         
@@ -118,8 +152,8 @@ void assert_equals_basicobj(NSObject* expected, NSObject* actual, print_basicobj
     }
 }
 
-void assert_equals_nsstring(NSString* expected, NSString* actual) {
-    assert_equals_basicobj(expected, actual, pretty_print_nsstring);
+void assert_equals_nsstring(const NSString* expected, const NSString* actual) {
+    assert_equals_basicobj((NSObject*)expected, (NSObject*)actual, pretty_print_nsstring);
 }
 
 void assert_equals_nsarray(NSArray* expected, NSArray* actual, print_basicobj_func_t print_item) {

@@ -1,1 +1,2 @@
+add_subdirectory(frameworks/LaunchServices)
 add_subdirectory(frameworks/SearchKit)

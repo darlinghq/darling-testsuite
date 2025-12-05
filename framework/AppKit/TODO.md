@@ -1,4 +1,10 @@
 # Implement Methods
+* NSAppearance
+  * [`appearanceNamed:`](https://developer.apple.com/documentation/appkit/nsappearance/init(named:)?language=objc)
+
+* NSBitmapImageRep
+  * [`bitmapImageRepByRetaggingWithColorSpace:`](https://developer.apple.com/documentation/appkit/nsbitmapimagerep/retagging(with:)?language=objc)
+
 * NSColor
   * [`encodeWithCoder:`](https://developer.apple.com/documentation/foundation/nscoding/encode(with:)?language=objc)
   * [`colorUsingColorSpaceName:`](https://developer.apple.com/documentation/appkit/nscolor/usingcolorspacename(_:)?language=objc)
@@ -13,6 +19,10 @@
 
 * NSImage
   * [`drawInRect:fromRect:operation:fraction:respectFlipped:hints:`](https://developer.apple.com/documentation/appkit/nsimage/draw(in:from:operation:fraction:respectflipped:hints:)?language=objc)
+
+* NSMenu
+  * [`menuZone`](https://developer.apple.com/documentation/appkit/nsmenu/menuzone()?language=objc)
+  * [`initWithCoder:`](https://developer.apple.com/documentation/appkit/nsmenuitem/init(coder:)?language=objc)
 
 * NSSavePanel
   * [`beginWithCompletionHandler:`](https://developer.apple.com/documentation/appkit/nssavepanel/begin(completionhandler:)?language=objc)

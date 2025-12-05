@@ -2,16 +2,30 @@
 
 #include <darling-testsuite/assertion.h>
 
-void verify_variables_in_NSApplication_h(void);
-void verify_variables_in_NSKeyValueBinding_h(void);
+void test_AppKit_NSApplication_h(void);
+void test_AppKit_NSKeyValueBinding_h(void);
+void test_AppKit_NSSpeechSynthesizer_h(void);
+
+extern const NSString* NSTextInputReplacementRangeAttributeName;
 
 int main() {
+    // #include <AppKit/???>
+    assert_equals_nsstring(@"NSTextInputReplacementRangeAttributeName", NSTextInputReplacementRangeAttributeName);
+
     // #include <AppKit/NSAccessibilityConstants.h>
     assert_equals_nsstring(@"AXShowAlternateUI", NSAccessibilityShowAlternateUIAction);
     assert_equals_nsstring(@"AXShowDefaultUI", NSAccessibilityShowDefaultUIAction);
+    assert_equals_nsstring(@"AXMarkedMisspelled", NSAccessibilityMarkedMisspelledTextAttribute);
+    assert_equals_nsstring(@"AXLevelIndicator", NSAccessibilityLevelIndicatorRole);
 
     // #include <AppKit/NSApplication.h>
-    verify_variables_in_NSApplication_h();
+    test_AppKit_NSApplication_h();
+
+    // #include <AppKit/NSAttributedString.h>
+    assert_equals_nsstring(@"NSMarkedClauseSegment", NSMarkedClauseSegmentAttributeName);
+
+    // #include <AppKit/NSCell.h>
+    assert_equals_nsstring(@"NSControlTintDidChangeNotification", NSControlTintDidChangeNotification);
 
     // #include <AppKit/NSColor.h>
     assert_equals_nsstring(@"NSSystemColorsDidChangeNotification" , NSSystemColorsDidChangeNotification);
@@ -24,7 +38,7 @@ int main() {
     assert_equals_nsstring(@"NSCustomColorSpace", NSCustomColorSpace);
 
     // #include <AppKit/NSKeyValueBinding.h>
-    verify_variables_in_NSKeyValueBinding_h();
+    test_AppKit_NSKeyValueBinding_h();
 
     // #include <AppKit/NSMenu.h>
     assert_equals_nsstring(@"NSMenuDidSendActionNotification", NSMenuDidSendActionNotification);
@@ -41,6 +55,15 @@ int main() {
     assert_equals_nsstring(@"NSScalingFactor", NSPrintScalingFactor);
     assert_equals_nsstring(@"selectedValue", NSSelectedValueBinding);
 
+    // #include <AppKit/NSScreen.h>
+    assert_equals_nsstring(@"NSScreenColorSpaceDidChangeNotification", NSScreenColorSpaceDidChangeNotification);
+
+    // #include <AppKit/NSSharingService.h>
+    assert_equals_nsstring(@"com.apple.share.System.add-to-safari-reading-list", NSSharingServiceNameAddToSafariReadingList);
+
+    // #include <AppKit/NSSpeechSynthesizer.h>
+    test_AppKit_NSSpeechSynthesizer_h();
+
     // #include <AppKit/NSWorkspace.h>
     assert_equals_nsstring(@"NSWorkspaceDidDeactivateApplicationNotification", NSWorkspaceDidDeactivateApplicationNotification);
     assert_equals_nsstring(@"NSWorkspaceSessionDidBecomeActiveNotification", NSWorkspaceSessionDidBecomeActiveNotification);
@@ -48,7 +71,7 @@ int main() {
 }
 
 
-void verify_variables_in_NSApplication_h(void) {
+void test_AppKit_NSApplication_h(void) {
     // NSApplicationPresentationOptions
     assert_equals_nsuinteger("NSApplicationPresentationDefault",                         0,       NSApplicationPresentationDefault);
     assert_equals_nsuinteger("NSApplicationPresentationAutoHideDock",                    1 << 0,  NSApplicationPresentationAutoHideDock);
@@ -67,7 +90,7 @@ void verify_variables_in_NSApplication_h(void) {
 }
 
 
-void verify_variables_in_NSKeyValueBinding_h(void) {
+void test_AppKit_NSKeyValueBinding_h(void) {
     // NSBindingInfoKey
     assert_equals_nsstring(@"NSObservedKeyPath", NSObservedKeyPathKey);
     assert_equals_nsstring(@"NSObservedObject", NSObservedObjectKey);
@@ -115,4 +138,20 @@ void verify_variables_in_NSKeyValueBinding_h(void) {
     assert_equals_nsstring(@"NSConditionallySetsEditable", NSConditionallySetsEditableBindingOption);
     assert_equals_nsstring(@"NSContinuouslyUpdatesValue", NSContinuouslyUpdatesValueBindingOption);
     assert_equals_nsstring(@"NSDisplayPattern", NSDisplayPatternBindingOption);
+}
+
+void test_AppKit_NSSpeechSynthesizer_h(void) {
+    // NSVoiceGenderName
+    assert_equals_nsstring(@"VoiceGenderFemale", NSVoiceGenderFemale);
+    assert_equals_nsstring(@"VoiceGenderMale", NSVoiceGenderMale);
+
+    // NSVoiceAttributeKey
+    assert_equals_nsstring(@"VoiceName", NSVoiceName);
+    assert_equals_nsstring(@"VoiceGender", NSVoiceGender);
+    assert_equals_nsstring(@"VoiceLocaleIdentifier",NSVoiceLocaleIdentifier);
+
+    // NSSpeechPropertyKey
+    assert_equals_nsstring(@"rate", NSSpeechRateProperty);
+    assert_equals_nsstring(@"pbas", NSSpeechPitchBaseProperty);
+    assert_equals_nsstring(@"volm", NSSpeechVolumeProperty);
 }

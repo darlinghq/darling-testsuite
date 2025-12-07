@@ -6,9 +6,10 @@
 #include <sys/errno.h>
 #include <sys/wait.h>
 
+#define FILE_SIZE 38
+
 const char* FILE_PATH = "write_test_wait4_child_messsage_1.txt";
 const char* FILE_CONTENT = "The child process wants to say hello!";
-const size_t FILE_SIZE = 38;
 
 int main() {
     pid_t pid = fork();

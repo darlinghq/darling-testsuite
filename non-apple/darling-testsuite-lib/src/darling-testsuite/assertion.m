@@ -80,6 +80,28 @@ void assert_equals_int64(char* variable_name, int64_t expected, int64_t actual) 
 }
 
 //
+// Floating Point Comparsion
+//
+
+void assert_equals_float(char *variable_name, float expected, float actual) {
+    if (expected != actual) {
+        printf("Expected does not equal actual (%s)\n", variable_name == NULL ? "" : variable_name);
+        printf("Expected: %f\n", expected);
+        printf("Actual: %f\n", actual);
+        assert(expected == actual);
+    }
+}
+
+void assert_equals_double(char *variable_name, double expected, double actual) {
+    if (expected != actual) {
+        printf("Expected does not equal actual (%s)\n", variable_name == NULL ? "" : variable_name);
+        printf("Expected: %f\n", expected);
+        printf("Actual: %f\n", actual);
+        assert(expected == actual);
+    }
+}
+
+//
 // Core Foundation Comparsion
 //
 

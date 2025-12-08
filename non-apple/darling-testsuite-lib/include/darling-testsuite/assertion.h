@@ -17,6 +17,10 @@ void assert_equals_int16(char* variable_name, int16_t expected, int16_t actual);
 void assert_equals_int32(char* variable_name, int32_t expected, int32_t actual);
 void assert_equals_int64(char* variable_name, int64_t expected, int64_t actual);
 
+// Floating Point Comparsion
+void assert_equals_float(char *variable_name, float expected, float actual);
+void assert_equals_double(char *variable_name, double expected, double actual);
+
 // CoreFoundation
 void assert_equals_cfstringref(CFStringRef expected, CFStringRef actual);
 

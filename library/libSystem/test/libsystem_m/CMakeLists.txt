@@ -1,0 +1,3 @@
+add_executable(test_libSystem_libsystem_m_sqrt "sqrt.m")
+target_link_libraries(test_libSystem_libsystem_m_sqrt darling-testsuite-lib)
+add_test(NAME test_libSystem_libsystem_m_sqrt COMMAND test_libSystem_libsystem_m_sqrt)

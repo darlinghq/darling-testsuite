@@ -1,3 +1,43 @@
+# clonefile
+configure_file("clonefile/resources/clone_resolve_beneath/input.txt" ${CMAKE_CURRENT_BINARY_DIR}/clone_resolve_beneath/input.txt COPYONLY)
+configure_file("clonefile/resources/multifiles/inner_folder/E.txt" ${CMAKE_CURRENT_BINARY_DIR}/multifiles/inner_folder/E.txt COPYONLY)
+configure_file("clonefile/resources/multifiles/A.txt" ${CMAKE_CURRENT_BINARY_DIR}/multifiles/A.txt COPYONLY)
+configure_file("clonefile/resources/multifiles/B.txt" ${CMAKE_CURRENT_BINARY_DIR}/multifiles/B.txt COPYONLY)
+configure_file("clonefile/resources/multifiles/C.txt" ${CMAKE_CURRENT_BINARY_DIR}/multifiles/C.txt COPYONLY)
+configure_file("clonefile/resources/multifiles/D.txt" ${CMAKE_CURRENT_BINARY_DIR}/multifiles/D.txt COPYONLY)
+configure_file("clonefile/resources/symlink_folder/fclonefileat_reference.txt" ${CMAKE_CURRENT_BINARY_DIR}/symlink_folder/fclonefileat_reference.txt COPYONLY)
+configure_file("clonefile/resources/fclonefileat_hello_world.txt" ${CMAKE_CURRENT_BINARY_DIR} COPYONLY)
+configure_file("clonefile/resources/fclonefileat_reference.txt" ${CMAKE_CURRENT_BINARY_DIR} COPYONLY)
+
+add_executable(test_libsystem_kernel_clonefile_soft_symlink "clonefile/test_clonefile_soft_symlink.c")
+add_test(NAME test_libsystem_kernel_clonefile_soft_symlink COMMAND test_libsystem_kernel_clonefile_soft_symlink)
+target_link_libraries(test_libsystem_kernel_clonefile_soft_symlink darling-testsuite-lib)
+
+add_executable(test_libsystem_kernel_clonefile_soft_symlink_nofollow "clonefile/test_clonefile_soft_symlink_nofollow.c")
+add_test(NAME test_libsystem_kernel_clonefile_soft_symlink_nofollow COMMAND test_libsystem_kernel_clonefile_soft_symlink_nofollow)
+target_link_libraries(test_libsystem_kernel_clonefile_soft_symlink_nofollow darling-testsuite-lib)
+
+
+add_executable(test_libsystem_kernel_fclonefileat_clone_nofollow_any "clonefile/test_fclonefileat_clone_nofollow_any.c")
+add_test(NAME test_libsystem_kernel_fclonefileat_clone_nofollow_any COMMAND test_libsystem_kernel_fclonefileat_clone_nofollow_any)
+target_link_libraries(test_libsystem_kernel_fclonefileat_clone_nofollow_any darling-testsuite-lib)
+
+add_executable(test_libsystem_kernel_fclonefileat_clone_resolve_beneath_invalid_flag "clonefile/test_fclonefileat_clone_resolve_beneath_invalid_flag.c")
+add_test(NAME test_libsystem_kernel_fclonefileat_clone_resolve_beneath_invalid_flag COMMAND test_libsystem_kernel_fclonefileat_clone_resolve_beneath_invalid_flag)
+target_link_libraries(test_libsystem_kernel_fclonefileat_clone_resolve_beneath_invalid_flag darling-testsuite-lib)
+
+add_executable(test_libsystem_kernel_fclonefileat_folder "clonefile/test_fclonefileat_folder.c")
+add_test(NAME test_libsystem_kernel_fclonefileat_folder COMMAND test_libsystem_kernel_fclonefileat_folder)
+target_link_libraries(test_libsystem_kernel_fclonefileat_folder darling-testsuite-lib)
+
+add_executable(test_libsystem_kernel_fclonefileat_nonacl "clonefile/test_fclonefileat_nonacl.c")
+add_test(NAME test_libsystem_kernel_fclonefileat_nonacl COMMAND test_libsystem_kernel_fclonefileat_nonacl)
+target_link_libraries(test_libsystem_kernel_fclonefileat_nonacl darling-testsuite-lib)
+
+add_executable(test_libsystem_kernel_fclonefileat_simple_file "clonefile/test_fclonefileat_simple_file.c")
+add_test(NAME test_libsystem_kernel_fclonefileat_simple_file COMMAND test_libsystem_kernel_fclonefileat_simple_file)
+target_link_libraries(test_libsystem_kernel_fclonefileat_simple_file darling-testsuite-lib)
+
 # close
 add_executable(test_close_success "close/test_close_success.c")
 add_test(NAME test_close_success COMMAND test_close_success)

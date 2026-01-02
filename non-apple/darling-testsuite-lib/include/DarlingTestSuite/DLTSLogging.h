@@ -5,7 +5,7 @@
 
 @interface DLTSLogging : NSObject
 
-+(BOOL)logNSError:(NSError*)error;
++(void)logNSError:(NSError*)error;
 
 @end
 

@@ -2,7 +2,7 @@
 
 @implementation DLTSLogging
 
-+(BOOL)logNSError:(NSError*)error {
++(void)logNSError:(NSError*)error {
     printf(
         "An NSError has occured (code=%ld, domain=%s)",
         error.code,

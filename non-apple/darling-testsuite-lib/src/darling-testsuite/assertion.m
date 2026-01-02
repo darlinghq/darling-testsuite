@@ -3,81 +3,70 @@
 #include <assert.h>
 #include <stdio.h>
 
+#include <sys/errno.h>
+
+
+#define CREATE_BASIC_PRIMITIVE_COMPARISON_FUNCTION(primitive_type, printf_primitive_type) \
+void assert_equals_ ## primitive_type(char* variable_name, primitive_type expected, primitive_type actual) { \
+    if (expected != actual) { \
+        printf("Expected does not equal actual (%s)\n", variable_name == NULL ? "" : variable_name); \
+        printf("Expected: " printf_primitive_type "\n", expected); \
+        printf("Actual: " printf_primitive_type "\n", actual); \
+        assert(expected == actual); \
+    } \
+}
+
 //
-// Integer Comparsion
+// Integer Comparison (Standard)
 //
 
+CREATE_BASIC_PRIMITIVE_COMPARISON_FUNCTION(uint8_t, "%hhu")
+CREATE_BASIC_PRIMITIVE_COMPARISON_FUNCTION(uint16_t, "%hu")
+CREATE_BASIC_PRIMITIVE_COMPARISON_FUNCTION(uint32_t, "%u")
+CREATE_BASIC_PRIMITIVE_COMPARISON_FUNCTION(uint64_t, "%llu")
+
+CREATE_BASIC_PRIMITIVE_COMPARISON_FUNCTION(int8_t, "%hhd")
+CREATE_BASIC_PRIMITIVE_COMPARISON_FUNCTION(int16_t, "%hd")
+CREATE_BASIC_PRIMITIVE_COMPARISON_FUNCTION(int32_t, "%d")
+CREATE_BASIC_PRIMITIVE_COMPARISON_FUNCTION(int64_t, "%lld")
+
 void assert_equals_uint8(char* variable_name, uint8_t expected, uint8_t actual) {
-    if (expected != actual) {
-        printf("Expected does not equal actual (%s)\n", variable_name == NULL ? "" : variable_name);
-        printf("Expected: %hhu\n", expected);
-        printf("Actual: %hhu\n", actual);
-        assert(expected == actual);
-    }
+    assert_equals_uint8_t(variable_name, expected, actual);
 }
 
 void assert_equals_uint16(char* variable_name, uint16_t expected, uint16_t actual) {
-    if (expected != actual) {
-        printf("Expected does not equal actual (%s)\n", variable_name == NULL ? "" : variable_name);
-        printf("Expected: %hu\n", expected);
-        printf("Actual: %hu\n", actual);
-        assert(expected == actual);
-    }
+    assert_equals_uint16_t(variable_name, expected, actual);
 }
 
 void assert_equals_uint32(char* variable_name, uint32_t expected, uint32_t actual) {
-    if (expected != actual) {
-        printf("Expected does not equal actual (%s)\n", variable_name == NULL ? "" : variable_name);
-        printf("Expected: %u\n", expected);
-        printf("Actual: %u\n", actual);
-        assert(expected == actual);
-    }
+    assert_equals_uint32_t(variable_name, expected, actual);
 }
 
 void assert_equals_uint64(char* variable_name, uint64_t expected, uint64_t actual) {
-    if (expected != actual) {
-        printf("Expected does not equal actual (%s)\n", variable_name == NULL ? "" : variable_name);
-        printf("Expected: %llu\n", expected);
-        printf("Actual: %llu\n", actual);
-        assert(expected == actual);
-    }
+    assert_equals_uint64_t(variable_name, expected, actual);
 }
 
 void assert_equals_int8(char* variable_name, int8_t expected, int8_t actual) {
-    if (expected != actual) {
-        printf("Expected does not equal actual (%s)\n", variable_name == NULL ? "" : variable_name);
-        printf("Expected: %hhd\n", expected);
-        printf("Actual: %hhd\n", actual);
-        assert(expected == actual);
-    }
+    assert_equals_int8_t(variable_name, expected, actual);
 }
 
 void assert_equals_int16(char* variable_name, int16_t expected, int16_t actual) {
-    if (expected != actual) {
-        printf("Expected does not equal actual (%s)\n", variable_name == NULL ? "" : variable_name);
-        printf("Expected: %hd\n", expected);
-        printf("Actual: %hd\n", actual);
-        assert(expected == actual);
-    }
+    assert_equals_int16_t(variable_name, expected, actual);
 }
 
 void assert_equals_int32(char* variable_name, int32_t expected, int32_t actual) {
-    if (expected != actual) {
-        printf("Expected does not equal actual (%s)\n", variable_name == NULL ? "" : variable_name);
-        printf("Expected: %d\n", expected);
-        printf("Actual: %d\n", actual);
-        assert(expected == actual);
-    }
+    assert_equals_int32_t(variable_name, expected, actual);
 }
 
 void assert_equals_int64(char* variable_name, int64_t expected, int64_t actual) {
-    if (expected != actual) {
-        printf("Expected does not equal actual (%s)\n", variable_name == NULL ? "" : variable_name);
-        printf("Expected: %lld\n", expected);
-        printf("Actual: %lld\n", actual);
-        assert(expected == actual);
-    }
+    assert_equals_int64_t(variable_name, expected, actual);
 }
+
+//
+// Integer Comparsion (Special)
+//
+
+CREATE_BASIC_PRIMITIVE_COMPARISON_FUNCTION(size_t, "%zu")
 
 //
 // Floating Point Comparsion
@@ -98,6 +87,153 @@ void assert_equals_double(char *variable_name, double expected, double actual) {
         printf("Expected: %f\n", expected);
         printf("Actual: %f\n", actual);
         assert(expected == actual);
+    }
+}
+
+//
+// Errno Comparsion
+//
+
+const char* get_errno_varname(int error_code) {
+    switch (error_code) {
+        case EPERM: return "EPERM";
+        case ENOENT: return "ENOENT";
+        case ESRCH: return "ESRCH";
+        case EINTR: return "EINTR";
+        case EIO: return "EIO";
+        case ENXIO: return "ENXIO";
+        case E2BIG: return "E2BIG";
+        case ENOEXEC: return "ENOEXEC";
+        case EBADF: return "EBADF";
+        case ECHILD: return "ECHILD";
+        case EDEADLK: return "EDEADLK";
+        case ENOMEM: return "ENOMEM";
+        case EACCES: return "EACCES";
+        case EFAULT: return "EFAULT";
+        case ENOTBLK: return "ENOTBLK";
+        case EBUSY: return "EBUSY";
+        case EEXIST: return "EEXIST";
+        case EXDEV: return "EXDEV";
+        case ENODEV: return "ENODEV";
+        case ENOTDIR: return "ENOTDIR";
+        case EISDIR: return "EISDIR";
+        case EINVAL: return "EINVAL";
+        case ENFILE: return "ENFILE";
+        case EMFILE: return "EMFILE";
+        case ENOTTY: return "ENOTTY";
+        case ETXTBSY: return "ETXTBSY";
+        case EFBIG: return "EFBIG";
+        case ENOSPC: return "ENOSPC";
+        case ESPIPE: return "ESPIPE";
+        case EROFS: return "EROFS";
+        case EMLINK: return "EMLINK";
+        case EPIPE: return "EPIPE";
+        case EDOM: return "EDOM";
+        case ERANGE: return "ERANGE";
+        case EAGAIN: return "EAGAIN";
+        case EINPROGRESS: return "EINPROGRESS";
+        case EALREADY: return "EALREADY";
+        case ENOTSOCK: return "ENOTSOCK";
+        case EDESTADDRREQ: return "EDESTADDRREQ";
+        case EMSGSIZE: return "EMSGSIZE";
+        case EPROTOTYPE: return "EPROTOTYPE";
+        case ENOPROTOOPT: return "ENOPROTOOPT";
+        case EPROTONOSUPPORT: return "EPROTONOSUPPORT";
+        case ESOCKTNOSUPPORT: return "ESOCKTNOSUPPORT";
+        case ENOTSUP: return "ENOTSUP";
+        case EPFNOSUPPORT: return "EPFNOSUPPORT";
+        case EAFNOSUPPORT: return "EAFNOSUPPORT";
+        case EADDRINUSE: return "EADDRINUSE";
+        case EADDRNOTAVAIL: return "EADDRNOTAVAIL";
+        case ENETDOWN: return "ENETDOWN";
+        case ENETUNREACH: return "ENETUNREACH";
+        case ENETRESET: return "ENETRESET";
+        case ECONNABORTED: return "ECONNABORTED";
+        case ECONNRESET: return "ECONNRESET";
+        case ENOBUFS: return "ENOBUFS";
+        case EISCONN: return "EISCONN";
+        case ENOTCONN: return "ENOTCONN";
+        case ESHUTDOWN: return "ESHUTDOWN";
+        case ETIMEDOUT: return "ETIMEDOUT";
+        case ECONNREFUSED: return "ECONNREFUSED";
+        case ELOOP: return "ELOOP";
+        case ENAMETOOLONG: return "ENAMETOOLONG";
+        case EHOSTDOWN: return "EHOSTDOWN";
+        case EHOSTUNREACH: return "EHOSTUNREACH";
+        case ENOTEMPTY: return "ENOTEMPTY";
+        case EPROCLIM: return "EPROCLIM";
+        case EUSERS: return "EUSERS";
+        case EDQUOT: return "EDQUOT";
+        case ESTALE: return "ESTALE";
+        case EBADRPC: return "EBADRPC";
+        case ERPCMISMATCH: return "ERPCMISMATCH";
+        case EPROGUNAVAIL: return "EPROGUNAVAIL";
+        case EPROGMISMATCH: return "EPROGMISMATCH";
+        case EPROCUNAVAIL: return "EPROCUNAVAIL";
+        case ENOLCK: return "ENOLCK";
+        case ENOSYS: return "ENOSYS";
+        case EFTYPE: return "EFTYPE";
+        case EAUTH: return "EAUTH";
+        case ENEEDAUTH: return "ENEEDAUTH";
+        case EPWROFF: return "EPWROFF";
+        case EDEVERR: return "EDEVERR";
+        case EOVERFLOW: return "EOVERFLOW";
+        case EBADEXEC: return "EBADEXEC";
+        case EBADARCH: return "EBADARCH";
+        case ESHLIBVERS: return "ESHLIBVERS";
+        case EBADMACHO: return "EBADMACHO";
+        case ECANCELED: return "ECANCELED";
+        case EIDRM: return "EIDRM";
+        case ENOMSG: return "ENOMSG";
+        case EILSEQ: return "EILSEQ";
+        case ENOATTR: return "ENOATTR";
+        case EBADMSG: return "EBADMSG";
+        case EMULTIHOP: return "EMULTIHOP";
+        case ENODATA: return "ENODATA";
+        case ENOLINK: return "ENOLINK";
+        case ENOSR: return "ENOSR";
+        case ENOSTR: return "ENOSTR";
+        case EPROTO: return "EPROTO";
+        case ETIME: return "ETIME";
+        case EOPNOTSUPP: return "EOPNOTSUPP";
+        default: return "Unknown value";
+    }
+}
+
+void assert_no_errno(const char* function_name, bool is_failure_case) {
+    if (is_failure_case) {
+        int error_num = errno;
+        const char* error_varname = get_errno_varname(error_num);
+        const char* error_msg = strerror(error_num);
+
+        if (function_name != NULL) {
+            printf("%s has failed (%s %d: %s)\n", 
+                function_name, error_varname, error_num, error_msg);
+        } else {
+            printf("Errno failure has occured (%s %d: %s)\n", 
+                error_varname, error_num, error_msg);
+        }
+
+        assert(!is_failure_case);
+    }
+}
+
+void assert_expected_errno(const char* function_name, bool is_failure_case, int expected_errcode) {
+    int error_num = errno;
+    if (is_failure_case && error_num == expected_errcode) {
+        return;
+    }
+
+    assert_no_errno(function_name, is_failure_case);
+    
+    if (!is_failure_case) {
+        if (function_name != NULL) {
+            printf("%s should have failed, but it succeeded.\n", function_name);
+        } else {
+            printf("Should have failed, but succeeded.\n");
+        }
+
+        assert(is_failure_case);
     }
 }
 

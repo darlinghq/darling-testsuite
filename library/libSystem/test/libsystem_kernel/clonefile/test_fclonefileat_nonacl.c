@@ -12,7 +12,7 @@
 int main() {
     // Setup
     int srcfd;
-    int dst_dirfd;
+    int dst_dirfd = AT_FDCWD;
     const char dst[] = "generated_result_libsystem_kernel_fclonefileat_nonacl_file.txt";
     int flags = CLONE_ACL;
 
@@ -40,6 +40,5 @@ int main() {
 
     // Cleanup
     close(srcfd);
-    close(dst_dirfd);
     close(copied_file_fd);
 }

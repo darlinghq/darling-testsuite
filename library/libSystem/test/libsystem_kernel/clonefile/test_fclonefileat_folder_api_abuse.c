@@ -9,11 +9,11 @@
 
 #include <darling-testsuite/assertion.h>
 
-// WARNING: Apple strongly discourage
+// WARNING: Apple strongly discourages using this API for copying a folder
 int main() {
     // Setup
     int srcfd;
-    int dst_dirfd;
+    int dst_dirfd = AT_FDCWD;
     const char dst[] = "generated_folder_multifiles";
     int flags = 0;
 
@@ -33,9 +33,6 @@ int main() {
 
     srcfd = open("multifiles", O_RDONLY);
     assert_no_errno("open(srcfd)", srcfd == -1);
-
-    dst_dirfd = open(".", O_RDONLY);
-    assert_no_errno("open(dst_dirfd)", dst_dirfd == -1);
 
     // Execute
     int result = fclonefileat(srcfd, dst_dirfd, dst, flags);
@@ -68,7 +65,6 @@ int main() {
 
     // Cleanup
     close(srcfd);
-    close(dst_dirfd);
     close(copied_fileA_fd);
     close(copied_fileB_fd);
     close(copied_fileC_fd);

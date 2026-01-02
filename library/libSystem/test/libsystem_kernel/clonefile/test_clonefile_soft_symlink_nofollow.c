@@ -10,7 +10,7 @@
 int main() {
     // Setup
     const char src[] = "generated_fclonefileat_soft_symlink_nofollow.txt";
-    const char dst[] = "symlink_folder/generated_result_libsystem_kernel_fclonefileat_soft_symlink_nofollow.txt";
+    const char dst[] = "symlink_folder/generated_result_libsystem_kernel_clonefile_soft_symlink_nofollow.txt";
     int flags = CLONE_NOFOLLOW;
     
     unlink(src);

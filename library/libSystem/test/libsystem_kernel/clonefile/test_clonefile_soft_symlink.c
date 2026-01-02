@@ -13,7 +13,7 @@ int check_errno_occured_int(int response);
 int main() {
     // Setup
     const char src[] = "generated_fclonefileat_soft_symlink.txt";
-    const char dst[] = "symlink_folder/generated_result_libsystem_kernel_fclonefileat_soft_symlink.txt";
+    const char dst[] = "symlink_folder/generated_result_libsystem_kernel_clonefile_soft_symlink.txt";
     int flags = 0;
     
     unlink(src);

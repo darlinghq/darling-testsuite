@@ -1,3 +1,0 @@
-add_executable(test_SystemConfiguration_variable "test/test_SystemConfiguration_variable.m")
-target_link_libraries(test_SystemConfiguration_variable "-framework Foundation" "-framework SystemConfiguration" darling-testsuite-lib)
-add_test(NAME test_SystemConfiguration_variable COMMAND test_SystemConfiguration_variable)

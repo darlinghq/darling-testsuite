@@ -4,10 +4,10 @@
 
 int main() {
     // #include <WebKit/WebKitErrors.h>
-    assert_equals_nsstring(@"WebKitErrorDomain", WebKitErrorDomain);
+    assert_equals_NSString(@"WebKitErrorDomain", WebKitErrorDomain);
 
     // #include <WebKit/WebView.h>
-    assert_equals_nsstring(@"WebElementLinkLabel", WebElementLinkLabelKey);
-    assert_equals_nsstring(@"WebElementLinkURL", WebElementLinkURLKey);
-    assert_equals_nsstring(@"WebViewDidChangeSelectionNotification", WebViewDidChangeSelectionNotification);
+    assert_equals_NSString(@"WebElementLinkLabel", WebElementLinkLabelKey);
+    assert_equals_NSString(@"WebElementLinkURL", WebElementLinkURLKey);
+    assert_equals_NSString(@"WebViewDidChangeSelectionNotification", WebViewDidChangeSelectionNotification);
 }

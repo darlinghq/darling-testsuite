@@ -1,6 +1,6 @@
-#include <private/DarlingTestSuite/DLTSXmlLayout.h>
+#include <private/darling-testsuite/DLTSXmlLayout.h>
 
-#include <private/DarlingTestSuite/DLTSTraverseXmlLayout.h>
+#include <private/darling-testsuite/DLTSTraverseXmlLayout.h>
 
 @implementation DLTSXmlLayout
 

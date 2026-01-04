@@ -4,17 +4,17 @@
 
 int main() {
     // #include <CoreBluetooth/CBAdvertisementData.h>
-    assert_equals_nsstring(@"kCBAdvDataLocalName", CBAdvertisementDataLocalNameKey);
-    assert_equals_nsstring(@"kCBAdvDataManufacturerData", CBAdvertisementDataManufacturerDataKey);
-    assert_equals_nsstring(@"kCBAdvDataServiceData", CBAdvertisementDataServiceDataKey);
-    assert_equals_nsstring(@"kCBAdvDataServiceUUIDs", CBAdvertisementDataServiceUUIDsKey);
-    assert_equals_nsstring(@"kCBAdvDataHashedServiceUUIDs", CBAdvertisementDataOverflowServiceUUIDsKey);
-    assert_equals_nsstring(@"kCBAdvDataTxPowerLevel", CBAdvertisementDataTxPowerLevelKey);
+    assert_equals_NSString(@"kCBAdvDataLocalName", CBAdvertisementDataLocalNameKey);
+    assert_equals_NSString(@"kCBAdvDataManufacturerData", CBAdvertisementDataManufacturerDataKey);
+    assert_equals_NSString(@"kCBAdvDataServiceData", CBAdvertisementDataServiceDataKey);
+    assert_equals_NSString(@"kCBAdvDataServiceUUIDs", CBAdvertisementDataServiceUUIDsKey);
+    assert_equals_NSString(@"kCBAdvDataHashedServiceUUIDs", CBAdvertisementDataOverflowServiceUUIDsKey);
+    assert_equals_NSString(@"kCBAdvDataTxPowerLevel", CBAdvertisementDataTxPowerLevelKey);
 
     // #include <CoreBluetooth/CBCentralManagerConstants.h>
-    assert_equals_nsstring(@"kCBScanOptionAllowDuplicates", CBCentralManagerScanOptionAllowDuplicatesKey);
+    assert_equals_NSString(@"kCBScanOptionAllowDuplicates", CBCentralManagerScanOptionAllowDuplicatesKey);
 
     // #include <CoreBluetooth/CBError.h>
-    assert_equals_nsstring(@"CBATTErrorDomain", CBATTErrorDomain);
-    assert_equals_nsstring(@"CBErrorDomain", CBErrorDomain);    
+    assert_equals_NSString(@"CBATTErrorDomain", CBATTErrorDomain);
+    assert_equals_NSString(@"CBErrorDomain", CBErrorDomain);    
 }

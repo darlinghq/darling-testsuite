@@ -8,6 +8,6 @@ int main() {
                                                  colorName:@"textBackgroundColor"];
     NSColor* expectedCatalog = [NSColor textBackgroundColor];
 
-    assert_equals_nsstring(expectedCatalog.catalogNameComponent, actualCatalog.catalogNameComponent);                        
-    assert_equals_nsstring(expectedCatalog.colorNameComponent, actualCatalog.colorNameComponent);
+    assert_equals_NSString(expectedCatalog.catalogNameComponent, actualCatalog.catalogNameComponent);                        
+    assert_equals_NSString(expectedCatalog.colorNameComponent, actualCatalog.colorNameComponent);
 }

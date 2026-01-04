@@ -6,9 +6,9 @@
 
 typedef NSString* (*print_basicobj_func_t)(NSObject*);
 
-NSString* pretty_print_nsstring(NSObject* obj);
+NSString* pretty_print_NSString(NSObject* obj);
 
-NSString* pretty_print_nsarray(NSArray<NSObject*> *arrayToPrint, print_basicobj_func_t print_item);
+NSString* pretty_print_NSArray(NSArray<NSObject*> *arrayToPrint, print_basicobj_func_t print_item);
 #endif // __OBJC__
 
 #endif // DARLING_TESTSUITE_LIB_PRINT_H

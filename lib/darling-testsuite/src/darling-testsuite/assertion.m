@@ -30,38 +30,6 @@ CREATE_BASIC_PRIMITIVE_COMPARISON_FUNCTION(int16_t, "%hd")
 CREATE_BASIC_PRIMITIVE_COMPARISON_FUNCTION(int32_t, "%d")
 CREATE_BASIC_PRIMITIVE_COMPARISON_FUNCTION(int64_t, "%lld")
 
-void assert_equals_uint8(char* variable_name, uint8_t expected, uint8_t actual) {
-    assert_equals_uint8_t(variable_name, expected, actual);
-}
-
-void assert_equals_uint16(char* variable_name, uint16_t expected, uint16_t actual) {
-    assert_equals_uint16_t(variable_name, expected, actual);
-}
-
-void assert_equals_uint32(char* variable_name, uint32_t expected, uint32_t actual) {
-    assert_equals_uint32_t(variable_name, expected, actual);
-}
-
-void assert_equals_uint64(char* variable_name, uint64_t expected, uint64_t actual) {
-    assert_equals_uint64_t(variable_name, expected, actual);
-}
-
-void assert_equals_int8(char* variable_name, int8_t expected, int8_t actual) {
-    assert_equals_int8_t(variable_name, expected, actual);
-}
-
-void assert_equals_int16(char* variable_name, int16_t expected, int16_t actual) {
-    assert_equals_int16_t(variable_name, expected, actual);
-}
-
-void assert_equals_int32(char* variable_name, int32_t expected, int32_t actual) {
-    assert_equals_int32_t(variable_name, expected, actual);
-}
-
-void assert_equals_int64(char* variable_name, int64_t expected, int64_t actual) {
-    assert_equals_int64_t(variable_name, expected, actual);
-}
-
 //
 // Integer Comparsion (Special)
 //
@@ -72,23 +40,8 @@ CREATE_BASIC_PRIMITIVE_COMPARISON_FUNCTION(size_t, "%zu")
 // Floating Point Comparsion
 //
 
-void assert_equals_float(char *variable_name, float expected, float actual) {
-    if (expected != actual) {
-        printf("Expected does not equal actual (%s)\n", variable_name == NULL ? "" : variable_name);
-        printf("Expected: %f\n", expected);
-        printf("Actual: %f\n", actual);
-        assert(expected == actual);
-    }
-}
-
-void assert_equals_double(char *variable_name, double expected, double actual) {
-    if (expected != actual) {
-        printf("Expected does not equal actual (%s)\n", variable_name == NULL ? "" : variable_name);
-        printf("Expected: %f\n", expected);
-        printf("Actual: %f\n", actual);
-        assert(expected == actual);
-    }
-}
+CREATE_BASIC_PRIMITIVE_COMPARISON_FUNCTION(float, "%f")
+CREATE_BASIC_PRIMITIVE_COMPARISON_FUNCTION(double, "%f")
 
 //
 // Errno Comparsion
@@ -241,7 +194,7 @@ void assert_expected_errno(const char* function_name, bool is_failure_case, int 
 // Core Foundation Comparsion
 //
 
-void assert_equals_cfstringref(CFStringRef expected, CFStringRef actual) {
+void assert_equals_CFStringRef(CFStringRef expected, CFStringRef actual) {
     if (expected == nil && actual == nil) {
         // Are equal
         return;
@@ -310,24 +263,24 @@ void assert_equals_basicobj(NSObject* expected, NSObject* actual, print_basicobj
     }
 }
 
-void assert_equals_nsstring(const NSString* expected, const NSString* actual) {
-    assert_equals_basicobj((NSObject*)expected, (NSObject*)actual, pretty_print_nsstring);
+void assert_equals_NSString(const NSString* expected, const NSString* actual) {
+    assert_equals_basicobj((NSObject*)expected, (NSObject*)actual, pretty_print_NSString);
 }
 
-void assert_equals_nsarray(NSArray* expected, NSArray* actual, print_basicobj_func_t print_item) {
+void assert_equals_NSArray(NSArray* expected, NSArray* actual, print_basicobj_func_t print_item) {
     if (![expected isEqualTo:actual]) {
         printf("Expected does not equal actual\n");
-        printf("Expected: %s\n", [pretty_print_nsarray(expected, print_item) UTF8String]);
-        printf("Actual: %s\n", [pretty_print_nsarray(actual, print_item) UTF8String]);
+        printf("Expected: %s\n", [pretty_print_NSArray(expected, print_item) UTF8String]);
+        printf("Actual: %s\n", [pretty_print_NSArray(actual, print_item) UTF8String]);
         assert([expected isEqualTo:actual]);
     }
 }
 
-void assert_equals_nsuinteger(char* variable_name, NSUInteger expected, NSUInteger actual) {
+void assert_equals_NSUInteger(char* variable_name, NSUInteger expected, NSUInteger actual) {
 #if __LP64__
-    assert_equals_uint64(variable_name, expected, actual);
+    assert_equals_uint64_t(variable_name, expected, actual);
 #else
-    assert_equals_uint32(variable_name, expected, actual);
+    assert_equals_uint32_t(variable_name, expected, actual);
 #endif
 }
 
@@ -341,10 +294,21 @@ void assert_equals_BOOL(char *variable_name, BOOL expected, BOOL actual) {
 }
 
 //
-// Objective-C Exception
+// Objective-C Exception/Error
 //
 
-NSException* assert_exception_is_thrown(void (^function_to_execute)(void)) {
+void assert_NSError_not_set(NSError *error, bool is_failure_case) {
+    if (is_failure_case && error != NULL) {
+        printf("An NSError has occured (code=%ld, domain=%s)\n",
+            error.code,
+            [error.domain UTF8String]
+        );
+
+        assert(!is_failure_case && error == NULL);
+    }
+}
+
+NSException* assert_NSException_is_thrown(void (^function_to_execute)(void)) {
     NSException* result = nil;
     @try {
         function_to_execute();

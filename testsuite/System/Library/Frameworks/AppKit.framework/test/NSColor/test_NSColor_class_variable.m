@@ -15,6 +15,6 @@ int main() {
 }
 
 void verify_catalog_color_name(NSColor* color, NSString* expectedCatalogName, NSString* expectedColorName) {
-    assert_equals_nsstring(expectedCatalogName, color.catalogNameComponent);
-    assert_equals_nsstring(expectedColorName, color.colorNameComponent);
+    assert_equals_NSString(expectedCatalogName, color.catalogNameComponent);
+    assert_equals_NSString(expectedColorName, color.colorNameComponent);
 }

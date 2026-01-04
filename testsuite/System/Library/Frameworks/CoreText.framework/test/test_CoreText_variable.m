@@ -4,5 +4,5 @@
 
 int main() {
     // #include <CoreText/CTFontManager.h>
-    assert_equals_cfstringref(CFSTR("CTFontManagerFontChangedNotification"), kCTFontManagerRegisteredFontsChangedNotification);
+    assert_equals_CFStringRef(CFSTR("CTFontManagerFontChangedNotification"), kCTFontManagerRegisteredFontsChangedNotification);
 }

@@ -3,7 +3,7 @@
 
 #include <Foundation/Foundation.h>
 
-#include <private/DarlingTestSuite/DLTSXmlLayout.h>
+#include <private/darling-testsuite/DLTSXmlLayout.h>
 
 @interface DLTSXmlParserDelegate : NSObject <NSXMLParserDelegate> {
   DLTSXmlLayout* _currentXmlLayoutPosition;

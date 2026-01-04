@@ -1,10 +1,10 @@
 #include <darling-testsuite/print.h>
 
-NSString* pretty_print_nsstring(NSObject* obj) {
+NSString* pretty_print_NSString(NSObject* obj) {
     return (NSString*)obj;
 }
 
-NSString* pretty_print_nsarray(NSArray<NSObject*> *arrayToPrint, print_basicobj_func_t print_item) {
+NSString* pretty_print_NSArray(NSArray<NSObject*> *arrayToPrint, print_basicobj_func_t print_item) {
     NSMutableString* result = [[NSMutableString alloc] init];
     NSUInteger index = 0;
 

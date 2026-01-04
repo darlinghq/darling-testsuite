@@ -1,4 +1,4 @@
-#include <private/DarlingTestSuite/DLTSTraverseXmlLayout.h>
+#include <private/darling-testsuite/DLTSTraverseXmlLayout.h>
 
 @implementation DLTSTraverseXmlLayout
 

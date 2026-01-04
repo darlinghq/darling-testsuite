@@ -9,15 +9,15 @@
 int main() {
 #if MACOS_SUPPORTED_ABI(VERSION_10_8,VERSION_14_0)
     // #include <CoreGraphics/CGDisplayStream.h>
-    assert_equals_cfstringref(CFSTR("kCGDisplayStreamShowCursor"), kCGDisplayStreamShowCursor);
+    assert_equals_CFStringRef(CFSTR("kCGDisplayStreamShowCursor"), kCGDisplayStreamShowCursor);
 #endif
 
     // #include <CoreGraphics/CGFont.h>
-    assert_equals_cfstringref(CFSTR("kCGFontVariationAxisName"), kCGFontVariationAxisName);
-    assert_equals_cfstringref(CFSTR("kCGFontVariationAxisMinValue"), kCGFontVariationAxisMinValue);
-    assert_equals_cfstringref(CFSTR("kCGFontVariationAxisDefaultValue"), kCGFontVariationAxisDefaultValue);
-    assert_equals_cfstringref(CFSTR("kCGFontVariationAxisMaxValue"), kCGFontVariationAxisMaxValue);
+    assert_equals_CFStringRef(CFSTR("kCGFontVariationAxisName"), kCGFontVariationAxisName);
+    assert_equals_CFStringRef(CFSTR("kCGFontVariationAxisMinValue"), kCGFontVariationAxisMinValue);
+    assert_equals_CFStringRef(CFSTR("kCGFontVariationAxisDefaultValue"), kCGFontVariationAxisDefaultValue);
+    assert_equals_CFStringRef(CFSTR("kCGFontVariationAxisMaxValue"), kCGFontVariationAxisMaxValue);
 
     // #include <CoreGraphics/CGWindow.h>
-    assert_equals_cfstringref(CFSTR("kCGWindowIsOnscreen"), kCGWindowIsOnscreen);
+    assert_equals_CFStringRef(CFSTR("kCGWindowIsOnscreen"), kCGWindowIsOnscreen);
 }

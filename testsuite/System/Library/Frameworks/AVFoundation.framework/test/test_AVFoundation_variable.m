@@ -6,24 +6,24 @@ void test_AVFoundation_AVMetadataFormat_h();
 
 int main() {
     // #include <AVFoundation/AVMediaFormat.h>
-    assert_equals_nsstring(@"soun", AVMediaTypeAudio);
-    assert_equals_nsstring(@"muxx", AVMediaTypeMuxed);
-    assert_equals_nsstring(@"vide", AVMediaTypeVideo);
+    assert_equals_NSString(@"soun", AVMediaTypeAudio);
+    assert_equals_NSString(@"muxx", AVMediaTypeMuxed);
+    assert_equals_NSString(@"vide", AVMediaTypeVideo);
 
     // #include <AVFoundation/AVMetadataFormat.h>
     test_AVFoundation_AVMetadataFormat_h();
 
     // #include <AVFoundation/AVVideoSettings.h>
-    assert_equals_nsstring(@"AVVideoScalingModeKey", AVVideoScalingModeKey);
-    assert_equals_nsstring(@"AVVideoScalingModeResizeAspectFill", AVVideoScalingModeResizeAspectFill);
+    assert_equals_NSString(@"AVVideoScalingModeKey", AVVideoScalingModeKey);
+    assert_equals_NSString(@"AVVideoScalingModeResizeAspectFill", AVVideoScalingModeResizeAspectFill);
 }
 
 void test_AVFoundation_AVMetadataFormat_h() {
-    assert_equals_nsstring(@"albumName", AVMetadataCommonKeyAlbumName);
-    assert_equals_nsstring(@"artist", AVMetadataCommonKeyArtist);
-    assert_equals_nsstring(@"artwork", AVMetadataCommonKeyArtwork);
-    assert_equals_nsstring(@"description", AVMetadataCommonKeyDescription);
-    assert_equals_nsstring(@"title", AVMetadataCommonKeyTitle);
+    assert_equals_NSString(@"albumName", AVMetadataCommonKeyAlbumName);
+    assert_equals_NSString(@"artist", AVMetadataCommonKeyArtist);
+    assert_equals_NSString(@"artwork", AVMetadataCommonKeyArtwork);
+    assert_equals_NSString(@"description", AVMetadataCommonKeyDescription);
+    assert_equals_NSString(@"title", AVMetadataCommonKeyTitle);
 
-    assert_equals_nsstring(@"WXXX", AVMetadataID3MetadataKeyUserURL);
+    assert_equals_NSString(@"WXXX", AVMetadataID3MetadataKeyUserURL);
 }

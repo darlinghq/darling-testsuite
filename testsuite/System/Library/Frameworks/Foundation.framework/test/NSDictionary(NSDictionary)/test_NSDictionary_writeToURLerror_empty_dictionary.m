@@ -1,5 +1,4 @@
-#include <DarlingTestSuite/DLTSLogging.h>
-
+#include <darling-testsuite/assertion.h>
 #include <darling-testsuite/xml.h>
 
 #include <Foundation/Foundation.h>
@@ -16,10 +15,7 @@ int main(void) {
     
     // Execute
     BOOL isSuccessful = [mutDict writeToURL:url error:&error];
-    if (!isSuccessful) {
-        [DLTSLogging logNSError:error];
-        abort();
-    }
+    assert_NSError_not_set(error, !isSuccessful);
 
     // Verify
     if (!is_xml_equal("expected_writeToURL_error_empty_dict", "generated_writeToURL_error_empty_dict")) {

@@ -19,5 +19,5 @@ int main() {
     [actualKeys sortUsingSelector: @selector(compare:)];
 
     // Verify List
-    assert_equals_nsarray(expectedKeys, actualKeys, pretty_print_nsstring);
+    assert_equals_NSArray(expectedKeys, actualKeys, pretty_print_NSString);
 }

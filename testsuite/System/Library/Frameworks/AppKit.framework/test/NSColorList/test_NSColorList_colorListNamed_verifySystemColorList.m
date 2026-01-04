@@ -64,8 +64,8 @@ int main() {
     actualKeyList = [actualKeyList sortedArrayUsingSelector:@selector(compare:)];
 
     // Verifying
-    assert_equals_nsstring(@"System", actualColorList.name);
-    assert_equals_nsarray(expectedKeyList, actualKeyList, pretty_print_nsstring);
+    assert_equals_NSString(@"System", actualColorList.name);
+    assert_equals_NSArray(expectedKeyList, actualKeyList, pretty_print_NSString);
 
     // Note to self:
     // Should we verify the NSColor values as well?

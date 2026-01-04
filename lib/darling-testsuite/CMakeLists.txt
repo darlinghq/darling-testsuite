@@ -9,7 +9,6 @@ add_library(darling-testsuite-lib
     src/private/DarlingTestSuite/DLTSTraverseXmlLayout.m
     src/private/DarlingTestSuite/DLTSXmlLayout.m
     src/private/DarlingTestSuite/DLTSXmlParserDelegate.m
-    src/DarlingTestSuite/DLTSLogging.m
 )
 
 target_link_libraries(darling-testsuite-lib "-framework Foundation")

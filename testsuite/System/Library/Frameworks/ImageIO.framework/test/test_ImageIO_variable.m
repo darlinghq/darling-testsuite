@@ -4,9 +4,9 @@
 
 int main() {
     // #include <ImageIO/CGImageSource.h>
-    assert_equals_cfstringref(CFSTR("kCGImageSourceShouldAllowFloat"), kCGImageSourceShouldAllowFloat);
+    assert_equals_CFStringRef(CFSTR("kCGImageSourceShouldAllowFloat"), kCGImageSourceShouldAllowFloat);
 
     // #include <ImageIO/CGImageProperties.h>
-    assert_equals_cfstringref(CFSTR("HasAlpha"), kCGImagePropertyHasAlpha);
+    assert_equals_CFStringRef(CFSTR("HasAlpha"), kCGImagePropertyHasAlpha);
 
 }

@@ -1,4 +1,4 @@
-#include <private/DarlingTestSuite/DLTSXmlParserDelegate.h>
+#include <private/darling-testsuite/DLTSXmlParserDelegate.h>
 
 @implementation DLTSXmlParserDelegate
 

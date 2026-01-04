@@ -41,13 +41,13 @@ void template_test_icns_single_type(NSURL* icns_url, size_t expected_width, size
     
     assert(CGImageSourceGetCount(icns_image_source_ref) == 1);
     CGImageRef icns_image_ref = CGImageSourceCreateImageAtIndex(icns_image_source_ref, 0, nil);
-    assert_equals_cfstringref(CFSTR("com.apple.icns"), CGImageGetUTType(icns_image_ref));
+    assert_equals_CFStringRef(CFSTR("com.apple.icns"), CGImageGetUTType(icns_image_ref));
     assert_equals_size_t(NULL, expected_width, CGImageGetWidth(icns_image_ref));
     assert_equals_size_t(NULL, expected_height, CGImageGetHeight(icns_image_ref));
     assert_equals_size_t(NULL, 32, CGImageGetBitsPerPixel(icns_image_ref));
-    assert_equals_int64(NULL, kCGImageAlphaLast, CGImageGetAlphaInfo(icns_image_ref));
+    assert_equals_int64_t(NULL, kCGImageAlphaLast, CGImageGetAlphaInfo(icns_image_ref));
     CGColorSpaceRef icns_color_space_ref = CGImageGetColorSpace(icns_image_ref);
-    assert_equals_int64(NULL, kCGColorSpaceModelRGB, CGColorSpaceGetModel(icns_color_space_ref));
+    assert_equals_int64_t(NULL, kCGColorSpaceModelRGB, CGColorSpaceGetModel(icns_color_space_ref));
 
     CFRelease(icns_image_source_ref);
     CGImageRelease(icns_image_ref);

@@ -4,5 +4,5 @@
 
 int main() {
     // #include <CoreImage/CIFilter.h>
-    assert_equals_nsstring(@"inputRadius", kCIInputRadiusKey);
+    assert_equals_NSString(@"inputRadius", kCIInputRadiusKey);
 }

@@ -4,6 +4,6 @@
 
 int main() {
     // #include <QuartzCore/CAEmitterLayer.h>
-    assert_equals_nsstring(@"point", kCAEmitterLayerPoint);
-    assert_equals_nsstring(@"additive", kCAEmitterLayerAdditive);
+    assert_equals_NSString(@"point", kCAEmitterLayerPoint);
+    assert_equals_NSString(@"additive", kCAEmitterLayerAdditive);
 }

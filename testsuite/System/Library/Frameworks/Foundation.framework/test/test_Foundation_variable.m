@@ -4,11 +4,11 @@
 
 int main() {
     // #include <Foundation/NSConnection.h>
-    assert_equals_nsstring(@"NSFailedAuthenticationException", NSFailedAuthenticationException);
+    assert_equals_NSString(@"NSFailedAuthenticationException", NSFailedAuthenticationException);
 
     // #include <Foundation/NSTimeZone.h>
-    assert_equals_nsstring(@"kCFTimeZoneSystemTimeZoneDidChangeNotification", NSSystemTimeZoneDidChangeNotification);
+    assert_equals_NSString(@"kCFTimeZoneSystemTimeZoneDidChangeNotification", NSSystemTimeZoneDidChangeNotification);
 
     // #include <Foundation/NSURL.h>
-    assert_equals_nsstring(@"NSURLUbiquitousItemDownloadingStatusNotDownloaded", NSURLUbiquitousItemDownloadingStatusNotDownloaded);
+    assert_equals_NSString(@"NSURLUbiquitousItemDownloadingStatusNotDownloaded", NSURLUbiquitousItemDownloadingStatusNotDownloaded);
 }

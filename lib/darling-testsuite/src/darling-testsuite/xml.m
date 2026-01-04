@@ -2,8 +2,8 @@
 
 #include <Foundation/Foundation.h>
 
-#include <private/DarlingTestSuite/DLTSXmlParserDelegate.h>
-#include <DarlingTestSuite/DLTSLogging.h>
+#include <darling-testsuite/assertion.h>
+#include <private/darling-testsuite/DLTSXmlParserDelegate.h>
 
 bool is_xml_equal(const char* expected_xml_path, const char* actual_xml_path) {
     NSError* error = nil;
@@ -19,12 +19,9 @@ bool is_xml_equal(const char* expected_xml_path, const char* actual_xml_path) {
     NSString* expectedXmlLayout = [[NSString alloc] initWithContentsOfFile:expectedXmlPath
                                                                   encoding:NSUTF8StringEncoding
                                                                      error:&error];
-    NSString* actualXmlLayout = [xmlDelegate.xmlLayout saveLayoutToString];
+    assert_NSError_not_set(error, error != nil);
 
-    if (error != nil) {
-        [DLTSLogging logNSError:error];
-        abort();
-    }
+    NSString* actualXmlLayout = [xmlDelegate.xmlLayout saveLayoutToString];
 
     if (![actualXmlLayout isEqual:expectedXmlLayout]) {
         printf("Actual does not match expected\n");

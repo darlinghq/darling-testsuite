@@ -1,5 +1,5 @@
 set(DARLING_PATH "${DARLING_PATH}/libxpc.dylib")
-set(DARLING_IDENTIFIER "${DARLING_IDENTIFIER}.libxpc_dylib")
+set(DARLING_IDENTIFIER "${DARLING_IDENTIFIER}_libxpc_dylib")
 
 set(SERVICE_NAME_XPC_CONNECTION_MACH "org.darlinghq.libxpc_basic_connection_server_mach")
 set(SERVICE_NAME_XPC_LISTENER_MACH "org.darlinghq.libxpc_basic_listener_server_mach")

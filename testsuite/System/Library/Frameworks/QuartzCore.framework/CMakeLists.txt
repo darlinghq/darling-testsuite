@@ -1,5 +1,5 @@
 set(DARLING_PATH "${DARLING_PATH}/QuartzCore.framework")
-set(DARLING_IDENTIFIER "${DARLING_IDENTIFIER}.QuartzCore_framework")
+set(DARLING_IDENTIFIER "${DARLING_IDENTIFIER}_QuartzCore_framework")
 
 add_executable("${DARLING_IDENTIFIER}.test_QuartzCore_variable" "test/test_QuartzCore_variable.m")
 target_link_libraries("${DARLING_IDENTIFIER}.test_QuartzCore_variable" "-framework Foundation" "-framework QuartzCore" darling-testsuite-lib)

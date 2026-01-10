@@ -1,5 +1,5 @@
 set(DARLING_PATH "${DARLING_PATH}/ImageIO.framework")
-set(DARLING_IDENTIFIER "${DARLING_IDENTIFIER}.ImageIO_framework")
+set(DARLING_IDENTIFIER "${DARLING_IDENTIFIER}_ImageIO_framework")
 
 file(COPY "resource/icns" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}")
 file(COPY "resource/iconset" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}")

@@ -1,5 +1,5 @@
 set(DARLING_PATH "${DARLING_PATH}/Carbon.framework")
-set(DARLING_IDENTIFIER "${DARLING_IDENTIFIER}.Carbon_framework")
+set(DARLING_IDENTIFIER "${DARLING_IDENTIFIER}_Carbon_framework")
 
 add_executable("${DARLING_IDENTIFIER}.test_Carbon_variable" "test/test_Carbon_variable.m")
 target_link_libraries("${DARLING_IDENTIFIER}.test_Carbon_variable" "-framework Foundation" "-framework Carbon" darling-testsuite-lib)

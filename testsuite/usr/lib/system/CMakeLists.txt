@@ -1,5 +1,5 @@
 set(DARLING_PATH "${DARLING_PATH}/system")
-set(DARLING_IDENTIFIER "${DARLING_IDENTIFIER}.system")
+set(DARLING_IDENTIFIER "${DARLING_IDENTIFIER}_system")
 
 add_subdirectory("libsystem_c.dylib")
 add_subdirectory("libsystem_kernel.dylib")

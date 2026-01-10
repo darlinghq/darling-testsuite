@@ -1,5 +1,5 @@
 set(DARLING_PATH "${DARLING_PATH}/SystemConfiguration.framework")
-set(DARLING_IDENTIFIER "${DARLING_IDENTIFIER}.SystemConfiguration_framework")
+set(DARLING_IDENTIFIER "${DARLING_IDENTIFIER}_SystemConfiguration_framework")
 
 add_executable("${DARLING_IDENTIFIER}.test_SystemConfiguration_variable" "test/test_SystemConfiguration_variable.m")
 target_link_libraries("${DARLING_IDENTIFIER}.test_SystemConfiguration_variable" "-framework Foundation" "-framework SystemConfiguration" darling-testsuite-lib)

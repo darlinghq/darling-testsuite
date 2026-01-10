@@ -1,5 +1,5 @@
 set(DARLING_PATH "${DARLING_PATH}/WebKit.framework")
-set(DARLING_IDENTIFIER "${DARLING_IDENTIFIER}.WebKit_framework")
+set(DARLING_IDENTIFIER "${DARLING_IDENTIFIER}_WebKit_framework")
 
 add_executable("${DARLING_IDENTIFIER}.test_WebKit_variable" "test/test_WebKit_variable.m")
 target_link_libraries("${DARLING_IDENTIFIER}.test_WebKit_variable" "-framework Foundation" "-framework WebKit" darling-testsuite-lib)

@@ -1,5 +1,5 @@
 set(DARLING_PATH "${DARLING_PATH}/CoreGraphics.framework")
-set(DARLING_IDENTIFIER "${DARLING_IDENTIFIER}.CoreGraphics_framework")
+set(DARLING_IDENTIFIER "${DARLING_IDENTIFIER}_CoreGraphics_framework")
 
 add_executable("${DARLING_IDENTIFIER}.test_CoreGraphics_variable" "test/test_CoreGraphics_variable.m")
 target_link_libraries("${DARLING_IDENTIFIER}.test_CoreGraphics_variable" "-framework Foundation" "-framework CoreGraphics" darling-testsuite-lib)

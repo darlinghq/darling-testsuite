@@ -1,5 +1,5 @@
 set(DARLING_PATH "${DARLING_PATH}/Foundation.framework")
-set(DARLING_IDENTIFIER "${DARLING_IDENTIFIER}.Foundation_framework")
+set(DARLING_IDENTIFIER "${DARLING_IDENTIFIER}_Foundation_framework")
 
 configure_file(resources/expected_writeToURL_error_empty_dict ${CMAKE_CURRENT_BINARY_DIR} COPYONLY)
 configure_file(resources/expected_writeToURL_error_primitives ${CMAKE_CURRENT_BINARY_DIR} COPYONLY)

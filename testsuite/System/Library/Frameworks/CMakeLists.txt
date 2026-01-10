@@ -1,5 +1,5 @@
 set(DARLING_PATH "${DARLING_PATH}/Frameworks")
-set(DARLING_IDENTIFIER "${DARLING_IDENTIFIER}.Frameworks")
+set(DARLING_IDENTIFIER "${DARLING_IDENTIFIER}_Frameworks")
 
 add_subdirectory("AddressBook.framework")
 add_subdirectory("AppKit.framework")

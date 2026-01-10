@@ -1,4 +1,4 @@
 set(DARLING_PATH "${DARLING_PATH}/usr")
-set(DARLING_IDENTIFIER "${DARLING_IDENTIFIER}.usr")
+set(DARLING_IDENTIFIER "${DARLING_IDENTIFIER}_usr")
 
 add_subdirectory("lib")

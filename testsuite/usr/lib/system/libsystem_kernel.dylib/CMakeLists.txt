@@ -1,5 +1,5 @@
 set(DARLING_PATH "${DARLING_PATH}/libsystem_kernel.dylib")
-set(DARLING_IDENTIFIER "${DARLING_IDENTIFIER}.libsystem_kernel_dylib")
+set(DARLING_IDENTIFIER "${DARLING_IDENTIFIER}_libsystem_kernel_dylib")
 
 add_subdirectory("clonefile")
 add_subdirectory("close")

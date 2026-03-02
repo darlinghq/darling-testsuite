@@ -1,3 +1,8 @@
+<!--
+SPDX-FileCopyrightText: 2026 Darling Team
+SPDX-License-Identifier: MPL-2.0
+-->
+
 # Methods To Implement
 
 * [CGDisplayIsInMirrorSet](https://developer.apple.com/documentation/coregraphics/cgdisplayisinmirrorset(_:)?language=objc)

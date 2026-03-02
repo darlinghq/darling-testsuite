@@ -1,3 +1,5 @@
+# SPDX-FileCopyrightText: 2026 Darling Team
+# SPDX-License-Identifier: MPL-2.0
 
 # Make sure the following dependencies are installed before you run the script
 # ```

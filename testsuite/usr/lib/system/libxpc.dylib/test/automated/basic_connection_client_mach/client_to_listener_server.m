@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 Darling Team
+// SPDX-License-Identifier: MIT-0
+
 #include <test_shared_data.h>
 #include <darling-testsuite/availability.h>
 #include <darling-testsuite/unsupported.h>

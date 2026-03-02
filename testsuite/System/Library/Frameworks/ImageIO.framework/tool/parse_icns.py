@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 
+# SPDX-FileCopyrightText: 2026 Darling Team
+# SPDX-License-Identifier: MIT-0
+
 # Credit to https://en.wikipedia.org/wiki/Apple_Icon_Image_format
 # for details on the icns format.
 

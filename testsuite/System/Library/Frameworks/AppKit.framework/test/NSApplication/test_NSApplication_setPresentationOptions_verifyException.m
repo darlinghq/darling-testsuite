@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 Darling Team
+// SPDX-License-Identifier: MIT-0
+
 #include <AppKit/AppKit.h>
 
 #include <stdio.h>

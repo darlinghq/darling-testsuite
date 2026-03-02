@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Darling Team
+# SPDX-License-Identifier: MPL-2.0
+
 add_compile_definitions(DARLING_IDENTIFIER=\"${DARLING_IDENTIFIER}\")
 
 add_executable("${DARLING_IDENTIFIER}.test_posix_spawn_parent_set_arg0" "test/test_posix_spawn_parent_set_arg0.c")

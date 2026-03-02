@@ -1,3 +1,8 @@
+<!--
+SPDX-FileCopyrightText: 2026 Darling Team
+SPDX-License-Identifier: MPL-2.0      
+-->
+
 # XNU Syscalls That Can't Be Tested Directly
 
 ## sys_fork

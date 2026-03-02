@@ -1,5 +1,5 @@
-; SPDX-FileCopyrightText: 2026 Darling Team
-; SPDX-License-Identifier: MIT-0
+# SPDX-FileCopyrightText: 2026 Darling Team
+# SPDX-License-Identifier: MIT-0
 
 #ifdef __arm64__
 .global _call_generic_syscall

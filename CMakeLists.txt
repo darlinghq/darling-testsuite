@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Darling Team
+# SPDX-License-Identifier: MPL-2.0
+
 cmake_minimum_required(VERSION 3.29)
 project(darling-testsuite)
 

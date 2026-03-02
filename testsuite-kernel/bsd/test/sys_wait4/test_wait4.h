@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 Darling Team
+// SPDX-License-Identifier: MIT-0
+
 #ifndef XNU_SYSCALL_BSD_TEST_WAIT4_SHARED_DATA
 #define XNU_SYSCALL_BSD_TEST_WAIT4_SHARED_DATA
 

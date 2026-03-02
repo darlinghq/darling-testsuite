@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Darling Team
+# SPDX-License-Identifier: MPL-2.0
+
 add_executable("${DARLING_IDENTIFIER}.test_basic_connection_client_to_connection_server_mach"
     basic_connection_client_mach/client_to_connection_server.m
     basic_connection_client_mach/shared_logic.m

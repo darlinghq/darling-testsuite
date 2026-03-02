@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Darling Team
+# SPDX-License-Identifier: MPL-2.0
+
 # NSApplication
 
 add_executable("${DARLING_IDENTIFIER}.test_NSApplication_helpMenu_setterDoesntAffectMainMenuStructure" "NSApplication/test_NSApplication_helpMenu_setterDoesntAffectMainMenuStructure.m")

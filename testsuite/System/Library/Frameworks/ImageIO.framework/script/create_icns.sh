@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Darling Team
+# SPDX-License-Identifier: MPL-2.0
+
 # iconutil --convert iconset -o ../resource/iconset/Type.iconset ../resource/icns/Type.icns
 # iconutil --convert icns -o ../resource/icns/Type.icns ../resource/iconset/Type.iconset
 

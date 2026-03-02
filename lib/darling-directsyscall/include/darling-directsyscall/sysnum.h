@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 Darling Team
+// SPDX-License-Identifier: MIT-0
+
 #ifndef DARLING_TESTSUITE_SYSNUM
 #define DARLING_TESTSUITE_SYSNUM
 

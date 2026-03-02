@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Darling Team
+# SPDX-License-Identifier: MPL-2.0
+
 # ../tool/parse_icns.py ../resource/icns/Type.icns
 
 parseIcns() {

@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Darling Team
+# SPDX-License-Identifier: MPL-2.0
+
 # sys_close
 add_executable("${DARLING_IDENTIFIER}.test_sys_close_success" "sys_close/test_sys_close_success.c")
 target_link_libraries("${DARLING_IDENTIFIER}.test_sys_close_success" darling-directsyscall darling-nostdlib)

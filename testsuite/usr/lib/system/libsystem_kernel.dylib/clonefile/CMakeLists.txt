@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Darling Team
+# SPDX-License-Identifier: MPL-2.0
+
 configure_file("resources/clone_resolve_beneath/input.txt" ${CMAKE_CURRENT_BINARY_DIR}/clone_resolve_beneath/input.txt COPYONLY)
 configure_file("resources/multifiles/inner_folder/E.txt" ${CMAKE_CURRENT_BINARY_DIR}/multifiles/inner_folder/E.txt COPYONLY)
 configure_file("resources/multifiles/A.txt" ${CMAKE_CURRENT_BINARY_DIR}/multifiles/A.txt COPYONLY)

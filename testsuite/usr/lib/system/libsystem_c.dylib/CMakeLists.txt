@@ -1,0 +1,7 @@
+# SPDX-FileCopyrightText: 2026 Darling Team
+# SPDX-License-Identifier: MPL-2.0
+
+set(DARLING_PATH "${DARLING_PATH}/libsystem_c.dylib")
+set(DARLING_IDENTIFIER "${DARLING_IDENTIFIER}_libsystem_c_dylib")
+
+add_subdirectory(exit)

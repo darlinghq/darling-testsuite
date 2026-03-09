@@ -1,0 +1,54 @@
+// SPDX-FileCopyrightText: 2026 Darling Team
+// SPDX-License-Identifier: MIT-0
+
+#include <assert.h>
+#include <stdlib.h>
+#include <xpc/xpc.h>
+
+#include <test_shared_data.h>
+#include <helper/xpc_type.h>
+#include <darling-testsuite/availability.h>
+
+int basic_xpc_connection_client_mach_main(const char* service_name) {
+    dispatch_queue_t targetq = NULL;
+    uint64_t flags = 0;
+
+    // Create (suspended) connection
+    xpc_connection_t connection = xpc_connection_create_mach_service(service_name, targetq, flags);
+    assert(connection != NULL);
+
+    // Set up event handler (required)
+    xpc_handler_t event_handler = ^(xpc_object_t xpc_obj) {
+        xpc_type_t obj_type = xpc_get_type(xpc_obj);
+        if (obj_type == XPC_TYPE_ERROR) {
+            const char* xpc_error_string = xpc_dictionary_get_string(xpc_obj, XPC_ERROR_KEY_DESCRIPTION);
+            printf("XPC error has occured: %s\n", xpc_error_string);
+            assert(xpc_get_type(xpc_obj) != XPC_TYPE_ERROR);
+
+        } else {
+            log_unexpected_xpc_type(obj_type);
+            abort();
+        }
+    };
+
+    xpc_connection_set_event_handler(connection, event_handler);
+
+    // Create message to send to server
+    xpc_object_t message = xpc_dictionary_create(NULL, NULL, 0);
+    assert(message != NULL);
+
+    xpc_dictionary_set_string(message, CLIENT_MSG_KEY, EXPECTED_CLIENT_MSG);
+    
+    // Send message to server
+    xpc_connection_resume(connection);
+
+    xpc_object_t reply = xpc_connection_send_message_with_reply_sync(connection, message);
+    assert(reply != NULL);
+
+    // Verify reply from server
+    const char* actual_server_msg = xpc_dictionary_get_string(reply, SERVER_MSG_KEY);
+    assert(actual_server_msg != NULL);
+    assert(strcmp(EXPECTED_SERVER_MSG, actual_server_msg) == 0);
+
+    return 0;
+}

@@ -13,9 +13,9 @@ The goal for this test suite is to provide a utility that can run test cases on 
 
 ## License
 
-Unlike other Darling projects, this repo is licensed under the MIT-0 (MIT No Attribution) license.
-
-The intention of the MIT-0 license is to allow any developer to use our test cases as a reference for implementing functionality in their proprietary applications, without needing to worry about crediting us or releasing the source code.
+TODO: Add note about the following:
+* Test cases being licensed under MIT-0.
+* Other code (including the test case management library) being licensed under MPL2.
 
 ## How To Build & Run
 

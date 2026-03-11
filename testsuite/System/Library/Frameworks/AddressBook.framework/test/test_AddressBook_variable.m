@@ -8,4 +8,5 @@
 int main() {
     // #include <AddressBook/ABGlobals.h>
     assert_equals_NSString(@"Suffix", kABSuffixProperty);
+    assert_equals_NSString(@"UID", kABUIDProperty);
 }

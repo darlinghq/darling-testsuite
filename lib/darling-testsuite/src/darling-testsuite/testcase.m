@@ -66,10 +66,13 @@ void single_testcase_controller(void (*single_testcase)(TESTCASE_ARGDEFS), int a
     testcase_result_state_t tcstate = get_testcase_state(context);
     switch (GRAB_COMMON_REASON(tcstate)) {
         case COMMON_REASON_PASSED:
+            dlts_log(context, LOG_INFO, "Test case passed");
             break;
         case COMMON_REASON_SKIPPED:
+            dlts_log(context, LOG_INFO, "Test case skipped");
             break;
         case COMMON_REASON_FAILURE:
+            dlts_log(context, LOG_INFO, "Test case failed");
             print_failure_reason(context);
             print_backtrace(context);
             exit(1);

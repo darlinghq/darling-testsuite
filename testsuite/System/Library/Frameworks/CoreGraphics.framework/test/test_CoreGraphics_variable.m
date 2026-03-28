@@ -10,7 +10,7 @@
 // extern const CFStringRef kCGDisplayStreamShowCursor;
 
 int main() {
-#if MACOS_SUPPORTED_ABI(VERSION_10_8,VERSION_14_0)
+#if MIN_VERSION_MACOS_ABI_TARGET_SUPPORTED(MACOS_10_8,MACOS_14_0)
     // #include <CoreGraphics/CGDisplayStream.h>
     assert_equals_CFStringRef(CFSTR("kCGDisplayStreamShowCursor"), kCGDisplayStreamShowCursor);
 #endif

@@ -8,7 +8,7 @@
 
 #include <darling-testsuite/availability.h>
 
-#if MIN_MACOS(VERSION_10_15)
+#if MIN_VERSION_MACOS_ABI_TARGET_SUPPORTED(MACOS_10_15,MACOS_MAX_VERSION)
 void log_xpc_error(xpc_rich_error_t xpc_error, const char *error_msg);
 #endif
 

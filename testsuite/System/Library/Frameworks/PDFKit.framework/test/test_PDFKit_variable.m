@@ -1,7 +1,8 @@
 // SPDX-FileCopyrightText: 2026 Darling Team
 // SPDX-License-Identifier: MIT-0
 
-#include <PDFKit/PDFKit.h>
+// Older versions of macOS can't directly include the <PDFKit/PDFKit.h> header.
+#include <Quartz/Quartz.h>
 
 #include <darling-testsuite/assertion.h>
 

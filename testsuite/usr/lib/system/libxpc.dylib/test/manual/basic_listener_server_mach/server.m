@@ -10,7 +10,7 @@
 #include <helper/xpc_error.h>
 
 int main() {
-#if MIN_MACOS(VERSION_14_0)
+#if MIN_VERSION_MACOS_ABI_TARGET_SUPPORTED(MACOS_14_0,MACOS_MAX_VERSION)
     xpc_listener_incoming_session_handler_t session_handler = ^(xpc_session_t peer) {
         xpc_session_incoming_message_handler_t message_handler = ^(xpc_object_t message) {
             // Grab the values that were sent from the client

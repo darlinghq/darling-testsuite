@@ -5,5 +5,6 @@
 #define DARLING_TESTSUITE_LIBRARY_UNSUPPORTED_H
 
 void darling_testcase_os_doesnt_support_newer_api();
+void darling_testcase_os_doesnt_support_older_api();
 
 #endif // DARLING_TESTSUITE_LIBRARY_UNSUPPORTED_H

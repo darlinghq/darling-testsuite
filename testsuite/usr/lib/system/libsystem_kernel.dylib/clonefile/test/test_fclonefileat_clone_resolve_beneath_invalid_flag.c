@@ -11,8 +11,11 @@
 #include <sys/errno.h>
 
 #include <darling-testsuite/assertion.h>
+#include <darling-testsuite/availability.h>
+#include <darling-testsuite/unsupported.h>
 
 int main() {
+#if MIN_VERSION_MACOS_ABI_TARGET_SUPPORTED(MACOS_26_0,MACOS_MAX_VERSION)
     // Setup
     int srcfd;
     int dst_dirfd = AT_FDCWD;
@@ -34,4 +37,7 @@ int main() {
 
     // Cleanup
     close(srcfd);
+#else
+    darling_testcase_os_doesnt_support_newer_api();
+#endif
 }

@@ -303,7 +303,7 @@ void assert_equals_BOOL(char *variable_name, BOOL expected, BOOL actual) {
 void assert_NSError_not_set(NSError *error, bool is_failure_case) {
     if (is_failure_case && error != NULL) {
         printf("An NSError has occured (code=%ld, domain=%s)\n",
-            error.code,
+            (long)error.code,
             [error.domain UTF8String]
         );
 

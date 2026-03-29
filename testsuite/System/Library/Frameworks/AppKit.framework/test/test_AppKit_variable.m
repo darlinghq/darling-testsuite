@@ -75,6 +75,8 @@ int main() {
 
 
 void test_AppKit_NSApplication_h(void) {
+    assert_equals_NSString(@"NSApplicationLaunchIsDefaultLaunchKey", NSApplicationLaunchIsDefaultLaunchKey);
+
     // NSApplicationPresentationOptions
     assert_equals_NSUInteger("NSApplicationPresentationDefault",                         0,       NSApplicationPresentationDefault);
     assert_equals_NSUInteger("NSApplicationPresentationAutoHideDock",                    1 << 0,  NSApplicationPresentationAutoHideDock);

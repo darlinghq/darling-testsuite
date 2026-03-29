@@ -11,7 +11,7 @@
 #include <helper/xpc_error.h>
 
 int basic_xpc_session_client_mach_main(const char* service_name) {
-#if MIN_MACOS(VERSION_13_0)
+#if MIN_VERSION_MACOS_ABI_TARGET_SUPPORTED(MACOS_13_0,MACOS_MAX_VERSION)
     // Connect to the XPC service
     dispatch_queue_t target_queue = NULL;
     xpc_session_create_flags_t flags = 0;
@@ -55,5 +55,6 @@ int basic_xpc_session_client_mach_main(const char* service_name) {
     return 0;
 #else
     darling_testcase_os_doesnt_support_newer_api();
+    return 0;
 #endif
 }

@@ -5,6 +5,10 @@
 
 @implementation DLTSTraverseXmlLayout
 
+@synthesize childEnumerator = _childEnumerator;
+@synthesize currentXmlLayout = _currentXmlLayout;
+@synthesize state = _state;
+
 -(instancetype)initWithXmlLayout:(DLTSXmlLayout*)xmlLayout {
     if (self = [super init]) {
         _currentXmlLayout = xmlLayout;

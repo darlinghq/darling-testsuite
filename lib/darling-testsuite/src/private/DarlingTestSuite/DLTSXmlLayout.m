@@ -7,6 +7,13 @@
 
 @implementation DLTSXmlLayout
 
+@synthesize elementName = _elementName;
+@synthesize elementText = _elementText;
+@synthesize attributes = _attributes;
+
+@synthesize parent = _parent;
+@synthesize children = _children;
+
 -(instancetype)initRoot {    
     return [self initChild];
 }

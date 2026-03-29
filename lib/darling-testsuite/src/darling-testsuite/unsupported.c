@@ -15,6 +15,9 @@ const char* get_os_type() {
 }
 
 void darling_testcase_os_doesnt_support_newer_api() {
-    printf("This testcase requires an API that is not supported in the current %s version.\n", get_os_type());
-    abort();
+    printf("This testcase requires an API that exists in a newer version of %s.\n", get_os_type());
+}
+
+void darling_testcase_os_doesnt_support_older_api() {
+    printf("This testcase requires an API that exists in an older version of %s.\n", get_os_type());
 }

@@ -35,15 +35,29 @@ void call_sysenter_syscall(
     int sysnum, syscall_return_args_t* retargs
 );
 
-#define CALL_SYSENTER_SYSCALL_ARG0(sysnum, retargs) call_sysenter_syscall(0, 0, 0, 0, 0, 0, 0, 0, sysnum, retargs)
-#define CALL_SYSENTER_SYSCALL_ARG1(sysnum, retargs, arg1) call_sysenter_syscall(arg1, 0, 0, 0, 0, 0, 0, 0, sysnum, retargs)
-#define CALL_SYSENTER_SYSCALL_ARG2(sysnum, retargs, arg1, arg2) call_sysenter_syscall(arg1, arg2, 0, 0, 0, 0, 0, 0, sysnum, retargs)
-#define CALL_SYSENTER_SYSCALL_ARG3(sysnum, retargs, arg1, arg2, arg3) call_sysenter_syscall(arg1, arg2, arg3, 0, 0, 0, 0, 0, sysnum, retargs)
-#define CALL_SYSENTER_SYSCALL_ARG4(sysnum, retargs, arg1, arg2, arg3, arg4) call_sysenter_syscall(arg1, arg2, arg3, arg4, 0, 0, 0, 0, sysnum, retargs)
-#define CALL_SYSENTER_SYSCALL_ARG5(sysnum, retargs, arg1, arg2, arg3, arg4, arg5) call_sysenter_syscall(arg1, arg2, arg3, arg4, arg5, 0, 0, 0, sysnum, retargs)
-#define CALL_SYSENTER_SYSCALL_ARG6(sysnum, retargs, arg1, arg2, arg3, arg4, arg5, arg6) call_sysenter_syscall(arg1, arg2, arg3, arg4, arg5, arg6, 0, 0, sysnum, retargs)
-#define CALL_SYSENTER_SYSCALL_ARG7(sysnum, retargs, arg1, arg2, arg3, arg4, arg5, arg6, arg7) call_sysenter_syscall(arg1, arg2, arg3, arg4, arg5, arg6, arg7, 0, sysnum, retargs)
-#define CALL_SYSENTER_SYSCALL_ARG8(sysnum, retargs, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8) call_sysenter_syscall(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, sysnum, retargs)
+#define CALL_SYSENTER_SYSCALL_EXPLICIT_CAST(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, sysnum, retargs) \
+    call_sysenter_syscall(      \
+        (register_size_t)arg1,  \
+        (register_size_t)arg2,  \
+        (register_size_t)arg3,  \
+        (register_size_t)arg4,  \
+        (register_size_t)arg5,  \
+        (register_size_t)arg6,  \
+        (register_size_t)arg7,  \
+        (register_size_t)arg8,  \
+        sysnum,                 \
+        retargs                 \
+    )
+
+#define CALL_SYSENTER_SYSCALL_ARG0(sysnum, retargs) CALL_SYSENTER_SYSCALL_EXPLICIT_CAST(0, 0, 0, 0, 0, 0, 0, 0, sysnum, retargs)
+#define CALL_SYSENTER_SYSCALL_ARG1(sysnum, retargs, arg1) CALL_SYSENTER_SYSCALL_EXPLICIT_CAST(arg1, 0, 0, 0, 0, 0, 0, 0, sysnum, retargs)
+#define CALL_SYSENTER_SYSCALL_ARG2(sysnum, retargs, arg1, arg2) CALL_SYSENTER_SYSCALL_EXPLICIT_CAST(arg1, arg2, 0, 0, 0, 0, 0, 0, sysnum, retargs)
+#define CALL_SYSENTER_SYSCALL_ARG3(sysnum, retargs, arg1, arg2, arg3) CALL_SYSENTER_SYSCALL_EXPLICIT_CAST(arg1, arg2, arg3, 0, 0, 0, 0, 0, sysnum, retargs)
+#define CALL_SYSENTER_SYSCALL_ARG4(sysnum, retargs, arg1, arg2, arg3, arg4) CALL_SYSENTER_SYSCALL_EXPLICIT_CAST(arg1, arg2, arg3, arg4, 0, 0, 0, 0, sysnum, retargs)
+#define CALL_SYSENTER_SYSCALL_ARG5(sysnum, retargs, arg1, arg2, arg3, arg4, arg5) CALL_SYSENTER_SYSCALL_EXPLICIT_CAST(arg1, arg2, arg3, arg4, arg5, 0, 0, 0, sysnum, retargs)
+#define CALL_SYSENTER_SYSCALL_ARG6(sysnum, retargs, arg1, arg2, arg3, arg4, arg5, arg6) CALL_SYSENTER_SYSCALL_EXPLICIT_CAST(arg1, arg2, arg3, arg4, arg5, arg6, 0, 0, sysnum, retargs)
+#define CALL_SYSENTER_SYSCALL_ARG7(sysnum, retargs, arg1, arg2, arg3, arg4, arg5, arg6, arg7) CALL_SYSENTER_SYSCALL_EXPLICIT_CAST(arg1, arg2, arg3, arg4, arg5, arg6, arg7, 0, sysnum, retargs)
+#define CALL_SYSENTER_SYSCALL_ARG8(sysnum, retargs, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8) CALL_SYSENTER_SYSCALL_EXPLICIT_CAST(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, sysnum, retargs)
 
 void call_int_unix_syscall(
     register_size_t arg1, register_size_t arg2, register_size_t arg3, register_size_t arg4,

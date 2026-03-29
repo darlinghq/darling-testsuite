@@ -1,0 +1,24 @@
+// SPDX-FileCopyrightText: 2026 Darling Team
+// SPDX-License-Identifier: MPL-2.0
+
+#ifndef DARLING_TESTSUITE_LIB_SYMBOL_H
+#define DARLING_TESTSUITE_LIB_SYMBOL_H
+
+#define SETUP_DYN_FUNCTION(DYN_RETARG, DYN_FUNCNAME, DYN_ARGS)  \
+    typedef DYN_RETARG (*DYN_FUNCNAME##_fp)(DYN_ARGS);          \
+    DYN_FUNCNAME##_fp DYN_FUNCNAME
+
+#define SETUP_DYN_VARIABLE(DYN_VARTYPE, DYN_VARNAME)    \
+    typedef DYN_VARTYPE DYN_VARNAME##_vt;               \
+    DYN_VARNAME##_vt DYN_VARNAME
+
+void *load_library(const char *path);
+void *init_symbol(void *handle, const char *symbol_name);
+
+#define INIT_DYN_VARIABLE(HANDLE_OBJ, DYN_VARTYPE, DYN_VARNAME) \
+    DYN_VARNAME = *((DYN_VARTYPE*)init_symbol(HANDLE_OBJ, #DYN_VARNAME))
+
+#define INIT_DYN_FUNCTION(HANDLE_OBJ, DYN_FUNCNAME) \
+    DYN_FUNCNAME = (DYN_FUNCNAME##_fp)init_symbol(HANDLE_OBJ, #DYN_FUNCNAME)
+
+#endif // DARLING_TESTSUITE_LIB_SYMBOL_H

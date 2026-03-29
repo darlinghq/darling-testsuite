@@ -18,6 +18,7 @@
 #define MACOS_14_0          140000
 #define MACOS_14_7          140700
 #define MACOS_15_0          150000
+#define MACOS_26_0          260000
 
 #define MACOS_MIN_VERSION   MACOS_10_0
 #define MACOS_MAX_VERSION   9999999

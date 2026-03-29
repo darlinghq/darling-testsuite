@@ -15,7 +15,11 @@ enum DLTSTraverseXmlLayoutStatus {
 
 };
 
-@interface DLTSTraverseXmlLayout : NSObject
+@interface DLTSTraverseXmlLayout : NSObject {
+    DLTSXmlLayout* _currentXmlLayout;
+    NSEnumerator<DLTSXmlLayout*>* _childEnumerator;
+    enum DLTSTraverseXmlLayoutStatus _state;
+}
 
 @property (nonatomic, assign) DLTSXmlLayout* currentXmlLayout;
 @property (nonatomic, strong) NSEnumerator<DLTSXmlLayout*>* childEnumerator;

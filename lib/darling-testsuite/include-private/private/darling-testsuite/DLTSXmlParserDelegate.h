@@ -10,6 +10,8 @@
 
 @interface DLTSXmlParserDelegate : NSObject <NSXMLParserDelegate> {
   DLTSXmlLayout* _currentXmlLayoutPosition;
+
+  DLTSXmlLayout* _xmlLayout;
 }
 
 @property (nonatomic, strong) DLTSXmlLayout* xmlLayout;

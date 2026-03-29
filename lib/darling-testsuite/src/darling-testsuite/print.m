@@ -13,7 +13,7 @@ NSString* pretty_print_NSArray(NSArray<NSObject*> *arrayToPrint, print_basicobj_
 
     [result appendString:@"[\n"];
     for (NSObject* objToPrint in arrayToPrint) {
-        [result appendFormat:@"[%lu] = %@\n", index, print_item(objToPrint)];
+        [result appendFormat:@"[%lu] = %@\n", (unsigned long)index, print_item(objToPrint)];
         index++;
     }
     [result appendString:@"]\n"];

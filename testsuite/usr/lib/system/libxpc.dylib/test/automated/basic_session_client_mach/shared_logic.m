@@ -55,5 +55,6 @@ int basic_xpc_session_client_mach_main(const char* service_name) {
     return 0;
 #else
     darling_testcase_os_doesnt_support_newer_api();
+    return 0;
 #endif
 }

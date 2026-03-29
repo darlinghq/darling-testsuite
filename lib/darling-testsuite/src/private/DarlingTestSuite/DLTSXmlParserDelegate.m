@@ -5,6 +5,8 @@
 
 @implementation DLTSXmlParserDelegate
 
+@synthesize xmlLayout = _xmlLayout;
+
 - (instancetype)init {
   if (self = [super init]) {
     _xmlLayout = [[DLTSXmlLayout alloc] initRoot];
@@ -28,8 +30,8 @@ didStartElement:(NSString *) elementName
 
     printf("Called parser:didStartElement:namespaceURI:qualifiedName:attributes:\n");
     printf("\tparser {\n");
-    printf("\t\t.columnNumber = %ld\n", parser.columnNumber);
-    printf("\t\t.lineNumber = %ld\n", parser.lineNumber);
+    printf("\t\t.columnNumber = %ld\n", (long)parser.columnNumber);
+    printf("\t\t.lineNumber = %ld\n", (long)parser.lineNumber);
     printf("\t\t.publicID = %s\n", [parser.publicID UTF8String]);
     printf("\t\t.systemID = %s\n", [parser.systemID UTF8String]);
     printf("\t}\n");
@@ -58,8 +60,8 @@ foundCharacters:(NSString *) string {
 
     printf("Called parser:foundCharacters:\n");
     printf("\tparser {\n");
-    printf("\t\t.columnNumber = %ld\n", parser.columnNumber);
-    printf("\t\t.lineNumber = %ld\n", parser.lineNumber);
+    printf("\t\t.columnNumber = %ld\n", (long)parser.columnNumber);
+    printf("\t\t.lineNumber = %ld\n", (long)parser.lineNumber);
     printf("\t\t.publicID = %s\n", [parser.publicID UTF8String]);
     printf("\t\t.systemID = %s\n", [parser.systemID UTF8String]);
     printf("\t}\n");
@@ -77,8 +79,8 @@ foundCharacters:(NSString *) string {
 
     printf("Called parser:didEndElement:namespaceURI:qualifiedName:\n");
     printf("\tparser {\n");
-    printf("\t\t.columnNumber = %ld\n", parser.columnNumber);
-    printf("\t\t.lineNumber = %ld\n", parser.lineNumber);
+    printf("\t\t.columnNumber = %ld\n", (long)parser.columnNumber);
+    printf("\t\t.lineNumber = %ld\n", (long)parser.lineNumber);
     printf("\t\t.publicID = %s\n", [parser.publicID UTF8String]);
     printf("\t\t.systemID = %s\n", [parser.systemID UTF8String]);
     printf("\t}\n");

@@ -11,6 +11,8 @@ CFMutableArrayRef initalizeCertificates();
 CFDataRef createCertificateDataRef(const char *cert_path);
 CFMutableArrayRef initalizePolicy();
 
+// IDK why, but macOS 10.14 does not include this in the header file for some reason.
+extern bool SecTrustEvaluateWithError(SecTrustRef trust, CFErrorRef*error);
 
 int main() {
     CFErrorRef error;

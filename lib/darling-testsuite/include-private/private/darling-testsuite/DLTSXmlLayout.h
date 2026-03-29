@@ -6,7 +6,14 @@
 
 #include <Foundation/Foundation.h>
 
-@interface DLTSXmlLayout : NSObject
+@interface DLTSXmlLayout : NSObject {
+    NSString* _elementName;
+    NSString* _elementText;
+    NSDictionary<NSString*,NSString*>* _attributes;
+
+    DLTSXmlLayout* _parent;
+    NSMutableArray<DLTSXmlLayout*>* _children;
+}
 
 @property (nonatomic, strong) NSString* elementName;
 @property (nonatomic, strong) NSString* elementText;

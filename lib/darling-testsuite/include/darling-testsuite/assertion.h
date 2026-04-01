@@ -26,6 +26,9 @@ void assert_equals_size_t(char *variable_name, size_t expected, size_t actual);
 void assert_equals_float(char *variable_name, float expected, float actual);
 void assert_equals_double(char *variable_name, double expected, double actual);
 
+// C string comparison
+void assert_equals_cstring(char* variable_name, const char* expected, const char* actual);
+
 // Errno Comparsion
 void assert_no_errno(const char* function_name, bool is_failure_case);
 void assert_expected_errno(const char* function_name, bool is_failure_case, int expected_errcode);

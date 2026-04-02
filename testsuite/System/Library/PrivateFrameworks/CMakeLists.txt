@@ -5,3 +5,4 @@ set(DARLING_PATH "${DARLING_PATH}/PrivateFrameworks")
 set(DARLING_IDENTIFIER "${DARLING_IDENTIFIER}_PrivateFrameworks")
 
 add_subdirectory("PubSub.framework")
+add_subdirectory("UIFoundation.framework")

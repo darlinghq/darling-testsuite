@@ -47,6 +47,34 @@ CREATE_BASIC_PRIMITIVE_COMPARISON_FUNCTION(float, "%f")
 CREATE_BASIC_PRIMITIVE_COMPARISON_FUNCTION(double, "%f")
 
 //
+// C string Comparison
+//
+
+void assert_equals_cstring(char* variable_name, const char* expected, const char* actual) {
+    if (expected == NULL && actual == NULL) {
+        return;
+    }
+
+    if (expected == NULL || actual == NULL || strcmp(expected, actual) != 0) {
+        printf("Expected does not equal actual (%s)\n", variable_name == NULL ? "" : variable_name);
+
+        if (expected != NULL) {
+            printf("Expected: %s\n", expected);
+        } else {
+            printf("Expected: NULL\n");
+        }
+
+        if (actual != NULL) {
+            printf("Actual: %s\n", actual);
+        } else {
+            printf("Actual: NULL\n");
+        }
+
+        assert(expected != NULL && actual != NULL && strcmp(expected, actual) == 0);
+    }
+}
+
+//
 // Errno Comparsion
 //
 

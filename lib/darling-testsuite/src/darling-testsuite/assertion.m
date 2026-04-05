@@ -2,12 +2,37 @@
 // SPDX-License-Identifier: MPL-2.0
 
 #include <darling-testsuite/assertion.h>
+#include <darling-testsuite/log.h>
+
+#include <private/darling-testsuite/testcase_private.h>
 
 #include <assert.h>
 #include <stdio.h>
 
 #include <sys/errno.h>
 
+#define fail_testcase_notequals(context,expected,actual) \
+    BACKTRACE_MACRO(internal__fail_testcase_notequals(context,expected,actual))
+#define fail_testcase_notfalse(context,expression) \
+    BACKTRACE_MACRO(internal__fail_testcase_notfalse(context,expression))
+#define fail_testcase_nottrue(context,expression) \
+    BACKTRACE_MACRO(internal__fail_testcase_nottrue(context,expression))
+
+//
+// General
+//
+
+void internal__assert_is_true(testcase_mgr_t context, const char* expression_str, bool is_true) {
+    NSString* expressionNsStr = [NSString stringWithUTF8String:expression_str];
+    dlts_log(context, LOG_DEBUG, "Check if `%s` is true", expression_str);
+    if (!is_true) {
+        fail_testcase_nottrue(context, expressionNsStr);
+    }
+}
+
+//
+// Integer Comparison
+//
 
 #define CREATE_BASIC_PRIMITIVE_COMPARISON_FUNCTION(primitive_type, printf_primitive_type) \
 void assert_equals_ ## primitive_type(char* variable_name, primitive_type expected, primitive_type actual) { \
@@ -16,6 +41,19 @@ void assert_equals_ ## primitive_type(char* variable_name, primitive_type expect
         printf("Expected: " printf_primitive_type "\n", expected); \
         printf("Actual: " printf_primitive_type "\n", actual); \
         assert(expected == actual); \
+    } \
+}
+
+#define CREATE_BASIC_PRIMITIVE_COMPARISON_FUNCTION2(primitive_type, printf_primitive_type) \
+void internal__assert_equals_ ## primitive_type(testcase_mgr_t context, char* variable_name, primitive_type expected, primitive_type actual) { \
+    NSString* expectedString = [NSString stringWithFormat:printf_primitive_type, expected]; \
+    NSString* actualString = [NSString stringWithFormat:printf_primitive_type, actual]; \
+    if (variable_name != NULL) { dlts_log(context, LOG_DEBUG, "Comparing expected against actual (%s):", variable_name); } \
+    else { dlts_log(context, LOG_DEBUG, "Comparing expected against actual:"); } \
+    dlts_log(context, LOG_DEBUG, "Expected: %s", [expectedString UTF8String]); \
+    dlts_log(context, LOG_DEBUG, "Actual: %s", [actualString UTF8String]); \
+    if (expected != actual) { \
+        fail_testcase_notequals(context,expectedString,actualString); \
     } \
 }
 
@@ -33,11 +71,23 @@ CREATE_BASIC_PRIMITIVE_COMPARISON_FUNCTION(int16_t, "%hd")
 CREATE_BASIC_PRIMITIVE_COMPARISON_FUNCTION(int32_t, "%d")
 CREATE_BASIC_PRIMITIVE_COMPARISON_FUNCTION(int64_t, "%lld")
 
+CREATE_BASIC_PRIMITIVE_COMPARISON_FUNCTION2(uint8_t, @"%hhu")
+CREATE_BASIC_PRIMITIVE_COMPARISON_FUNCTION2(uint16_t, @"%hu")
+CREATE_BASIC_PRIMITIVE_COMPARISON_FUNCTION2(uint32_t, @"%u")
+CREATE_BASIC_PRIMITIVE_COMPARISON_FUNCTION2(uint64_t, @"%llu")
+
+CREATE_BASIC_PRIMITIVE_COMPARISON_FUNCTION2(int8_t, @"%hhd")
+CREATE_BASIC_PRIMITIVE_COMPARISON_FUNCTION2(int16_t, @"%hd")
+CREATE_BASIC_PRIMITIVE_COMPARISON_FUNCTION2(int32_t, @"%d")
+CREATE_BASIC_PRIMITIVE_COMPARISON_FUNCTION2(int64_t, @"%lld")
+
 //
 // Integer Comparsion (Special)
 //
 
 CREATE_BASIC_PRIMITIVE_COMPARISON_FUNCTION(size_t, "%zu")
+
+CREATE_BASIC_PRIMITIVE_COMPARISON_FUNCTION2(size_t, @"%zu")
 
 //
 // Floating Point Comparsion
@@ -45,6 +95,9 @@ CREATE_BASIC_PRIMITIVE_COMPARISON_FUNCTION(size_t, "%zu")
 
 CREATE_BASIC_PRIMITIVE_COMPARISON_FUNCTION(float, "%f")
 CREATE_BASIC_PRIMITIVE_COMPARISON_FUNCTION(double, "%f")
+
+CREATE_BASIC_PRIMITIVE_COMPARISON_FUNCTION2(float, @"%f")
+CREATE_BASIC_PRIMITIVE_COMPARISON_FUNCTION2(double, @"%f")
 
 //
 // Errno Comparsion
@@ -266,8 +319,25 @@ void assert_equals_basicobj(NSObject* expected, NSObject* actual, print_basicobj
     }
 }
 
+void assert_equals_basicobj2(testcase_mgr_t context, NSObject* expected, NSObject* actual, print_basicobj_func_t print_item) {
+    NSString* expectedString = print_item(expected);
+    NSString* actualString = print_item(actual);
+
+    dlts_log(context, LOG_DEBUG, "Comparing expected against actual:");
+    dlts_log(context, LOG_DEBUG, "Expected: %s", [expectedString UTF8String]);
+    dlts_log(context, LOG_DEBUG, "Actual: %s", [actualString UTF8String]);
+
+    if (![expected isEqualTo:actual]) {
+        fail_testcase_notequals(context,expectedString,actualString);
+    }
+}
+
 void assert_equals_NSString(const NSString* expected, const NSString* actual) {
     assert_equals_basicobj((NSObject*)expected, (NSObject*)actual, pretty_print_NSString);
+}
+
+void internal__assert_equals_NSString(testcase_mgr_t context, const NSString* expected, const NSString* actual) {
+    BACKTRACE_MACRO(assert_equals_basicobj2(context, (NSObject*)expected, (NSObject*)actual, pretty_print_NSString));
 }
 
 void assert_equals_NSArray(NSArray* expected, NSArray* actual, print_basicobj_func_t print_item) {
@@ -279,11 +349,41 @@ void assert_equals_NSArray(NSArray* expected, NSArray* actual, print_basicobj_fu
     }
 }
 
+void internal__assert_equals_NSArray(testcase_mgr_t context, NSArray* expected, NSArray* actual, print_basicobj_func_t print_item) {
+    NSString* expectedString = pretty_print_NSArray(expected, print_item);
+    NSString* actualString = pretty_print_NSArray(actual, print_item);
+    
+    dlts_log(context, LOG_DEBUG, "Comparing expected against actual:");
+    dlts_log(context, LOG_DEBUG, "Expected: %s", [expectedString UTF8String]);
+    dlts_log(context, LOG_DEBUG, "Actual: %s", [actualString UTF8String]);
+
+    if (![expected isEqualTo:actual]) {
+        fail_testcase_notequals(context,expectedString,actualString);
+    }
+}
+
+
 void assert_equals_NSUInteger(char* variable_name, NSUInteger expected, NSUInteger actual) {
 #if __LP64__
     assert_equals_uint64_t(variable_name, expected, actual);
 #else
     assert_equals_uint32_t(variable_name, expected, actual);
+#endif
+}
+
+void internal__assert_equals_NSInteger(testcase_mgr_t context, char *variable_name, NSInteger expected, NSInteger actual) {
+#if __LP64__
+    assert_equals_int64_t2(context, variable_name, expected, actual);
+#else
+    assert_equals_int32_t2(context, variable_name, expected, actual);
+#endif
+}
+
+void internal__assert_equals_NSUInteger(testcase_mgr_t context, char *variable_name, NSUInteger expected, NSUInteger actual) {
+#if __LP64__
+    assert_equals_uint64_t2(context, variable_name, expected, actual);
+#else
+    assert_equals_uint32_t2(context, variable_name, expected, actual);
 #endif
 }
 
@@ -293,6 +393,20 @@ void assert_equals_BOOL(char *variable_name, BOOL expected, BOOL actual) {
         printf("Expected: %hhu (%s)\n", expected, expected == NO ? "NO" : "YES");
         printf("Actual: %hhu (%s)\n", actual, actual == NO ? "NO" : "YES");
         assert(expected == actual);
+    }
+}
+
+void internal__assert_equals_BOOL(testcase_mgr_t context, char *variable_name, BOOL expected, BOOL actual) {    
+    NSString* expectedString = [NSString stringWithFormat:@"%hhu (%s)", expected, expected == NO ? "NO" : "YES"];
+    NSString* actualString = [NSString stringWithFormat:@"%hhu (%s)", actual, actual == NO ? "NO" : "YES"];
+
+    if (variable_name != NULL) { dlts_log(context, LOG_DEBUG, "Comparing expected against actual (%s):", variable_name); }
+    else { dlts_log(context, LOG_DEBUG, "Comparing expected against actual:"); }
+    dlts_log(context, LOG_DEBUG, "Expected: %s", [expectedString UTF8String]);
+    dlts_log(context, LOG_DEBUG, "Actual: %s", [actualString UTF8String]);
+
+    if (expected != actual) {
+        fail_testcase_notequals(context,expectedString,actualString);
     }
 }
 
@@ -323,4 +437,18 @@ NSException* assert_NSException_is_thrown(void (^function_to_execute)(void)) {
 
     assert(result != nil);
     return result;
+}
+
+void internal__assert_NSException_is_thrown(testcase_mgr_t context, NSException **result, void (^function_to_execute)(void)) {
+    *result = nil;
+    
+    @try {
+        function_to_execute();
+    }
+    
+    @catch (NSException* exception) {
+        *result = exception;
+    }
+
+    assert(*result != nil);
 }

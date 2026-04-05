@@ -26,13 +26,16 @@ void free_testcase_mgr(testcase_mgr_t *context) {
     
     switch (get_testcase_state((*context))) {
         case TCSTATE_FAILURE_NOTEQUAL:
+        case TCSTATE_FAILURE_NOTTRUE:
+        case TCSTATE_FAILURE_NOTFALSE:
+            [(*context)->result.notes.comparion.expression release];
             [(*context)->result.notes.comparion.expected release];
             [(*context)->result.notes.comparion.actual release];
             break;
 
         // default:
         case TCSTATE_PASSED:
-        case TCSTATE_SKIPPED:
+        case TCSTATE_SKIPPED_INCOMPLETE:
         case TCSTATE_FAILURE_EXPLICTCALL:
         case TCSTATE_FAILURE_EXCEPTION:
             break;
@@ -70,10 +73,11 @@ void single_testcase_controller(void (*single_testcase)(TESTCASE_ARGDEFS), int a
             break;
         case COMMON_REASON_SKIPPED:
             dlts_log(context, LOG_INFO, "Test case skipped");
+            print_reason(context);
             break;
         case COMMON_REASON_FAILURE:
             dlts_log(context, LOG_INFO, "Test case failed");
-            print_failure_reason(context);
+            print_reason(context);
             print_backtrace(context);
             exit(1);
     }
@@ -97,15 +101,37 @@ void internal__jmp_to_bypass_testcase_execution(testcase_mgr_t context) {
     longjmp(context->testcase_jmp_buf, -1);
 }
 
+void skip_testcase_incomplete(testcase_mgr_t context) {
+    internal__set_testcase_state(context, TCSTATE_SKIPPED_INCOMPLETE);
+    internal__jmp_to_bypass_testcase_execution(context);
+}
+
 void fail_testcase(testcase_mgr_t context) {
     internal__set_testcase_state(context, TCSTATE_FAILURE_EXPLICTCALL);
     internal__jmp_to_bypass_testcase_execution(context);
 }
 
 void internal__fail_testcase_notequals(testcase_mgr_t context, NSString* expected, NSString* actual) {
+    context->result.notes.comparion.expression = nil;
     context->result.notes.comparion.expected = [expected retain];
     context->result.notes.comparion.actual = [actual retain];
     internal__set_testcase_state(context, TCSTATE_FAILURE_NOTEQUAL);
+    internal__jmp_to_bypass_testcase_execution(context);
+}
+
+void internal__fail_testcase_notfalse(testcase_mgr_t context, NSString* expression) {
+    context->result.notes.comparion.expression = expression;
+    context->result.notes.comparion.expected = @"false";
+    context->result.notes.comparion.actual = @"true";
+    internal__set_testcase_state(context, TCSTATE_FAILURE_NOTFALSE);
+    internal__jmp_to_bypass_testcase_execution(context);
+}
+
+void internal__fail_testcase_nottrue(testcase_mgr_t context, NSString* expression) {
+    context->result.notes.comparion.expression = expression;
+    context->result.notes.comparion.expected = @"true";
+    context->result.notes.comparion.actual = @"false";
+    internal__set_testcase_state(context, TCSTATE_FAILURE_NOTTRUE);
     internal__jmp_to_bypass_testcase_execution(context);
 }
 
@@ -113,7 +139,10 @@ void internal__fail_testcase_notequals(testcase_mgr_t context, NSString* expecte
 // Testcase Result Notes
 //
 
-void print_failure_reason(testcase_mgr_t context) {
+void print_reason(testcase_mgr_t context) {
+    NSString* expression;
+    NSString* expected;
+    NSString* actual;
     switch (get_testcase_state(context)) {
         case TCSTATE_FAILURE_EXPLICTCALL:
             dlts_log(context, LOG_ERROR, "TODO TCSTATE_FAILURE_EXPLICTCALL");
@@ -121,15 +150,28 @@ void print_failure_reason(testcase_mgr_t context) {
         case TCSTATE_FAILURE_EXCEPTION:
             dlts_log(context, LOG_ERROR, "TODO TCSTATE_FAILURE_EXCEPTION");
             break;
+        case TCSTATE_FAILURE_NOTTRUE:
+        case TCSTATE_FAILURE_NOTFALSE:
+            expression = context->result.notes.comparion.expression;
+            expected = context->result.notes.comparion.expected;
+            actual = context->result.notes.comparion.actual;
+            dlts_log(context, LOG_ERROR, "`%s` is %s when should be %s",
+                [expression UTF8String], [actual UTF8String], [expected UTF8String]);
+            break;
         case TCSTATE_FAILURE_NOTEQUAL:
+            expected = context->result.notes.comparion.expected;
+            actual = context->result.notes.comparion.actual;
             dlts_log(context, LOG_ERROR, "Expected does not equal actual");
-            dlts_log(context, LOG_ERROR, "Expected: %s", [context->result.notes.comparion.expected UTF8String]);
-            dlts_log(context, LOG_ERROR, "Actual: %s", [context->result.notes.comparion.actual UTF8String]);
+            dlts_log(context, LOG_ERROR, "Expected: %s", [expected UTF8String]);
+            dlts_log(context, LOG_ERROR, "Actual: %s", [actual UTF8String]);
             break;
         
+        case TCSTATE_SKIPPED_INCOMPLETE:
+            dlts_log(context, LOG_WARN, "This test case is incomplete");
+            break;
+
         // default: (ignore)
         case TCSTATE_PASSED:
-        case TCSTATE_SKIPPED:
             break;
     }
 }

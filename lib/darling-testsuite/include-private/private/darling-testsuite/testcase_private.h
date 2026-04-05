@@ -16,7 +16,10 @@ struct opaque_testcase_mgr {
         testcase_result_state_t state;
         union {
             // TCSTATE_FAILURE_NOTEQUAL
+            // TCSTATE_FAILURE_NOTTRUE
+            // TCSTATE_FAILURE_NOTFALSE
             struct {
+                NSString* expression;
                 NSString* expected;
                 NSString* actual;
             } comparion;
@@ -32,5 +35,7 @@ void internal__jmp_to_bypass_testcase_execution(testcase_mgr_t context);
 
 // Internal Fail Testcase
 void internal__fail_testcase_notequals(testcase_mgr_t context, NSString *expected, NSString *actual);
+void internal__fail_testcase_notfalse(testcase_mgr_t context, NSString *expression);
+void internal__fail_testcase_nottrue(testcase_mgr_t context, NSString *expression);
 
 #endif // DARLING_TESTSUITE_LIB_TESTCASE_PRIVATE_H

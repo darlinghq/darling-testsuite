@@ -22,3 +22,7 @@ add_test(NAME "${DARLING_PATH}/test_NSString_stringByRemovingPercentEncoding" CO
 add_executable("${DARLING_IDENTIFIER}.test_Foundation_variable" "test/test_Foundation_variable.m")
 target_link_libraries("${DARLING_IDENTIFIER}.test_Foundation_variable" "-framework Foundation" darling-testsuite-lib)
 add_test(NAME "${DARLING_PATH}/test_Foundation_variable" COMMAND "${DARLING_IDENTIFIER}.test_Foundation_variable")
+
+add_executable("${DARLING_IDENTIFIER}.test_NSDistributedLock" "test/NSDistributedLock/test_NSDistributedLock.m")
+target_link_libraries("${DARLING_IDENTIFIER}.test_NSDistributedLock" "-framework Foundation" darling-testsuite-lib)
+add_test(NAME "${DARLING_PATH}/test_NSDistributedLock" COMMAND "${DARLING_IDENTIFIER}.test_NSDistributedLock")

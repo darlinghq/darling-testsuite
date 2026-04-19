@@ -20,6 +20,24 @@ void assert_equals_ ## primitive_type(char* variable_name, primitive_type expect
 }
 
 //
+// Common
+//
+
+void assert_is_true(bool expression) {
+    if (expression == false) {
+        printf("Expression returned false, when it should be true\n");
+        assert(expression == true);
+    }
+}
+
+void assert_is_false(bool expression) {
+    if (expression == true) {
+        printf("Expression returned true, when it should be false\n");
+        assert(expression == false);
+    }
+}
+
+//
 // Integer Comparison (Standard)
 //
 

@@ -8,6 +8,10 @@
 
 #include <CoreFoundation/CoreFoundation.h>
 
+// Common
+void assert_is_true(bool expression);
+void assert_is_false(bool expression);
+
 // Integer Comparison (standard)
 void assert_equals_uint8_t(char* variable_name, uint8_t expected, uint8_t actual);
 void assert_equals_uint16_t(char* variable_name, uint16_t expected, uint16_t actual);

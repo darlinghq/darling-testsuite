@@ -43,6 +43,16 @@ add_executable("${DARLING_IDENTIFIER}.test_NSColorList_insertColorkeyatIndex_def
 target_link_libraries("${DARLING_IDENTIFIER}.test_NSColorList_insertColorkeyatIndex_defaultColorListNotEditable" "-framework Foundation" "-framework AppKit" darling-testsuite-lib)
 add_test(NAME "${DARLING_PATH}/test_NSColorList_insertColorkeyatIndex_defaultColorListNotEditable" COMMAND "${DARLING_IDENTIFIER}.test_NSColorList_insertColorkeyatIndex_defaultColorListNotEditable")
 
+# NSCursor
+
+add_executable("${DARLING_IDENTIFIER}.test_NSCursor_encodeWithCoder" "NSCursor/test_NSCursor_encodeWithCoder.m")
+target_link_libraries("${DARLING_IDENTIFIER}.test_NSCursor_encodeWithCoder" "-framework Foundation" "-framework AppKit" darling-testsuite-lib)
+add_test(NAME "${DARLING_PATH}/test_NSCursor_encodeWithCoder" COMMAND "${DARLING_IDENTIFIER}.test_NSCursor_encodeWithCoder")
+
+add_executable("${DARLING_IDENTIFIER}.test_NSCursor_initWithCoder" "NSCursor/test_NSCursor_initWithCoder.m")
+target_link_libraries("${DARLING_IDENTIFIER}.test_NSCursor_initWithCoder" "-framework Foundation" "-framework AppKit" darling-testsuite-lib)
+add_test(NAME "${DARLING_PATH}/test_NSCursor_initWithCoder" COMMAND "${DARLING_IDENTIFIER}.test_NSCursor_initWithCoder")
+
 # Misc
 
 add_executable("${DARLING_IDENTIFIER}.test_AppKit_variable" "test_AppKit_variable.m")

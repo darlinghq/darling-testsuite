@@ -44,6 +44,8 @@ void assert_equals_CFStringRef(CFStringRef expected, CFStringRef actual);
 #if __OBJC__
 #include <Foundation/Foundation.h>
 
+#include <darling-testsuite/objc/NSCoder.h>
+
 // Objective-C Comparsion
 void assert_equals_NSString(const NSString* expected, const NSString* actual);
 void assert_equals_NSArray(NSArray* expected, NSArray* actual, print_basicobj_func_t print_item);

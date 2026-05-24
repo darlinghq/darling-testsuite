@@ -24,6 +24,7 @@ void assert_equals_int32_t(char* variable_name, int32_t expected, int32_t actual
 void assert_equals_int64_t(char* variable_name, int64_t expected, int64_t actual);
 
 // Integer Comparsion (special)
+void assert_equals_CGFloat(char *variable_name, CGFloat expected, CGFloat actual);
 void assert_equals_size_t(char *variable_name, size_t expected, size_t actual);
 
 // Floating Point Comparsion
@@ -42,6 +43,8 @@ void assert_equals_CFStringRef(CFStringRef expected, CFStringRef actual);
 
 #if __OBJC__
 #include <Foundation/Foundation.h>
+
+#include <darling-testsuite/objc/NSCoder.h>
 
 // Objective-C Comparsion
 void assert_equals_NSString(const NSString* expected, const NSString* actual);

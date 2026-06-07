@@ -1,8 +1,8 @@
 # SPDX-FileCopyrightText: 2026 Darling Team
 # SPDX-License-Identifier: MPL-2.0
 
-set(DARLING_PATH "${DARLING_PATH}/SystemConfiguration.framework")
-set(DARLING_IDENTIFIER "${DARLING_IDENTIFIER}_SystemConfiguration_framework")
+set(DARLING_PATH "${DARLING_PATH}/Security.framework")
+set(DARLING_IDENTIFIER "${DARLING_IDENTIFIER}_Security_framework")
 
 configure_file(resources/pypi_org.der ${CMAKE_CURRENT_BINARY_DIR} COPYONLY)
 configure_file(resources/globalsign_atlas_r3_dv_tls_ca_2025_q1.der ${CMAKE_CURRENT_BINARY_DIR} COPYONLY)

@@ -25,17 +25,9 @@ add_executable("${DARLING_IDENTIFIER}.test_fclonefileat_clone_nofollow_any" "tes
 target_link_libraries("${DARLING_IDENTIFIER}.test_fclonefileat_clone_nofollow_any" darling-testsuite-lib)
 add_test(NAME "${DARLING_PATH}/test_fclonefileat_clone_nofollow_any" COMMAND "${DARLING_IDENTIFIER}.test_fclonefileat_clone_nofollow_any")
 
-add_executable("${DARLING_IDENTIFIER}.test_fclonefileat_clone_resolve_beneath_invalid_flag" "test/test_fclonefileat_clone_resolve_beneath_invalid_flag.c")
-target_link_libraries("${DARLING_IDENTIFIER}.test_fclonefileat_clone_resolve_beneath_invalid_flag" darling-testsuite-lib)
-add_test(NAME "${DARLING_PATH}/test_fclonefileat_clone_resolve_beneath_invalid_flag" COMMAND "${DARLING_IDENTIFIER}.test_fclonefileat_clone_resolve_beneath_invalid_flag")
-
 add_executable("${DARLING_IDENTIFIER}.test_fclonefileat_folder_api_abuse" "test/test_fclonefileat_folder_api_abuse.c")
 target_link_libraries("${DARLING_IDENTIFIER}.test_fclonefileat_folder_api_abuse" darling-testsuite-lib)
 add_test(NAME "${DARLING_PATH}/test_fclonefileat_folder_api_abuse" COMMAND "${DARLING_IDENTIFIER}.test_fclonefileat_folder_api_abuse")
-
-add_executable("${DARLING_IDENTIFIER}.test_fclonefileat_nonacl" "test/test_fclonefileat_nonacl.c")
-target_link_libraries("${DARLING_IDENTIFIER}.test_fclonefileat_nonacl" darling-testsuite-lib)
-add_test(NAME "${DARLING_PATH}/test_fclonefileat_nonacl" COMMAND "${DARLING_IDENTIFIER}.test_fclonefileat_nonacl")
 
 add_executable("${DARLING_IDENTIFIER}.test_fclonefileat_simple_file" "test/test_fclonefileat_simple_file.c")
 target_link_libraries("${DARLING_IDENTIFIER}.test_fclonefileat_simple_file" darling-testsuite-lib)

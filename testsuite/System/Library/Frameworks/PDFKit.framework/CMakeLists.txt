@@ -8,3 +8,11 @@ add_executable("${DARLING_IDENTIFIER}.test_PDFKit_variable" "test/test_PDFKit_va
 # Older versions of macOS had PDFKit live inside the Quartz framework
 target_link_libraries("${DARLING_IDENTIFIER}.test_PDFKit_variable" "-framework Foundation" "-framework Quartz" darling-testsuite-lib)
 add_test(NAME "${DARLING_PATH}/test_PDFKit_variable" COMMAND "${DARLING_IDENTIFIER}.test_PDFKit_variable")
+
+install(
+    TARGETS
+        "${DARLING_IDENTIFIER}.test_PDFKit_variable"
+
+    DESTINATION
+        "${INSTALL_DIR_TESTCASE}"
+)

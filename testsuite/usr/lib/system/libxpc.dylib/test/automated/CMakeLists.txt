@@ -46,3 +46,17 @@ add_test(NAME "${DARLING_PATH}/test_connection_client_error_no_server" COMMAND "
 add_executable("${DARLING_IDENTIFIER}.test_connection_server_error_invalid_connection" connection_server_error_invalid_connection.m)
 target_link_libraries("${DARLING_IDENTIFIER}.test_connection_server_error_invalid_connection" darling-testsuite-lib libxpc_helper_tools)
 add_test(NAME "${DARLING_PATH}/test_connection_server_error_invalid_connection" COMMAND "${DARLING_IDENTIFIER}.test_connection_server_error_invalid_connection")
+
+install(
+    TARGETS
+        "${DARLING_IDENTIFIER}.test_basic_connection_client_to_connection_server_mach"
+        "${DARLING_IDENTIFIER}.test_basic_connection_client_to_listener_server_mach"
+        "${DARLING_IDENTIFIER}.test_basic_session_client_to_connection_server_mach"
+        "${DARLING_IDENTIFIER}.test_basic_session_client_to_listener_server_mach"
+        "${DARLING_IDENTIFIER}.test_connection_api_misuse_no_event_handler"
+        "${DARLING_IDENTIFIER}.test_connection_client_error_no_server"
+        "${DARLING_IDENTIFIER}.test_connection_server_error_invalid_connection"
+
+    DESTINATION
+        "${INSTALL_DIR_TESTCASE}"
+)

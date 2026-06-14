@@ -58,3 +58,31 @@ add_test(NAME "${DARLING_PATH}/test_NSCursor_initWithCoder" COMMAND "${DARLING_I
 add_executable("${DARLING_IDENTIFIER}.test_AppKit_variable" "test_AppKit_variable.m")
 target_link_libraries("${DARLING_IDENTIFIER}.test_AppKit_variable" "-framework Foundation" "-framework AppKit" darling-testsuite-lib)
 add_test(NAME "${DARLING_PATH}/test_AppKit_variable" COMMAND "${DARLING_IDENTIFIER}.test_AppKit_variable")
+
+install(
+    TARGETS
+        # NSApplication
+        "${DARLING_IDENTIFIER}.test_NSApplication_helpMenu_setterDoesntAffectMainMenuStructure"
+        "${DARLING_IDENTIFIER}.test_NSApplication_setPresentationOptions_verifyException"
+        
+        # NSColor
+        "${DARLING_IDENTIFIER}.test_NSColor_class_variable"
+        "${DARLING_IDENTIFIER}.test_NSColor_colorUsingColorSpaceNamedevice"
+        "${DARLING_IDENTIFIER}.test_NSColor_colorWithCatalogNamecolorName"
+
+        # NSColorList
+        "${DARLING_IDENTIFIER}.test_NSColorList_availableColorLists_checkDefaultColorList"
+        "${DARLING_IDENTIFIER}.test_NSColorList_colorListNamed_verifySystemColorList"
+        "${DARLING_IDENTIFIER}.test_NSColorList_editable_isDefaultColorListEditable"
+        "${DARLING_IDENTIFIER}.test_NSColorList_insertColorkeyatIndex_defaultColorListNotEditable"
+
+        # NSCursor
+        "${DARLING_IDENTIFIER}.test_NSCursor_encodeWithCoder"
+        "${DARLING_IDENTIFIER}.test_NSCursor_initWithCoder"
+
+        # Misc
+        "${DARLING_IDENTIFIER}.test_AppKit_variable"
+
+    DESTINATION
+        "${INSTALL_DIR_TESTCASE}"
+)

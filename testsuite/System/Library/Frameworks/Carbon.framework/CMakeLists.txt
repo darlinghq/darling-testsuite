@@ -7,3 +7,11 @@ set(DARLING_IDENTIFIER "${DARLING_IDENTIFIER}_Carbon_framework")
 add_executable("${DARLING_IDENTIFIER}.test_Carbon_variable" "test/test_Carbon_variable.m")
 target_link_libraries("${DARLING_IDENTIFIER}.test_Carbon_variable" "-framework Foundation" "-framework Carbon" darling-testsuite-lib)
 add_test(NAME "${DARLING_PATH}/test_Carbon_variable" COMMAND "${DARLING_IDENTIFIER}.test_Carbon_variable")
+
+install(
+    TARGETS
+        "${DARLING_IDENTIFIER}.test_Carbon_variable"
+
+    DESTINATION
+        "${INSTALL_DIR_TESTCASE}"
+)

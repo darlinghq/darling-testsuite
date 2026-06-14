@@ -23,3 +23,20 @@ add_test(NAME "${DARLING_PATH}/test_Foundation_variable" COMMAND "${DARLING_IDEN
 add_executable("${DARLING_IDENTIFIER}.test_NSDistributedLock" "test/NSDistributedLock/test_NSDistributedLock.m")
 target_link_libraries("${DARLING_IDENTIFIER}.test_NSDistributedLock" "-framework Foundation" darling-testsuite-lib)
 add_test(NAME "${DARLING_PATH}/test_NSDistributedLock" COMMAND "${DARLING_IDENTIFIER}.test_NSDistributedLock")
+
+install(
+    TARGETS
+        "${DARLING_IDENTIFIER}.test_NSDictionary_writeToURLerror_empty_dictionary"
+        "${DARLING_IDENTIFIER}.test_NSDictionary_writeToURLerror_primitives"
+        "${DARLING_IDENTIFIER}.test_NSString_stringByRemovingPercentEncoding"
+        "${DARLING_IDENTIFIER}.test_Foundation_variable"
+        "${DARLING_IDENTIFIER}.test_NSDistributedLock"
+
+    DESTINATION
+        "${INSTALL_DIR_TESTCASE}"
+)
+
+install(
+    DIRECTORY "resources"
+    DESTINATION "${INSTALL_DIR_RESOURCE}/${DARLING_PATH}"
+)

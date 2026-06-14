@@ -14,3 +14,17 @@ add_test(NAME "${DARLING_PATH}/test_ImageIO_icns" COMMAND "${DARLING_IDENTIFIER}
 add_executable("${DARLING_IDENTIFIER}.test_ImageIO_variable" "test/test_ImageIO_variable.m")
 target_link_libraries("${DARLING_IDENTIFIER}.test_ImageIO_variable" "-framework Foundation" "-framework ImageIO" darling-testsuite-lib)
 add_test(NAME "${DARLING_PATH}/test_ImageIO_variable" COMMAND "${DARLING_IDENTIFIER}.test_ImageIO_variable")
+
+install(
+    TARGETS
+        "${DARLING_IDENTIFIER}.test_ImageIO_icns"
+        "${DARLING_IDENTIFIER}.test_ImageIO_variable"
+
+    DESTINATION
+        "${INSTALL_DIR_TESTCASE}"
+)
+
+install(
+    DIRECTORY "resource"
+    DESTINATION "${INSTALL_DIR_RESOURCE}/${DARLING_PATH}"
+)

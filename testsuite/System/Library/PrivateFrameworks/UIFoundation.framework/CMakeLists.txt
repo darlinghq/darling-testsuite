@@ -27,3 +27,12 @@ add_test(
     NAME "${DARLING_PATH}/test_UIFoundation_variable"
     COMMAND "${DARLING_IDENTIFIER}.test_UIFoundation_variable"
 )
+
+install(
+    TARGETS
+        "${DARLING_IDENTIFIER}.test_UIFoundation_UIDataLooksLikeNibArchive"
+        "${DARLING_IDENTIFIER}.test_UIFoundation_variable"
+
+    DESTINATION
+        "${INSTALL_DIR_TESTCASE}"
+)

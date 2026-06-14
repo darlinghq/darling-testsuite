@@ -2,7 +2,9 @@
 # SPDX-License-Identifier: MPL-2.0
 
 add_executable("${DARLING_IDENTIFIER}.test_open_doesnt_exist" "test/test_open_doesnt_exist.c")
+target_link_libraries("${DARLING_IDENTIFIER}.test_open_doesnt_exist" darling-testsuite-lib)
 add_test(NAME "${DARLING_PATH}/test_open_doesnt_exist" COMMAND "${DARLING_IDENTIFIER}.test_open_doesnt_exist")
 
 add_executable("${DARLING_IDENTIFIER}.test_open_exist" "test/test_open_exist.c")
+target_link_libraries("${DARLING_IDENTIFIER}.test_open_exist" darling-testsuite-lib)
 add_test(NAME "${DARLING_PATH}/test_open_exist" COMMAND "${DARLING_IDENTIFIER}.test_open_exist")

@@ -9,9 +9,11 @@
 #include <sys/errno.h>
 #include <sys/wait.h>
 
+#include <darling-testsuite/assertion.h>
+
 #define FILE_SIZE 38
 
-const char* FILE_PATH = "write_test_wait4_child_messsage_1.txt";
+const char* FILE_PATH = "/tmp/write_test_wait4_child_messsage_1.txt";
 const char* FILE_CONTENT = "The child process wants to say hello!";
 
 int main() {
@@ -24,7 +26,7 @@ int main() {
         // Child process
         // Create and write file
         int fd = open(FILE_PATH, O_CREAT | O_TRUNC | O_RDWR, 0666);
-        assert(fd >= 0);
+        assert_no_errno("open(...)", fd == -1);
 
         size_t write_bytes = write(fd, FILE_CONTENT, FILE_SIZE);
         assert(write_bytes == FILE_SIZE);
@@ -43,7 +45,7 @@ int main() {
         
         // Verify file created by child
         int fd = open(FILE_PATH, O_RDWR);
-        assert(fd >= 0);
+        assert_no_errno("open(...)", fd == -1);
 
         char child_msg[FILE_SIZE];
         size_t read_bytes = read(fd, child_msg, FILE_SIZE);

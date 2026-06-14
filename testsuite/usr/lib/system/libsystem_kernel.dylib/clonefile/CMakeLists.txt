@@ -1,16 +1,6 @@
 # SPDX-FileCopyrightText: 2026 Darling Team
 # SPDX-License-Identifier: MPL-2.0
 
-configure_file("resources/clone_resolve_beneath/input.txt" ${CMAKE_CURRENT_BINARY_DIR}/clone_resolve_beneath/input.txt COPYONLY)
-configure_file("resources/multifiles/inner_folder/E.txt" ${CMAKE_CURRENT_BINARY_DIR}/multifiles/inner_folder/E.txt COPYONLY)
-configure_file("resources/multifiles/A.txt" ${CMAKE_CURRENT_BINARY_DIR}/multifiles/A.txt COPYONLY)
-configure_file("resources/multifiles/B.txt" ${CMAKE_CURRENT_BINARY_DIR}/multifiles/B.txt COPYONLY)
-configure_file("resources/multifiles/C.txt" ${CMAKE_CURRENT_BINARY_DIR}/multifiles/C.txt COPYONLY)
-configure_file("resources/multifiles/D.txt" ${CMAKE_CURRENT_BINARY_DIR}/multifiles/D.txt COPYONLY)
-configure_file("resources/symlink_folder/fclonefileat_reference.txt" ${CMAKE_CURRENT_BINARY_DIR}/symlink_folder/fclonefileat_reference.txt COPYONLY)
-configure_file("resources/fclonefileat_hello_world.txt" ${CMAKE_CURRENT_BINARY_DIR} COPYONLY)
-configure_file("resources/fclonefileat_reference.txt" ${CMAKE_CURRENT_BINARY_DIR} COPYONLY)
-
 # clonefile
 add_executable("${DARLING_IDENTIFIER}.test_clonefile_soft_symlink" "test/test_clonefile_soft_symlink.c")
 target_link_libraries("${DARLING_IDENTIFIER}.test_clonefile_soft_symlink" darling-testsuite-lib)

@@ -5,8 +5,9 @@
 #include <errno.h>
 #include <unistd.h>
 
+#include <darling-testsuite/assertion.h>
+
 int main() {
     int unlink_result = unlink("unlink_this_file_should_not_exist.txt");
-    assert(unlink_result == -1);
-    assert(errno == ENOENT);
+    assert_expected_errno("unlink(...)", unlink_result == -1, ENOENT);
 }

@@ -2,7 +2,6 @@
 # SPDX-License-Identifier: MPL-2.0
 
 # read
-configure_file(resources/read_hello_world.txt ${CMAKE_CURRENT_BINARY_DIR} COPYONLY)
-
 add_executable("${DARLING_IDENTIFIER}.test_read_file" "test/test_read_file.c")
+target_link_libraries("${DARLING_IDENTIFIER}.test_read_file" darling-testsuite-lib)
 add_test(NAME "${DARLING_PATH}/test_read_file" COMMAND "${DARLING_IDENTIFIER}.test_read_file")

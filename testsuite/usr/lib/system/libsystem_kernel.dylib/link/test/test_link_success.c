@@ -6,41 +6,30 @@
 #include <unistd.h>
 #include <sys/stat.h>
 
+#include <darling-testsuite/assertion.h>
+#include <darling-testsuite/file.h>
+
 int main() {
-    const char* nondir_path = "test_link_original_file.txt";
-    const char* hard_path = "test_link_hardlink_file.txt";
+    // Setup
+    const char* normal_file_path = "/tmp/libsystem_kernel_link_normal_file.txt";
+    unlink(normal_file_path);
+    create_file_with_content(normal_file_path, "Hello world link!");
 
-    // Create original file to create a hardlink against
-    int fd = open(nondir_path, O_CREAT | O_EXCL | O_RDWR, 0666);
-    assert(fd >= 0);
-
-    char file_content[] = "Hello world link!";
-    size_t file_content_size = 17;
-    ssize_t write_result = write(fd, file_content, file_content_size);
-    assert(write_result == file_content_size);
-    
-    close(fd);
+    const char* hardlink_path = "/tmp/libsystem_kernel_link_hardlink_file.txt";
+    unlink(hardlink_path);
 
     // Create the hardlink
-    int link_result = link(nondir_path, hard_path);
+    int link_result = link(normal_file_path, hardlink_path);
     assert(link_result == 0);
 
     // Verify that the created file is indeed a hardlink.
-    int lstat_result;
-    struct stat hardlink_file_stat;
     struct stat original_file_stat;
+    struct stat hardlink_file_stat;
 
-    lstat_result = lstat(hard_path, &original_file_stat);
-    assert(lstat_result == 0);
-
-    lstat_result = lstat(hard_path, &hardlink_file_stat);
-    assert(lstat_result == 0);
+    assert_no_errno("lstat(normal_file_path)", lstat(normal_file_path, &original_file_stat) == -1);
+    assert_no_errno("lstat(hardlink_path)", lstat(hardlink_path, &hardlink_file_stat) == -1);
 
     assert((hardlink_file_stat.st_mode & S_IFMT) == S_IFREG);
     assert(hardlink_file_stat.st_ino == original_file_stat.st_ino);
     assert(hardlink_file_stat.st_nlink == 2);
-
-    // Cleanup
-    unlink(nondir_path);
-    unlink(hard_path);
 }

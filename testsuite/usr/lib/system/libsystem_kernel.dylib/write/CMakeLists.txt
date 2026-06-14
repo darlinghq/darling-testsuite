@@ -3,4 +3,5 @@
 
 # write
 add_executable("${DARLING_IDENTIFIER}.test_write_file" "test/test_write_file.c")
+target_link_libraries("${DARLING_IDENTIFIER}.test_write_file" darling-testsuite-lib)
 add_test(NAME "${DARLING_PATH}/test_write_file" COMMAND "${DARLING_IDENTIFIER}.test_write_file")

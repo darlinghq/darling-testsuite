@@ -41,6 +41,9 @@ void assert_expected_errno(const char* function_name, bool is_failure_case, int 
 // CoreFoundation
 void assert_equals_CFStringRef(CFStringRef expected, CFStringRef actual);
 
+void assert_CFErrorRef_not_set(CFErrorRef error, bool is_failure_case);
+
+
 #if __OBJC__
 #include <Foundation/Foundation.h>
 

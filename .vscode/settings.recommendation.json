@@ -1,0 +1,24 @@
+// SPDX-FileCopyrightText: 2026 Darling Team
+// SPDX-License-Identifier: MPL-2.0
+
+{
+    "cmake.configureArgs": [
+        // Install Path
+        "-DCMAKE_INSTALL_PREFIX=${workspaceFolder}/install",
+        
+        // Architectures
+        // "-DCMAKE_OSX_ARCHITECTURES=i386;x86_64",
+        "-DCMAKE_OSX_ARCHITECTURES=x86_64;arm64"
+    ],
+    
+    //
+    // Environment Variables
+    //
+
+    "terminal.integrated.env.osx": {
+        "DARLING_TESTSUITE_RESOURCE_PATH" : "${workspaceFolder}"
+    },
+    "cmake.testEnvironment": {
+        "DARLING_TESTSUITE_RESOURCE_PATH" : "${workspaceFolder}"
+    }
+}

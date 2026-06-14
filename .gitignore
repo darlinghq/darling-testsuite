@@ -2,6 +2,10 @@
 # SPDX-License-Identifier: MPL-2.0
 
 build/
+install/
+
+# It's better to have 
+.vscode/settings.json
 
 #
 # Ignore macOS files

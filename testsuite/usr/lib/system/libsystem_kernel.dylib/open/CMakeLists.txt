@@ -1,8 +1,22 @@
 # SPDX-FileCopyrightText: 2026 Darling Team
 # SPDX-License-Identifier: MPL-2.0
 
+set(DARLING_PATH "${DARLING_PATH}/open")
+set(DARLING_IDENTIFIER "${DARLING_IDENTIFIER}_open")
+
 add_executable("${DARLING_IDENTIFIER}.test_open_doesnt_exist" "test/test_open_doesnt_exist.c")
+target_link_libraries("${DARLING_IDENTIFIER}.test_open_doesnt_exist" darling-testsuite-lib)
 add_test(NAME "${DARLING_PATH}/test_open_doesnt_exist" COMMAND "${DARLING_IDENTIFIER}.test_open_doesnt_exist")
 
 add_executable("${DARLING_IDENTIFIER}.test_open_exist" "test/test_open_exist.c")
+target_link_libraries("${DARLING_IDENTIFIER}.test_open_exist" darling-testsuite-lib)
 add_test(NAME "${DARLING_PATH}/test_open_exist" COMMAND "${DARLING_IDENTIFIER}.test_open_exist")
+
+install(
+    TARGETS
+        "${DARLING_IDENTIFIER}.test_open_doesnt_exist"
+        "${DARLING_IDENTIFIER}.test_open_exist"
+
+    DESTINATION
+        "${INSTALL_DIR_TESTCASE}"
+)

@@ -5,10 +5,12 @@
 #include <fcntl.h>
 #include <unistd.h>
 
+#include <darling-testsuite/assertion.h>
+
 int main() {
     int fd = open("/System", O_RDONLY);
-    assert(fd >= 0);
+    assert_no_errno("open(...)", fd == -1);
 
     int close_result = close(fd);
-    assert(close_result == 0);
+    assert_no_errno("close(fd)", close_result == -1);
 }

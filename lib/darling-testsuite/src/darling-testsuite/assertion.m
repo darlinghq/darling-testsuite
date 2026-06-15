@@ -300,6 +300,10 @@ void assert_equals_CFStringRef(CFStringRef expected, CFStringRef actual) {
     }
 }
 
+void assert_CFErrorRef_not_set(CFErrorRef error, bool is_failure_case) {
+    assert_NSError_not_set((NSError*)error, is_failure_case);
+}
+
 //
 // Objective-C Comparsion
 //
@@ -349,9 +353,10 @@ void assert_equals_BOOL(char *variable_name, BOOL expected, BOOL actual) {
 
 void assert_NSError_not_set(NSError *error, bool is_failure_case) {
     if (is_failure_case && error != NULL) {
-        printf("An NSError has occured (code=%ld, domain=%s)\n",
+        printf("An NSError has occured (code=%ld, domain=%s): %s\n",
             (long)error.code,
-            [error.domain UTF8String]
+            [error.domain UTF8String],
+            [error.localizedDescription UTF8String]
         );
 
         assert(!is_failure_case && error == NULL);

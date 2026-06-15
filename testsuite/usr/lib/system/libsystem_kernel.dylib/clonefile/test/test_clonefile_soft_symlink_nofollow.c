@@ -7,26 +7,38 @@
 #include <unistd.h>
 
 #include <sys/clonefile.h>
+#include <sys/stat.h>
 
 #include <darling-testsuite/assertion.h>
+#include <darling-testsuite/file.h>
+#include <darling-testsuite/resource.h>
 
+/**
+ * Create a copy of the symlink itself
+ */
 int main() {
     // Setup
-    const char src[] = "generated_fclonefileat_soft_symlink_nofollow.txt";
-    const char dst[] = "symlink_folder/generated_result_libsystem_kernel_clonefile_soft_symlink_nofollow.txt";
-    int flags = CLONE_NOFOLLOW;
-    
-    unlink(src);
-    unlink(dst);
+    const char setup_base_path[] = "/tmp/libsystem_kernel_clonefile_base.txt";
+    unlink(setup_base_path);
+    assert(create_file_with_content(setup_base_path, "ORIG1") == true);
 
-    assert_no_errno("symlink()", symlink("fclonefileat_reference.txt", src) == -1);
+    const char src_path[] = "/tmp/libsystem_kernel_clonefile_symlink_to_base.txt";
+    unlink(src_path);
+    assert_no_errno("symlink()", symlink("libsystem_kernel_clonefile_base.txt", src_path) == -1);
+
+    const char dst_folder[] = "/tmp/libsystem_kernel_clonefile_folder";
+    const char dst_path[] = "/tmp/libsystem_kernel_clonefile_folder/libsystem_kernel_clonefile_symlink_copy.txt";
+    const char setup_dst_base_file[] = "/tmp/libsystem_kernel_clonefile_folder/libsystem_kernel_clonefile_base.txt";
+    delete_directory_with_files(dst_folder);
+    assert_no_errno("symlink()", mkdir(dst_folder, 0755) == -1);
+    assert(create_file_with_content(setup_dst_base_file, "UPDT2") == true);
 
     // Execute
-    int result = clonefile(src, dst, flags);
+    int result = clonefile(src_path, dst_path, CLONE_NOFOLLOW);
     assert_no_errno("clonefile()", result == -1);
 
     // Verify
-    int copied_file_fd = open(dst, O_RDONLY);
+    int copied_file_fd = open(dst_path, O_RDONLY);
     assert_no_errno("open()", copied_file_fd == -1);
     
     char actual_file_txt[5] = {0};

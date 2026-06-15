@@ -12,6 +12,10 @@ add_compile_options("-Wno-deprecated-declarations")
 
 set(CMAKE_INSTALL_PREFIX ${CMAKE_INSTALL_PREFIX}/darling-testsuite)
 
+set(INSTALL_DIR_MANUAL "manual")
+set(INSTALL_DIR_RESOURCE "resource")
+set(INSTALL_DIR_TESTCASE "testcase")
+
 include_directories("include")
 
 add_subdirectory("lib")

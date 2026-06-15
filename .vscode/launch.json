@@ -14,7 +14,10 @@
             "name": "Debug (ctest)",
             "program": "${cmake.testProgram}",
             "args": [ "${cmake.testArgs}" ],
-            "cwd": "${cmake.testWorkingDirectory}"
+            "cwd": "${cmake.testWorkingDirectory}",
+            "env": {
+                "DARLING_TESTSUITE_RESOURCE_PATH" : "${workspaceFolder}"
+            }
         }
     ]
 }

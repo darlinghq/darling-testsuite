@@ -4,6 +4,9 @@
 #include <CoreFoundation/CoreFoundation.h>
 #include <Security/Security.h>
 
+#include <darling-testsuite/assertion.h>
+#include <darling-testsuite/resource.h>
+
 #include <assert.h>
 #include <stdio.h>
 
@@ -15,7 +18,7 @@ CFMutableArrayRef initalizePolicy();
 extern bool SecTrustEvaluateWithError(SecTrustRef trust, CFErrorRef*error);
 
 int main() {
-    CFErrorRef error;
+    CFErrorRef error = NULL;
 
     SecTrustRef trust = NULL;
     CFMutableArrayRef certificateArray = initalizeCertificates();
@@ -27,8 +30,8 @@ int main() {
     OSStatus sec_trust_set_anchor_certs_status = SecTrustSetAnchorCertificatesOnly(trust, FALSE);
     assert(sec_trust_set_anchor_certs_status == errSecSuccess);
     
-    bool sec_trust_eval_result = SecTrustEvaluateWithError(trust, &error);
-    assert(sec_trust_eval_result == true);
+    bool evaluation_is_successful = SecTrustEvaluateWithError(trust, &error);
+    assert_CFErrorRef_not_set(error, !evaluation_is_successful);
 }
 
 CFMutableArrayRef initalizeCertificates() {
@@ -37,14 +40,18 @@ CFMutableArrayRef initalizeCertificates() {
     CFDataRef raw_certifcate_data;
     SecCertificateRef certificate;
 
-    raw_certifcate_data = createCertificateDataRef("pypi_org.der");
+    const char *pypi_der = grab_full_resource_path("testsuite/System/Library/Frameworks/Security.framework/resources/pypi_org.der");
+    raw_certifcate_data = createCertificateDataRef(pypi_der);
     certificate = SecCertificateCreateWithData(kCFAllocatorDefault, raw_certifcate_data);
     CFArrayAppendValue(mutableArray, certificate);
 
-    raw_certifcate_data = createCertificateDataRef("globalsign_atlas_r3_dv_tls_ca_2025_q1.der");
+    const char *globalsign_der = grab_full_resource_path("testsuite/System/Library/Frameworks/Security.framework/resources/globalsign_atlas_r3_dv_tls_ca_2025_q4.der");
+    raw_certifcate_data = createCertificateDataRef(globalsign_der);
     certificate = SecCertificateCreateWithData(kCFAllocatorDefault, raw_certifcate_data);
     CFArrayAppendValue(mutableArray, certificate);
 
+    free((void*)pypi_der);
+    free((void*)globalsign_der);
     return mutableArray;
 }
 

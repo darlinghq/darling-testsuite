@@ -11,26 +11,26 @@
 #include <sys/errno.h>
 
 #include <darling-testsuite/assertion.h>
+#include <darling-testsuite/resource.h>
 
 int main() {
     // Setup
-    int srcfd;
-    int dst_dirfd = AT_FDCWD;
-    const char dst[] = "generated_result_libsystem_kernel_fclonefileat_file_result.txt";
-    int flags = 0;
+    int dst_dirfd = open("/tmp", O_SEARCH);
+    const char dst_path[] = "libsystem_kernel_fclonefileat_copied_file.txt";
+    const char full_dst_path[] = "/tmp/libsystem_kernel_fclonefileat_copied_file.txt";
+    unlink(full_dst_path);
 
-    unlink(dst);
-
-    srcfd = open("fclonefileat_hello_world.txt", O_RDONLY);
+    const char *src_path = grab_full_resource_path("testsuite/usr/lib/system/libsystem_kernel.dylib/clonefile/resources/fclonefileat_hello_world.txt");
+    int srcfd = open(src_path, O_RDONLY);
     assert_no_errno("open(srcfd)", srcfd == -1);
 
     // Execute
-    int result = fclonefileat(srcfd, dst_dirfd, dst, flags);
+    int result = fclonefileat(srcfd, dst_dirfd, dst_path, /*flags*/ 0);
     assert_no_errno("fclonefileat()", result == -1);
 
     // Verify
-    int copied_file_fd = open(dst, O_RDONLY);
-    assert_no_errno("open()", copied_file_fd == -1);
+    int copied_file_fd = open(full_dst_path, O_RDONLY);
+    assert_no_errno("open(full_dst_path)", copied_file_fd == -1);
     
     char actual_file_txt[12] = {0};
     assert(read(copied_file_fd, actual_file_txt, 12) == 12);
@@ -39,4 +39,5 @@ int main() {
     // Cleanup
     close(srcfd);
     close(copied_file_fd);
+    free((void*)src_path);
 }

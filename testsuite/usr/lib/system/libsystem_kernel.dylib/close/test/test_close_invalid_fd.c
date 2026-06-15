@@ -6,10 +6,10 @@
 #include <fcntl.h>
 #include <unistd.h>
 
+#include <darling-testsuite/assertion.h>
+
 int main() {
     int fd = 100;
-
     int close_result = close(fd);
-    assert(close_result == -1);
-    assert(errno == EBADF);
+    assert_expected_errno("close(fd)", close_result == -1, EBADF);
 }

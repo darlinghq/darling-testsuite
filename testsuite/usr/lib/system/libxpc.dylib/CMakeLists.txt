@@ -64,6 +64,9 @@ install(
     TARGETS
         libxpc_basic_listener_server_mach
         libxpc_basic_connection_server_mach
+
+    DESTINATION
+        "${INSTALL_DIR_MANUAL}"
 )
 
 # Launchd Scripts
@@ -73,7 +76,7 @@ install(
         ${CMAKE_CURRENT_BINARY_DIR}/${SERVICE_NAME_XPC_CONNECTION_MACH}.plist
     
     DESTINATION
-        "launchd"
+        "${INSTALL_DIR_MANUAL}/launchd"
 )
 
 # Shell Scripts
@@ -92,5 +95,5 @@ install(
         WORLD_EXECUTE
 
     DESTINATION
-        "scripts"
+        "${INSTALL_DIR_MANUAL}/scripts"
 )

@@ -8,14 +8,15 @@
 
 int main() {
     // Setup
-    const char* NEW_FILENAME = "write_to_new_file_1.txt";
-    char buffer[] = "New file!";
-    size_t size = 10;
+    const char* NEW_FILENAME = "/tmp/write_to_new_file_1.txt";
+    unlink(NEW_FILENAME);
 
     int fd = open(NEW_FILENAME, O_CREAT | O_EXCL | O_RDWR, 0666);
     assert(fd >= 0);
 
     // Test
+    char buffer[] = "New file!";
+    size_t size = 10;
     size_t bytes_written = write(fd, buffer, size);
 
     // Verify
@@ -29,6 +30,5 @@ int main() {
 
     // Teardown
     close(fd);
-    unlink(NEW_FILENAME);
     return 0;
 }

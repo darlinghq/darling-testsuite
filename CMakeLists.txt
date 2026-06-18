@@ -10,11 +10,10 @@ include(CTest)
 # Ignore warning about using deprecated API
 add_compile_options("-Wno-deprecated-declarations")
 
-set(CMAKE_INSTALL_PREFIX ${CMAKE_INSTALL_PREFIX}/darling-testsuite)
-
-set(INSTALL_DIR_MANUAL "manual")
-set(INSTALL_DIR_RESOURCE "resource")
-set(INSTALL_DIR_TESTCASE "testcase")
+set(INSTALL_DIR_BASEFOLDER "darling-testsuite")
+set(INSTALL_DIR_MANUAL "${INSTALL_DIR_BASEFOLDER}/manual")
+set(INSTALL_DIR_RESOURCE "${INSTALL_DIR_BASEFOLDER}/resource")
+set(INSTALL_DIR_TESTCASE "${INSTALL_DIR_BASEFOLDER}/testcase")
 
 include_directories("include")
 

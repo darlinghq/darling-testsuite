@@ -19,6 +19,15 @@ int main() {
     // #include <AVFoundation/AVVideoSettings.h>
     assert_equals_NSString(@"AVVideoScalingModeKey", AVVideoScalingModeKey);
     assert_equals_NSString(@"AVVideoScalingModeResizeAspectFill", AVVideoScalingModeResizeAspectFill);
+
+    // #include <AVFoundation/AVAudioSettings.h>
+    assert_equals_NSString(@"AVLinearPCMIsBigEndianKey", AVLinearPCMIsBigEndianKey);
+    assert_equals_NSString(@"AVLinearPCMIsFloatKey", AVLinearPCMIsFloatKey);
+    assert_equals_NSString(@"AVLinearPCMIsNonInterleaved", AVLinearPCMIsNonInterleaved);
+
+    // #include <AVFoundation/AVSampleBufferAudioRenderer.h>
+    assert_equals_NSString(@"AVSampleBufferAudioRendererWasFlushedAutomaticallyNotification",
+                           AVSampleBufferAudioRendererWasFlushedAutomaticallyNotification);
 }
 
 void test_AVFoundation_AVMetadataFormat_h() {

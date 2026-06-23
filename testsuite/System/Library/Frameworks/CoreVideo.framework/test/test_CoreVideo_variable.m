@@ -6,9 +6,11 @@
 #include <darling-testsuite/assertion.h>
 
 void test_CoreVideo_CVImageBuffer_h();
+void test_CoreVideo_CVPixelBuffer_h();
 
 int main() {
     test_CoreVideo_CVImageBuffer_h();
+    test_CoreVideo_CVPixelBuffer_h();
 }
 
 void test_CoreVideo_CVImageBuffer_h() {
@@ -48,4 +50,18 @@ void test_CoreVideo_CVImageBuffer_h() {
     assert_equals_CFStringRef(CFSTR("DV 4:2:0"), kCVImageBufferChromaLocation_DV420);
     assert_equals_CFStringRef(CFSTR("Top"), kCVImageBufferChromaLocation_Top);
     assert_equals_CFStringRef(CFSTR("TopLeft"), kCVImageBufferChromaLocation_TopLeft);
+}
+
+void test_CoreVideo_CVPixelBuffer_h() {
+    assert_equals_CFStringRef(CFSTR("IOSurfaceProperties"), kCVPixelBufferIOSurfacePropertiesKey);
+    assert_equals_CFStringRef(CFSTR("OpenGLCompatibility"), kCVPixelBufferOpenGLCompatibilityKey);
+    assert_equals_CFStringRef(CFSTR("PixelFormatType"), kCVPixelBufferPixelFormatTypeKey);
+    assert_equals_CFStringRef(CFSTR("MetalCompatibility"), kCVPixelBufferMetalCompatibilityKey);
+    assert_equals_CFStringRef(CFSTR("BytesPerRowAlignment"), kCVPixelBufferBytesPerRowAlignmentKey);
+    assert_equals_CFStringRef(CFSTR("Height"), kCVPixelBufferHeightKey);
+    assert_equals_CFStringRef(CFSTR("Width"), kCVPixelBufferWidthKey);
+    assert_equals_CFStringRef(CFSTR("IOSurfaceOpenGLTextureCompatibility"),
+                              kCVPixelBufferIOSurfaceOpenGLTextureCompatibilityKey);
+    assert_equals_CFStringRef(CFSTR("MaximumBufferAge"), kCVPixelBufferPoolMaximumBufferAgeKey);
+    assert_equals_CFStringRef(CFSTR("MinimumBufferCount"), kCVPixelBufferPoolMinimumBufferCountKey);
 }

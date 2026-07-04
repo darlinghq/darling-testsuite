@@ -6,6 +6,7 @@ include_directories(include-private)
 add_library(darling-testsuite-lib
     src/darling-testsuite/obj/NSCoder.m
 
+    src/darling-testsuite/algorithm.c
     src/darling-testsuite/assertion.m
     src/darling-testsuite/file.m
     src/darling-testsuite/print.m

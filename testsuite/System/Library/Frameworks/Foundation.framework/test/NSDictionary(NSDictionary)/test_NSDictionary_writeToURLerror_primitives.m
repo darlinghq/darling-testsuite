@@ -12,6 +12,8 @@
 #include <unistd.h>
 
 int main(void) {
+    resource_container_pt resource_container = resource_container_init();
+
     const char* expected_relative_path = "testsuite/System/Library/Frameworks/Foundation.framework/resources/expected_writeToURL_error_primitives";
     NSString *generated_path = @"/tmp/generated_writeToURL_error_primitives";
     NSError* error;
@@ -32,10 +34,10 @@ int main(void) {
     assert_NSError_not_set(error, !isSuccessful);
 
     // Verify
-    const char *expected_path = grab_full_resource_path(expected_relative_path);
+    const char *expected_path = grab_full_resource_path(resource_container, expected_relative_path);
     if (!is_xml_equal(expected_path, [generated_path UTF8String])) {
         abort();
     }
 
-    free((void*)expected_path);
+    resource_container_free(&resource_container);
 }

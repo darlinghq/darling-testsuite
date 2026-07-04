@@ -24,11 +24,13 @@
 int main() {
 #if MIN_VERSION_MACOS_ABI_TARGET_SUPPORTED(MACOS_15_0,MACOS_MAX_VERSION)
     // Setup
+    resource_container_pt resource_container = resource_container_init();
+
     const char base_folder[] = "/tmp/libsystem_kernel_fclonefileat_base_folder";
     delete_directory_with_files(base_folder);
     assert_no_errno("mkdir()", mkdir(base_folder, 0755) == -1);
 
-    const char *src_path = grab_full_resource_path("testsuite/usr/lib/system/libsystem_kernel.dylib/clonefile/resources/fclonefileat_hello_world.txt");
+    const char *src_path = grab_full_resource_path(resource_container, "testsuite/usr/lib/system/libsystem_kernel.dylib/clonefile/resources/fclonefileat_hello_world.txt");
     int srcfd = open(src_path, O_RDONLY);
     assert_no_errno("open(srcfd)", srcfd == -1);
 
@@ -53,7 +55,7 @@ int main() {
     // Cleanup
     close(srcfd);
     close(copied_file_fd);
-    free((void*)src_path);
+    resource_container_free(&resource_container);
 #else
     darling_testcase_os_doesnt_support_newer_api();
 #endif

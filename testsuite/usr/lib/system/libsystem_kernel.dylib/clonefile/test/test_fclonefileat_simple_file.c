@@ -15,12 +15,14 @@
 
 int main() {
     // Setup
+    resource_container_pt resource_container = resource_container_init();
+
     int dst_dirfd = open("/tmp", O_SEARCH);
     const char dst_path[] = "libsystem_kernel_fclonefileat_copied_file.txt";
     const char full_dst_path[] = "/tmp/libsystem_kernel_fclonefileat_copied_file.txt";
     unlink(full_dst_path);
 
-    const char *src_path = grab_full_resource_path("testsuite/usr/lib/system/libsystem_kernel.dylib/clonefile/resources/fclonefileat_hello_world.txt");
+    const char *src_path = grab_full_resource_path(resource_container, "testsuite/usr/lib/system/libsystem_kernel.dylib/clonefile/resources/fclonefileat_hello_world.txt");
     int srcfd = open(src_path, O_RDONLY);
     assert_no_errno("open(srcfd)", srcfd == -1);
 
@@ -39,5 +41,5 @@ int main() {
     // Cleanup
     close(srcfd);
     close(copied_file_fd);
-    free((void*)src_path);
+    resource_container_free(&resource_container);
 }

@@ -3,7 +3,7 @@
 
 #include <darling-directsyscall/cbridge_syscall.h>
 
-#include <darling-nostdlib/assert.h>
+#include <darling-testsuite/assertion.h>
 
 #include <errno.h>
 
@@ -16,6 +16,6 @@ int main() {
     int close_result = sys_close(fd, &error_code);
 
     // Verify
-    nostdlib_assert(close_result == -1);
-    nostdlib_assert(error_code == EBADF);
+    assert_is_true(close_result == -1);
+    assert_is_true(error_code == EBADF);
 }

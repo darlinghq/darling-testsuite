@@ -5,9 +5,7 @@
 
 #include <darling-directsyscall/cbridge_syscall.h>
 
-#include <darling-nostdlib/assert.h>
-#include <darling-nostdlib/io.h>
-#include <darling-nostdlib/string.h>
+#include <darling-testsuite/assertion.h>
 
 #include <fcntl.h>
 
@@ -18,10 +16,10 @@
 int main() {
     // Setup
     int fd = sys_open((const darling_user_addr_t)FILE_PATH, O_CREAT | O_TRUNC | O_RDWR, 0666, NULL);
-    nostdlib_assert(fd >= 0);
+    assert_is_true(fd >= 0);
 
     size_t write_bytes = sys_write(fd, (const darling_user_addr_t)FILE_CONTENT, FILE_SIZE, NULL);
-    nostdlib_assert(write_bytes == FILE_SIZE);
+    assert_is_true(write_bytes == FILE_SIZE);
 
     // Clean up
     sys_close(fd, NULL);

@@ -11,10 +11,12 @@
 
 int main() {
     // Setup
+    resource_container_pt resource_container = resource_container_init();
+
     char buffer[12] = { 0 };
     size_t size = 12;
 
-    const char *src_path = grab_full_resource_path("testsuite/usr/lib/system/libsystem_kernel.dylib/read/resources/read_hello_world.txt");
+    const char *src_path = grab_full_resource_path(resource_container, "testsuite/usr/lib/system/libsystem_kernel.dylib/read/resources/read_hello_world.txt");
     int fd = open(src_path, O_RDONLY);
     assert(fd >= 0);
 
@@ -27,6 +29,6 @@ int main() {
 
     // Teardown
     close(fd);
-    free((void *)src_path);
+    resource_container_free(&resource_container);
     return 0;
 }

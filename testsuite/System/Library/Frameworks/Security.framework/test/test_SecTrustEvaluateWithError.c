@@ -10,7 +10,7 @@
 #include <assert.h>
 #include <stdio.h>
 
-CFMutableArrayRef initalizeCertificates();
+CFMutableArrayRef initalizeCertificates(resource_container_pt resource_container);
 CFDataRef createCertificateDataRef(const char *cert_path);
 CFMutableArrayRef initalizePolicy();
 
@@ -18,10 +18,12 @@ CFMutableArrayRef initalizePolicy();
 extern bool SecTrustEvaluateWithError(SecTrustRef trust, CFErrorRef*error);
 
 int main() {
+    resource_container_pt resource_container = resource_container_init();
+
     CFErrorRef error = NULL;
 
     SecTrustRef trust = NULL;
-    CFMutableArrayRef certificateArray = initalizeCertificates();
+    CFMutableArrayRef certificateArray = initalizeCertificates(resource_container);
     CFMutableArrayRef policyArray = initalizePolicy();
 
     OSStatus sec_trust_constructor_status = SecTrustCreateWithCertificates(certificateArray, policyArray, &trust);
@@ -32,26 +34,26 @@ int main() {
     
     bool evaluation_is_successful = SecTrustEvaluateWithError(trust, &error);
     assert_CFErrorRef_not_set(error, !evaluation_is_successful);
+
+    resource_container_free(&resource_container);
 }
 
-CFMutableArrayRef initalizeCertificates() {
+CFMutableArrayRef initalizeCertificates(resource_container_pt resource_container) {
     CFMutableArrayRef mutableArray = CFArrayCreateMutable(kCFAllocatorDefault, 0, &kCFTypeArrayCallBacks);
 
     CFDataRef raw_certifcate_data;
     SecCertificateRef certificate;
 
-    const char *pypi_der = grab_full_resource_path("testsuite/System/Library/Frameworks/Security.framework/resources/pypi_org.der");
+    const char *pypi_der = grab_full_resource_path(resource_container, "testsuite/System/Library/Frameworks/Security.framework/resources/pypi_org.der");
     raw_certifcate_data = createCertificateDataRef(pypi_der);
     certificate = SecCertificateCreateWithData(kCFAllocatorDefault, raw_certifcate_data);
     CFArrayAppendValue(mutableArray, certificate);
 
-    const char *globalsign_der = grab_full_resource_path("testsuite/System/Library/Frameworks/Security.framework/resources/globalsign_atlas_r3_dv_tls_ca_2025_q4.der");
+    const char *globalsign_der = grab_full_resource_path(resource_container, "testsuite/System/Library/Frameworks/Security.framework/resources/globalsign_atlas_r3_dv_tls_ca_2025_q4.der");
     raw_certifcate_data = createCertificateDataRef(globalsign_der);
     certificate = SecCertificateCreateWithData(kCFAllocatorDefault, raw_certifcate_data);
     CFArrayAppendValue(mutableArray, certificate);
 
-    free((void*)pypi_der);
-    free((void*)globalsign_der);
     return mutableArray;
 }
 

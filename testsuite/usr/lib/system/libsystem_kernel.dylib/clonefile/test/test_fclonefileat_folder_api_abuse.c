@@ -20,6 +20,8 @@
  */
 int main() {
     // Setup
+    resource_container_pt resource_container = resource_container_init();
+    
     int dst_dirfd = open("/tmp", O_SEARCH);
     const char dst_path[] = "libsystem_kernel_fclonefileat_create_dir_copy";
 
@@ -32,7 +34,7 @@ int main() {
 
     delete_directory_with_files(dst_full_path);
 
-    const char *src_path = grab_full_resource_path("testsuite/usr/lib/system/libsystem_kernel.dylib/clonefile/resources/multifiles");
+    const char *src_path = grab_full_resource_path(resource_container, "testsuite/usr/lib/system/libsystem_kernel.dylib/clonefile/resources/multifiles");
     int srcfd = open(src_path, O_RDONLY);
     assert_no_errno("open(srcfd)", srcfd == -1);
 
@@ -71,5 +73,5 @@ int main() {
     close(copied_fileB_fd);
     close(copied_fileC_fd);
     close(copied_fileD_fd);
-    free((void*)src_path);
+    resource_container_free(&resource_container);
 }

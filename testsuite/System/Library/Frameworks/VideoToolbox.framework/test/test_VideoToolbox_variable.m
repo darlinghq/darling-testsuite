@@ -12,4 +12,6 @@ int main() {
     assert_equals_CFStringRef(CFSTR("MaxFrameDelayCount"), kVTCompressionPropertyKey_MaxFrameDelayCount);
     assert_equals_CFStringRef(CFSTR("ExpectedFrameRate"), kVTCompressionPropertyKey_ExpectedFrameRate);
     assert_equals_CFStringRef(CFSTR("RequireHardwareAcceleratedVideoEncoder"), kVTVideoEncoderSpecification_RequireHardwareAcceleratedVideoEncoder);
+    assert_equals_CFStringRef(CFSTR("RequireHardwareAcceleratedVideoDecoder"),
+                              kVTVideoDecoderSpecification_RequireHardwareAcceleratedVideoDecoder);
 }

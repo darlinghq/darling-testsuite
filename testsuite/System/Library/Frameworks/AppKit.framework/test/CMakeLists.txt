@@ -53,6 +53,15 @@ add_executable("${DARLING_IDENTIFIER}.test_NSCursor_initWithCoder" "NSCursor/tes
 target_link_libraries("${DARLING_IDENTIFIER}.test_NSCursor_initWithCoder" "-framework Foundation" "-framework AppKit" darling-testsuite-lib)
 add_test(NAME "${DARLING_PATH}/test_NSCursor_initWithCoder" COMMAND "${DARLING_IDENTIFIER}.test_NSCursor_initWithCoder")
 
+# NSWorkspace
+
+add_executable("${DARLING_IDENTIFIER}.test_NSWorkspace_openFile_withApplication_andDeactivate" "NSWorkspace/test_NSWorkspace_openFile_withApplication_andDeactivate.m")
+target_link_libraries("${DARLING_IDENTIFIER}.test_NSWorkspace_openFile_withApplication_andDeactivate" "-framework Foundation" "-framework AppKit" darling-testsuite-lib)
+add_test(NAME "${DARLING_PATH}/test_NSWorkspace_openFile_withApplication_andDeactivate" COMMAND "${DARLING_IDENTIFIER}.test_NSWorkspace_openFile_withApplication_andDeactivate")
+
+add_executable("${DARLING_IDENTIFIER}.manual_NSWorkspace_openURL" "NSWorkspace/manual/test_NSWorkspace_openURL.m")
+target_link_libraries("${DARLING_IDENTIFIER}.manual_NSWorkspace_openURL" "-framework Foundation" "-framework AppKit" darling-testsuite-lib)
+
 # Misc
 
 add_executable("${DARLING_IDENTIFIER}.test_AppKit_variable" "test_AppKit_variable.m")
@@ -80,9 +89,21 @@ install(
         "${DARLING_IDENTIFIER}.test_NSCursor_encodeWithCoder"
         "${DARLING_IDENTIFIER}.test_NSCursor_initWithCoder"
 
+        # NSWorkspace
+        "${DARLING_IDENTIFIER}.test_NSWorkspace_openFile_withApplication_andDeactivate"
+
         # Misc
         "${DARLING_IDENTIFIER}.test_AppKit_variable"
 
     DESTINATION
         "${INSTALL_DIR_TESTCASE}"
+)
+
+install(
+    TARGETS
+        # NSWorkspace
+        "${DARLING_IDENTIFIER}.manual_NSWorkspace_openURL"
+
+    DESTINATION
+        "${INSTALL_DIR_MANUAL}"
 )

@@ -9,6 +9,9 @@ int main() {
     // #include <WebKit/WebKitErrors.h>
     assert_equals_NSString(@"WebKitErrorDomain", WebKitErrorDomain);
 
+    // #include <WebKit/WebPolicyDelegate.h>
+    assert_equals_NSString(@"WebActionNavigationTypeKey", WebActionNavigationTypeKey);
+
     // #include <WebKit/WebView.h>
     assert_equals_NSString(@"WebElementLinkLabel", WebElementLinkLabelKey);
     assert_equals_NSString(@"WebElementLinkURL", WebElementLinkURLKey);

@@ -1,0 +1,9 @@
+# Refer to the following link for more details on how to configure `REUSE.toml`
+# https://reuse.software/spec-3.3/#reusetoml
+
+version = 1
+
+[[annotations]]
+path = "**"
+SPDX-FileCopyrightText = "NONE"
+SPDX-License-Identifier = "CC0-1.0"

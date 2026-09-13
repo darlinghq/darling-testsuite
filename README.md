@@ -13,9 +13,11 @@ The goal for this test suite is to provide a utility that can run test cases on 
 
 ## License
 
-TODO: Add note about the following:
-* Test cases being licensed under MIT-0.
-* Other code (including the test case management library) being licensed under MPL2.
+The two most common licenses in this project are `MIT-0` & `MPL-2.0`
+* `MIT-0` (or MIT No Attribution) is mainly used for test cases or example code.
+* `MPL-2.0` is usually for anything else that is not a test case or example code.
+
+This project is [REUSE-compliant](https://reuse.software/).
 
 ## How To Build & Run
 

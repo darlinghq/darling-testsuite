@@ -66,8 +66,14 @@ add_test(NAME "${DARLING_PATH}/test_NSWorkspace_openFile_withApplication_andDeac
 add_executable("${DARLING_IDENTIFIER}.manual_NSWorkspace_openURL" "NSWorkspace/manual/test_NSWorkspace_openURL.m")
 target_link_libraries("${DARLING_IDENTIFIER}.manual_NSWorkspace_openURL" "-framework Foundation" "-framework AppKit" darling-testsuite-lib)
 
-add_executable("${DARLING_IDENTIFIER}.manual_NSWorkspace_openFile_withApplication_andDeactivate" "NSWorkspace/manual/test_NSWorkspace_openFile_withApplication_andDeactivate.m")
-target_link_libraries("${DARLING_IDENTIFIER}.manual_NSWorkspace_openFile_withApplication_andDeactivate" "-framework Foundation" "-framework AppKit" darling-testsuite-lib)
+add_executable("${DARLING_IDENTIFIER}.manual_NSWorkspace_openFile_withApplication_andDeactivate_openFileNull" "NSWorkspace/manual/test_NSWorkspace_openFile_withApplication_andDeactivate_openFileNull.m")
+target_link_libraries("${DARLING_IDENTIFIER}.manual_NSWorkspace_openFile_withApplication_andDeactivate_openFileNull" "-framework Foundation" "-framework AppKit" darling-testsuite-lib)
+
+add_executable("${DARLING_IDENTIFIER}.manual_NSWorkspace_openFile_withApplication_andDeactivate_withApplicationNull" "NSWorkspace/manual/test_NSWorkspace_openFile_withApplication_andDeactivate_withApplicationNull.m")
+target_link_libraries("${DARLING_IDENTIFIER}.manual_NSWorkspace_openFile_withApplication_andDeactivate_withApplicationNull" "-framework Foundation" "-framework AppKit" darling-testsuite-lib)
+
+add_executable("${DARLING_IDENTIFIER}.manual_NSWorkspace_openFile_withApplication_andDeactivate_fileAndApplication" "NSWorkspace/manual/test_NSWorkspace_openFile_withApplication_andDeactivate_fileAndApplication.m")
+target_link_libraries("${DARLING_IDENTIFIER}.manual_NSWorkspace_openFile_withApplication_andDeactivate_fileAndApplication" "-framework Foundation" "-framework AppKit" darling-testsuite-lib)
 
 # Application bundle used by the manual openFile test above. Built without the
 # ${DARLING_IDENTIFIER} prefix because the installed binary name must match
@@ -125,7 +131,9 @@ install(
     TARGETS
         # NSWorkspace
         "${DARLING_IDENTIFIER}.manual_NSWorkspace_openURL"
-        "${DARLING_IDENTIFIER}.manual_NSWorkspace_openFile_withApplication_andDeactivate"
+        "${DARLING_IDENTIFIER}.manual_NSWorkspace_openFile_withApplication_andDeactivate_openFileNull"
+        "${DARLING_IDENTIFIER}.manual_NSWorkspace_openFile_withApplication_andDeactivate_withApplicationNull"
+        "${DARLING_IDENTIFIER}.manual_NSWorkspace_openFile_withApplication_andDeactivate_fileAndApplication"
 
     DESTINATION
         "${INSTALL_DIR_MANUAL}"

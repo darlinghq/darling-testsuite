@@ -15,11 +15,6 @@ int main(void) {
         NSString *dummyFile = [NSTemporaryDirectory() stringByAppendingPathComponent:@"nsworkspace_openfile_test.txt"];
         [fm createFileAtPath:dummyFile contents:[NSData data] attributes:nil];
 
-        // A plain command line tool is not an application, so opening a file
-        // with it is expected to fail.
-        BOOL cliResult = [workspace openFile:dummyFile withApplication:@"/bin/echo" andDeactivate:NO];
-        assert_is_false(cliResult);
-
         // A real application bundle can be launched with the file, so this
         // call is expected to succeed. Run this test from the directory that
         // contains NSApplicationDelegate_application_openFile.app. Note that

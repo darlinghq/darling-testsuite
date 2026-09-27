@@ -126,6 +126,17 @@ install(TARGETS "NSApplicationDelegate_application_openFile"
 install(FILES "NSWorkspace/manual/NSApplicationDelegate_application_openFile.app/Contents/Info.plist"
     DESTINATION "${INSTALL_DIR_MANUAL}/NSApplicationDelegate_application_openFile.app/Contents"
 )
+# NSEvent
+
+add_executable("${DARLING_IDENTIFIER}.test_NSEvent_mouseLocation_isInPoints" "NSEvent/test_NSEvent_mouseLocation_isInPoints.m")
+target_link_libraries("${DARLING_IDENTIFIER}.test_NSEvent_mouseLocation_isInPoints" "-framework Foundation" "-framework AppKit" darling-testsuite-lib)
+add_test(NAME "${DARLING_PATH}/test_NSEvent_mouseLocation_isInPoints" COMMAND "${DARLING_IDENTIFIER}.test_NSEvent_mouseLocation_isInPoints")
+
+# NSScreen
+
+add_executable("${DARLING_IDENTIFIER}.test_NSScreen_backingScaleFactor_isPointsBased" "NSScreen/test_NSScreen_backingScaleFactor_isPointsBased.m")
+target_link_libraries("${DARLING_IDENTIFIER}.test_NSScreen_backingScaleFactor_isPointsBased" "-framework Foundation" "-framework AppKit" darling-testsuite-lib)
+add_test(NAME "${DARLING_PATH}/test_NSScreen_backingScaleFactor_isPointsBased" COMMAND "${DARLING_IDENTIFIER}.test_NSScreen_backingScaleFactor_isPointsBased")
 
 # Misc
 
@@ -174,6 +185,11 @@ install(
         # NSWorkspace
         "${DARLING_IDENTIFIER}.test_NSWorkspace_openURL"
         "${DARLING_IDENTIFIER}.test_NSWorkspace_openFile_withApplication_andDeactivate"
+        # NSEvent
+        "${DARLING_IDENTIFIER}.test_NSEvent_mouseLocation_isInPoints"
+
+        # NSScreen
+        "${DARLING_IDENTIFIER}.test_NSScreen_backingScaleFactor_isPointsBased"
 
         # Misc
         "${DARLING_IDENTIFIER}.test_AppKit_variable"

@@ -1,6 +1,12 @@
 # SPDX-FileCopyrightText: 2026 Darling Team
 # SPDX-License-Identifier: MPL-2.0
 
+# AppKit
+
+add_executable("${DARLING_IDENTIFIER}.test_CGDisplayPixels_areDevicePixels" "AppKit/test_CGDisplayPixels_areDevicePixels.m")
+target_link_libraries("${DARLING_IDENTIFIER}.test_CGDisplayPixels_areDevicePixels" "-framework Foundation" "-framework AppKit" darling-testsuite-lib)
+add_test(NAME "${DARLING_PATH}/test_CGDisplayPixels_areDevicePixels" COMMAND "${DARLING_IDENTIFIER}.test_CGDisplayPixels_areDevicePixels")
+
 # NSApplication
 
 add_executable("${DARLING_IDENTIFIER}.test_NSApplication_helpMenu_setterDoesntAffectMainMenuStructure" "NSApplication/test_NSApplication_helpMenu_setterDoesntAffectMainMenuStructure.m")
@@ -146,6 +152,9 @@ add_test(NAME "${DARLING_PATH}/test_AppKit_variable" COMMAND "${DARLING_IDENTIFI
 
 install(
     TARGETS
+        # AppKit
+        "${DARLING_IDENTIFIER}.test_CGDisplayPixels_areDevicePixels"
+
         # NSApplication
         "${DARLING_IDENTIFIER}.test_NSApplication_helpMenu_setterDoesntAffectMainMenuStructure"
         "${DARLING_IDENTIFIER}.test_NSApplication_setPresentationOptions_verifyException"

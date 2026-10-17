@@ -9,6 +9,8 @@ include(CTest)
 
 # Ignore warning about using deprecated API
 add_compile_options("-Wno-deprecated-declarations")
+# Ignore the warning about setting a null value to a non-null argument.
+add_compile_options("-Wno-nonnull")
 
 set(INSTALL_DIR_BASEFOLDER "darling-testsuite")
 set(INSTALL_DIR_DOCUMENTATION "${INSTALL_DIR_BASEFOLDER}/doc")

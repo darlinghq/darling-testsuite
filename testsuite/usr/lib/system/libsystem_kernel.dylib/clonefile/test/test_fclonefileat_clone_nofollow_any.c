@@ -30,7 +30,7 @@ int main() {
     delete_directory_with_files(base_folder);
     assert_no_errno("mkdir()", mkdir(base_folder, 0755) == -1);
 
-    const char *src_path = grab_full_resource_path(resource_container, "testsuite/usr/lib/system/libsystem_kernel.dylib/clonefile/resources/fclonefileat_hello_world.txt");
+    const char *src_path = grab_full_resource_path_direct(resource_container, "testsuite/usr/lib/system/libsystem_kernel.dylib/clonefile/resources/fclonefileat_hello_world.txt");
     int srcfd = open(src_path, O_RDONLY);
     assert_no_errno("open(srcfd)", srcfd == -1);
 

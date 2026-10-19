@@ -1,9 +1,9 @@
 // SPDX-FileCopyrightText: 2026 Darling Team
 // SPDX-License-Identifier: MPL-2.0
 
-#include <darling-testsuite/resource.h>
+#include <private/darling-testsuite/resource.h>
 
-#include <darling-testsuite/algorithm.h>
+#include <private/darling-testsuite/testcase.h>
 
 #include <sys/syslimits.h>
 
@@ -11,14 +11,25 @@
 #include <stdlib.h>
 #include <string.h>
 
-struct opaque_resource_container {
-    const char* base_path;
-    linked_list_t *allocated_resource_paths;
-};
-
 const char *grab_base_resource_path();
 resource_container_pt alloc_resource_container();
 void free_allocated_resource_path(void* ptr);
+
+//
+// Public Functions
+//
+
+const char *grab_full_resource_path(testsuite_container_pt container, const char *resource_path) {
+    return grab_full_resource_path_direct(container->resource, resource_path);
+}
+
+NSString *grab_full_resource_path_nsstring(testsuite_container_pt container, NSString *resource_path) {
+    return grab_full_resource_path_nsstring_direct(container->resource, resource_path);
+}
+
+//
+// Private Functions
+//
 
 resource_container_pt resource_container_alloc() {
     return malloc(sizeof(struct opaque_resource_container));
@@ -47,7 +58,7 @@ void free_allocated_resource_path(void* ptr) {
     free(ptr);
 }
 
-const char *grab_full_resource_path(resource_container_pt container, const char *resource_path) {
+const char *grab_full_resource_path_direct(resource_container_pt container, const char *resource_path) {
     if (resource_path == NULL) {
         return NULL;
     }
@@ -74,12 +85,12 @@ const char *grab_full_resource_path(resource_container_pt container, const char 
     return strncat(full_path, resource_path, new_str_length);
 }
 
-NSString *grab_full_resource_path_nsstring(resource_container_pt container, NSString* resource_path) {
+NSString *grab_full_resource_path_nsstring_direct(resource_container_pt container, NSString* resource_path) {
     if (resource_path == nil) {
         return nil;
     }
 
-    const char *cstring_result = grab_full_resource_path(container, [resource_path UTF8String]);
+    const char *cstring_result = grab_full_resource_path_direct(container, [resource_path UTF8String]);
     if (cstring_result == NULL) {
         return nil;
     }

@@ -22,7 +22,7 @@ int main() {
     const char full_dst_path[] = "/tmp/libsystem_kernel_fclonefileat_copied_file.txt";
     unlink(full_dst_path);
 
-    const char *src_path = grab_full_resource_path(resource_container, "testsuite/usr/lib/system/libsystem_kernel.dylib/clonefile/resources/fclonefileat_hello_world.txt");
+    const char *src_path = grab_full_resource_path_direct(resource_container, "testsuite/usr/lib/system/libsystem_kernel.dylib/clonefile/resources/fclonefileat_hello_world.txt");
     int srcfd = open(src_path, O_RDONLY);
     assert_no_errno("open(srcfd)", srcfd == -1);
 

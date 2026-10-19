@@ -62,70 +62,70 @@ void template_test_icns_single_type(NSURL* icns_url, size_t expected_width, size
 }
 
 void test_icontype_ic04(resource_container_pt resource_container) {
-    NSURL* icns_url = [NSURL fileURLWithPath:grab_full_resource_path_nsstring(resource_container, @"testsuite/System/Library/Frameworks/ImageIO.framework/resource/icns/Type_ic04.icns")];
+    NSURL* icns_url = [NSURL fileURLWithPath:grab_full_resource_path_nsstring_direct(resource_container, @"testsuite/System/Library/Frameworks/ImageIO.framework/resource/icns/Type_ic04.icns")];
     size_t expected_width = 16;
     size_t expected_height = 16;
     template_test_icns_single_type(icns_url, expected_width, expected_height);
 }   
 
 void test_icontype_ic05(resource_container_pt resource_container) {
-    NSURL* icns_url = [NSURL fileURLWithPath:grab_full_resource_path_nsstring(resource_container, @"testsuite/System/Library/Frameworks/ImageIO.framework/resource/icns/Type_ic05.icns")];
+    NSURL* icns_url = [NSURL fileURLWithPath:grab_full_resource_path_nsstring_direct(resource_container, @"testsuite/System/Library/Frameworks/ImageIO.framework/resource/icns/Type_ic05.icns")];
     size_t expected_width = 32;
     size_t expected_height = 32;
     template_test_icns_single_type(icns_url, expected_width, expected_height);
 }
 
 void test_icontype_ic07(resource_container_pt resource_container) {
-    NSURL* icns_url = [NSURL fileURLWithPath:grab_full_resource_path_nsstring(resource_container, @"testsuite/System/Library/Frameworks/ImageIO.framework/resource/icns/Type_ic07.icns")];
+    NSURL* icns_url = [NSURL fileURLWithPath:grab_full_resource_path_nsstring_direct(resource_container, @"testsuite/System/Library/Frameworks/ImageIO.framework/resource/icns/Type_ic07.icns")];
     size_t expected_width = 128;
     size_t expected_height = 128;
     template_test_icns_single_type(icns_url, expected_width, expected_height);
 }
 
 void test_icontype_ic08(resource_container_pt resource_container) {
-    NSURL* icns_url = [NSURL fileURLWithPath:grab_full_resource_path_nsstring(resource_container, @"testsuite/System/Library/Frameworks/ImageIO.framework/resource/icns/Type_ic08.icns")];
+    NSURL* icns_url = [NSURL fileURLWithPath:grab_full_resource_path_nsstring_direct(resource_container, @"testsuite/System/Library/Frameworks/ImageIO.framework/resource/icns/Type_ic08.icns")];
     size_t expected_width = 256;
     size_t expected_height = 256;
     template_test_icns_single_type(icns_url, expected_width, expected_height);
 }
 
 void test_icontype_ic09(resource_container_pt resource_container) {
-    NSURL* icns_url = [NSURL fileURLWithPath:grab_full_resource_path_nsstring(resource_container, @"testsuite/System/Library/Frameworks/ImageIO.framework/resource/icns/Type_ic09.icns")];
+    NSURL* icns_url = [NSURL fileURLWithPath:grab_full_resource_path_nsstring_direct(resource_container, @"testsuite/System/Library/Frameworks/ImageIO.framework/resource/icns/Type_ic09.icns")];
     size_t expected_width = 512;
     size_t expected_height = 512;
     template_test_icns_single_type(icns_url, expected_width, expected_height);
 }
 
 void test_icontype_ic10(resource_container_pt resource_container) {
-    NSURL* icns_url = [NSURL fileURLWithPath:grab_full_resource_path_nsstring(resource_container, @"testsuite/System/Library/Frameworks/ImageIO.framework/resource/icns/Type_ic10.icns")];
+    NSURL* icns_url = [NSURL fileURLWithPath:grab_full_resource_path_nsstring_direct(resource_container, @"testsuite/System/Library/Frameworks/ImageIO.framework/resource/icns/Type_ic10.icns")];
     size_t expected_width = 1024;
     size_t expected_height = 1024;
     template_test_icns_single_type(icns_url, expected_width, expected_height);
 }
 
 void test_icontype_ic11(resource_container_pt resource_container) {
-    NSURL* icns_url = [NSURL fileURLWithPath:grab_full_resource_path_nsstring(resource_container, @"testsuite/System/Library/Frameworks/ImageIO.framework/resource/icns/Type_ic11.icns")];
+    NSURL* icns_url = [NSURL fileURLWithPath:grab_full_resource_path_nsstring_direct(resource_container, @"testsuite/System/Library/Frameworks/ImageIO.framework/resource/icns/Type_ic11.icns")];
     size_t expected_width = 32;
     size_t expected_height = 32;
     template_test_icns_single_type(icns_url, expected_width, expected_height);
 }
 
 void test_icontype_ic12(resource_container_pt resource_container) {
-    NSURL* icns_url = [NSURL fileURLWithPath:grab_full_resource_path_nsstring(resource_container, @"testsuite/System/Library/Frameworks/ImageIO.framework/resource/icns/Type_ic12.icns")];
+    NSURL* icns_url = [NSURL fileURLWithPath:grab_full_resource_path_nsstring_direct(resource_container, @"testsuite/System/Library/Frameworks/ImageIO.framework/resource/icns/Type_ic12.icns")];
     size_t expected_width = 64;
     size_t expected_height = 64;
     template_test_icns_single_type(icns_url, expected_width, expected_height);
 }
 
 void test_icontype_ic13(resource_container_pt resource_container) {
-    NSURL* icns_url = [NSURL fileURLWithPath:grab_full_resource_path_nsstring(resource_container, @"testsuite/System/Library/Frameworks/ImageIO.framework/resource/icns/Type_ic13.icns")];
+    NSURL* icns_url = [NSURL fileURLWithPath:grab_full_resource_path_nsstring_direct(resource_container, @"testsuite/System/Library/Frameworks/ImageIO.framework/resource/icns/Type_ic13.icns")];
     size_t expected_width = 256;
     size_t expected_height = 256;
     template_test_icns_single_type(icns_url, expected_width, expected_height);
 }
 
 void test_icontype_ic14(resource_container_pt resource_container) {
-    NSURL* icns_url = [NSURL fileURLWithPath:grab_full_resource_path_nsstring(resource_container, @"testsuite/System/Library/Frameworks/ImageIO.framework/resource/icns/Type_ic14.icns")];
+    NSURL* icns_url = [NSURL fileURLWithPath:grab_full_resource_path_nsstring_direct(resource_container, @"testsuite/System/Library/Frameworks/ImageIO.framework/resource/icns/Type_ic14.icns")];
     size_t expected_width = 512;
     size_t expected_height = 512;
     template_test_icns_single_type(icns_url, expected_width, expected_height);

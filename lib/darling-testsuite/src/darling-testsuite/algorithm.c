@@ -37,6 +37,10 @@ void linked_list_append_next(linked_list_t **base, void *value) {
 }
 
 void linked_list_free(linked_list_t **base, value_free_handler_f free_value_func) {
+    if (base == NULL || *base == NULL) {
+        return;
+    }
+
     linked_list_t *item_before_base = (*base)->prev;
     linked_list_t *item_after_base = (*base)->next;
 
@@ -53,12 +57,20 @@ void linked_list_free(linked_list_t **base, value_free_handler_f free_value_func
 }
 
 void linked_list_freeall(linked_list_t **base, value_free_handler_f free_value_func) {
+    if (base == NULL || *base == NULL) {
+        return;
+    }
+
     linked_list_freeall_after(*base, free_value_func);
     linked_list_freeall_before(*base, free_value_func);
     linked_list_free(base, free_value_func);
 }
 
 void linked_list_freeall_before(linked_list_t *base, value_free_handler_f free_value_func) {
+    if (base == NULL) {
+        return;
+    }
+
     linked_list_t *prev_item = base->prev;
     while (prev_item != NULL) {
         linked_list_t *item_to_delete = prev_item;
@@ -70,6 +82,10 @@ void linked_list_freeall_before(linked_list_t *base, value_free_handler_f free_v
 }
 
 void linked_list_freeall_after(linked_list_t *base, value_free_handler_f free_value_func) {
+    if (base == NULL) {
+        return;
+    }
+
     linked_list_t *next_item = base->next;
     while (next_item != NULL) {
         linked_list_t *item_to_delete = next_item;

@@ -7,8 +7,8 @@
 createIcns() {
     local name="$1"
 
-    local icns_path="../resource/icns/$name.icns"
-    local iconset_path="../resource/iconset/$name.iconset"
+    local icns_path="../testdata/icns/$name.icns"
+    local iconset_path="../testdata/iconset/$name.iconset"
 
     echo "Creating $icns_path"
     iconutil --convert icns -o $icns_path $iconset_path

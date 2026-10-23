@@ -44,12 +44,12 @@ CFMutableArrayRef initalizeCertificates(resource_container_pt resource_container
     CFDataRef raw_certifcate_data;
     SecCertificateRef certificate;
 
-    const char *pypi_der = grab_full_resource_path(resource_container, "testsuite/System/Library/Frameworks/Security.framework/resources/pypi_org.der");
+    const char *pypi_der = grab_full_resource_path_direct(resource_container, "testsuite/System/Library/Frameworks/Security.framework/resources/pypi_org.der");
     raw_certifcate_data = createCertificateDataRef(pypi_der);
     certificate = SecCertificateCreateWithData(kCFAllocatorDefault, raw_certifcate_data);
     CFArrayAppendValue(mutableArray, certificate);
 
-    const char *globalsign_der = grab_full_resource_path(resource_container, "testsuite/System/Library/Frameworks/Security.framework/resources/globalsign_atlas_r3_dv_tls_ca_2025_q4.der");
+    const char *globalsign_der = grab_full_resource_path_direct(resource_container, "testsuite/System/Library/Frameworks/Security.framework/resources/globalsign_atlas_r3_dv_tls_ca_2025_q4.der");
     raw_certifcate_data = createCertificateDataRef(globalsign_der);
     certificate = SecCertificateCreateWithData(kCFAllocatorDefault, raw_certifcate_data);
     CFArrayAppendValue(mutableArray, certificate);

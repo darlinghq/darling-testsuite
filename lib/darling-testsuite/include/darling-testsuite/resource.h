@@ -4,18 +4,26 @@
 #ifndef DARLING_TESTSUITE_LIB_RESOURCE_H
 #define DARLING_TESTSUITE_LIB_RESOURCE_H
 
+#include <darling-testsuite/testcase.h>
+
+const char *grab_full_resource_path(testsuite_container_pt container, const char *resource_path);
+
+// Will become private in the future
 typedef struct opaque_resource_container *resource_container_pt;
 
 resource_container_pt resource_container_init();
 void resource_container_free(resource_container_pt *container);
 
-const char *grab_full_resource_path(resource_container_pt container, const char *resource_path);
+const char *grab_full_resource_path_direct(resource_container_pt container, const char *resource_path);
 
 #ifdef __OBJC__
 
 #include <Foundation/Foundation.h>
 
-NSString *grab_full_resource_path_nsstring(resource_container_pt container, NSString *resource_path);
+NSString *grab_full_resource_path_nsstring(testsuite_container_pt container, NSString *resource_path);
+
+// Will become private in the future
+NSString *grab_full_resource_path_nsstring_direct(resource_container_pt container, NSString *resource_path);
 
 #endif // __OBJC__
 

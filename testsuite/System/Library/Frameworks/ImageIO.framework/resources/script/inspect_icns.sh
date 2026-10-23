@@ -1,15 +1,15 @@
 # SPDX-FileCopyrightText: 2026 Darling Team
 # SPDX-License-Identifier: MPL-2.0
 
-# ../tool/parse_icns.py ../resource/icns/Type.icns
+# ./parse_icns.py ../testdata/icns/Type.icns
 
 parseIcns() {
     local name="$1"
 
-    local icns_path="../resource/icns/$name.icns"
+    local icns_path="../testdata/icns/$name.icns"
 
     echo "Inspecting $icns_path"
-    ../tool/parse_icns.py $icns_path
+    ./parse_icns.py $icns_path
     echo "" # To add a space
 }
 

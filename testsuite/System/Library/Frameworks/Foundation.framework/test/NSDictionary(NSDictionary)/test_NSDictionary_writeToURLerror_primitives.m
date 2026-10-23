@@ -34,7 +34,7 @@ int main(void) {
     assert_NSError_not_set(error, !isSuccessful);
 
     // Verify
-    const char *expected_path = grab_full_resource_path(resource_container, expected_relative_path);
+    const char *expected_path = grab_full_resource_path_direct(resource_container, expected_relative_path);
     if (!is_xml_equal(expected_path, [generated_path UTF8String])) {
         abort();
     }

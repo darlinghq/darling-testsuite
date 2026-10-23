@@ -16,7 +16,7 @@ int main() {
     char buffer[12] = { 0 };
     size_t size = 12;
 
-    const char *src_path = grab_full_resource_path(resource_container, "testsuite/usr/lib/system/libsystem_kernel.dylib/read/resources/read_hello_world.txt");
+    const char *src_path = grab_full_resource_path_direct(resource_container, "testsuite/usr/lib/system/libsystem_kernel.dylib/read/resources/read_hello_world.txt");
     int fd = open(src_path, O_RDONLY);
     assert(fd >= 0);
 

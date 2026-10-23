@@ -12,7 +12,7 @@
 int main() {
     // Setup
     resource_container_pt resource_container = resource_container_init();
-    const char *hello_world_path = grab_full_resource_path(resource_container, "testsuite-kernel/syscall/bsd/sys_read/resources/read_hello_world.txt");
+    const char *hello_world_path = grab_full_resource_path_direct(resource_container, "testsuite-kernel/syscall/bsd/sys_read/resources/read_hello_world.txt");
 
     int fd = sys_open((const darling_user_addr_t)hello_world_path, O_RDONLY, 0, NULL);
     char buffer[13] = { 0 };

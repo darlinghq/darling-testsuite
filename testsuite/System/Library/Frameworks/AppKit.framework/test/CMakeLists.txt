@@ -11,6 +11,16 @@ add_executable("${DARLING_IDENTIFIER}.test_NSApplication_setPresentationOptions_
 target_link_libraries("${DARLING_IDENTIFIER}.test_NSApplication_setPresentationOptions_verifyException" "-framework Foundation" "-framework AppKit" darling-testsuite-lib)
 add_test(NAME "${DARLING_PATH}/test_NSApplication_setPresentationOptions_verifyException" COMMAND "${DARLING_IDENTIFIER}.test_NSApplication_setPresentationOptions_verifyException")
 
+# NSButton
+
+add_executable("${DARLING_IDENTIFIER}.test_NSButton_buttonWithImage_target_action_verifyDefaults" "NSButton/test_NSButton_buttonWithImage_target_action_verifyDefaults.m")
+target_link_libraries("${DARLING_IDENTIFIER}.test_NSButton_buttonWithImage_target_action_verifyDefaults" "-framework Foundation" "-framework AppKit" darling-testsuite-lib)
+add_test(NAME "${DARLING_PATH}/test_NSButton_buttonWithImage_target_action_verifyDefaults" COMMAND "${DARLING_IDENTIFIER}.test_NSButton_buttonWithImage_target_action_verifyDefaults")
+
+add_executable("${DARLING_IDENTIFIER}.test_NSButton_buttonWithTitle_target_action_verifyDefaults" "NSButton/test_NSButton_buttonWithTitle_target_action_verifyDefaults.m")
+target_link_libraries("${DARLING_IDENTIFIER}.test_NSButton_buttonWithTitle_target_action_verifyDefaults" "-framework Foundation" "-framework AppKit" darling-testsuite-lib)
+add_test(NAME "${DARLING_PATH}/test_NSButton_buttonWithTitle_target_action_verifyDefaults" COMMAND "${DARLING_IDENTIFIER}.test_NSButton_buttonWithTitle_target_action_verifyDefaults")
+
 # NSColor
 
 add_executable("${DARLING_IDENTIFIER}.test_NSColor_class_variable" "NSColor/test_NSColor_class_variable.m")
@@ -52,6 +62,34 @@ add_test(NAME "${DARLING_PATH}/test_NSCursor_encodeWithCoder" COMMAND "${DARLING
 add_executable("${DARLING_IDENTIFIER}.test_NSCursor_initWithCoder" "NSCursor/test_NSCursor_initWithCoder.m")
 target_link_libraries("${DARLING_IDENTIFIER}.test_NSCursor_initWithCoder" "-framework Foundation" "-framework AppKit" darling-testsuite-lib)
 add_test(NAME "${DARLING_PATH}/test_NSCursor_initWithCoder" COMMAND "${DARLING_IDENTIFIER}.test_NSCursor_initWithCoder")
+
+# NSFont
+
+add_executable("${DARLING_IDENTIFIER}.test_NSFont_monospacedDigitSystemFontOfSize_weight" "NSFont/test_NSFont_monospacedDigitSystemFontOfSize_weight.m")
+target_link_libraries("${DARLING_IDENTIFIER}.test_NSFont_monospacedDigitSystemFontOfSize_weight" "-framework Foundation" "-framework AppKit" darling-testsuite-lib)
+add_test(NAME "${DARLING_PATH}/test_NSFont_monospacedDigitSystemFontOfSize_weight" COMMAND "${DARLING_IDENTIFIER}.test_NSFont_monospacedDigitSystemFontOfSize_weight")
+
+add_executable("${DARLING_IDENTIFIER}.test_NSFont_monospacedSystemFontOfSize_weight" "NSFont/test_NSFont_monospacedSystemFontOfSize_weight.m")
+target_link_libraries("${DARLING_IDENTIFIER}.test_NSFont_monospacedSystemFontOfSize_weight" "-framework Foundation" "-framework AppKit" darling-testsuite-lib)
+add_test(NAME "${DARLING_PATH}/test_NSFont_monospacedSystemFontOfSize_weight" COMMAND "${DARLING_IDENTIFIER}.test_NSFont_monospacedSystemFontOfSize_weight")
+
+# NSTextField
+
+add_executable("${DARLING_IDENTIFIER}.test_NSTextField_labelWithString_verifyDefaults" "NSTextField/test_NSTextField_labelWithString_verifyDefaults.m")
+target_link_libraries("${DARLING_IDENTIFIER}.test_NSTextField_labelWithString_verifyDefaults" "-framework Foundation" "-framework AppKit" darling-testsuite-lib)
+add_test(NAME "${DARLING_PATH}/test_NSTextField_labelWithString_verifyDefaults" COMMAND "${DARLING_IDENTIFIER}.test_NSTextField_labelWithString_verifyDefaults")
+
+# NSTextView
+
+add_executable("${DARLING_IDENTIFIER}.test_NSTextView_scrollableTextView_verifyDefaults" "NSTextView/test_NSTextView_scrollableTextView_verifyDefaults.m")
+target_link_libraries("${DARLING_IDENTIFIER}.test_NSTextView_scrollableTextView_verifyDefaults" "-framework Foundation" "-framework AppKit" darling-testsuite-lib)
+add_test(NAME "${DARLING_PATH}/test_NSTextView_scrollableTextView_verifyDefaults" COMMAND "${DARLING_IDENTIFIER}.test_NSTextView_scrollableTextView_verifyDefaults")
+
+# NSViewController
+
+add_executable("${DARLING_IDENTIFIER}.test_NSViewController_isViewLoaded_loadsOnDemand" "NSViewController/test_NSViewController_isViewLoaded_loadsOnDemand.m")
+target_link_libraries("${DARLING_IDENTIFIER}.test_NSViewController_isViewLoaded_loadsOnDemand" "-framework Foundation" "-framework AppKit" darling-testsuite-lib)
+add_test(NAME "${DARLING_PATH}/test_NSViewController_isViewLoaded_loadsOnDemand" COMMAND "${DARLING_IDENTIFIER}.test_NSViewController_isViewLoaded_loadsOnDemand")
 
 # NSWorkspace
 
@@ -101,6 +139,10 @@ install(
         "${DARLING_IDENTIFIER}.test_NSApplication_helpMenu_setterDoesntAffectMainMenuStructure"
         "${DARLING_IDENTIFIER}.test_NSApplication_setPresentationOptions_verifyException"
         
+        # NSButton
+        "${DARLING_IDENTIFIER}.test_NSButton_buttonWithImage_target_action_verifyDefaults"
+        "${DARLING_IDENTIFIER}.test_NSButton_buttonWithTitle_target_action_verifyDefaults"
+
         # NSColor
         "${DARLING_IDENTIFIER}.test_NSColor_class_variable"
         "${DARLING_IDENTIFIER}.test_NSColor_colorUsingColorSpaceNamedevice"
@@ -115,6 +157,19 @@ install(
         # NSCursor
         "${DARLING_IDENTIFIER}.test_NSCursor_encodeWithCoder"
         "${DARLING_IDENTIFIER}.test_NSCursor_initWithCoder"
+
+        # NSFont
+        "${DARLING_IDENTIFIER}.test_NSFont_monospacedDigitSystemFontOfSize_weight"
+        "${DARLING_IDENTIFIER}.test_NSFont_monospacedSystemFontOfSize_weight"
+
+        # NSTextField
+        "${DARLING_IDENTIFIER}.test_NSTextField_labelWithString_verifyDefaults"
+
+        # NSTextView
+        "${DARLING_IDENTIFIER}.test_NSTextView_scrollableTextView_verifyDefaults"
+
+        # NSViewController
+        "${DARLING_IDENTIFIER}.test_NSViewController_isViewLoaded_loadsOnDemand"
 
         # NSWorkspace
         "${DARLING_IDENTIFIER}.test_NSWorkspace_openURL"

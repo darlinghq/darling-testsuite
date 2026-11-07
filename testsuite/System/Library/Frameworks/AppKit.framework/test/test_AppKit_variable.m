@@ -37,6 +37,18 @@ int main() {
     assert_equals_NSString(@"icon", NSDraggingImageComponentIconKey);
     assert_equals_NSString(@"label", NSDraggingImageComponentLabelKey);
 
+    // #include <AppKit/NSFontDescriptor.h>
+    // NSFontWeight (the values have float precision)
+    assert_equals_CGFloat("NSFontWeightUltraLight", (CGFloat)-0.8f, NSFontWeightUltraLight);
+    assert_equals_CGFloat("NSFontWeightThin",       (CGFloat)-0.6f, NSFontWeightThin);
+    assert_equals_CGFloat("NSFontWeightLight",      (CGFloat)-0.4f, NSFontWeightLight);
+    assert_equals_CGFloat("NSFontWeightRegular",    (CGFloat)0.0f, NSFontWeightRegular);
+    assert_equals_CGFloat("NSFontWeightMedium",     (CGFloat)0.23f, NSFontWeightMedium);
+    assert_equals_CGFloat("NSFontWeightSemibold",   (CGFloat)0.3f, NSFontWeightSemibold);
+    assert_equals_CGFloat("NSFontWeightBold",       (CGFloat)0.4f, NSFontWeightBold);
+    assert_equals_CGFloat("NSFontWeightHeavy",      (CGFloat)0.56f, NSFontWeightHeavy);
+    assert_equals_CGFloat("NSFontWeightBlack",      (CGFloat)0.62f, NSFontWeightBlack);
+
     // #include <AppKit/NSGraphics.h>
     assert_equals_NSString(@"NSCustomColorSpace", NSCustomColorSpace);
 

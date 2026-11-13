@@ -8,11 +8,14 @@
 
 #include <darling-testsuite/assertion.h>
 
-// +[NSEvent mouseLocation] and CGWarpMouseCursorPosition are both documented in
-// points, in the same top-left-origin space as NSScreen.frame. The X11 backend used
-// to feed XQueryPointer's device pixels straight back out, so at 2x the reported
-// location was twice as far from the origin as the pointer actually was, and
-// warping to a point moved the pointer to twice that distance.
+// +[NSEvent mouseLocation] and CGWarpMouseCursorPosition both work in points, but
+// in different spaces: Quartz global display coordinates have their origin at the
+// top left of the main display, while the Cocoa screen space that mouseLocation and
+// NSScreen.frame use has it at the bottom left (the main screen's frame starts at
+// (0,0)). The X11 backend used to feed XQueryPointer's device pixels straight back
+// out, so at 2x the reported location was twice as far from the origin as the
+// pointer actually was, and warping to a point moved the pointer to twice that
+// distance.
 //
 // Driving the pointer with CGWarpMouseCursorPosition and reading it back is what
 // makes this deterministic: a test that only sampled wherever the pointer happened
@@ -34,9 +37,12 @@ int main() {
     // Deliberately off-centre and asymmetric: a centre-only sample would still
     // agree between the two coordinate spaces at 1x, and an off-centre point is
     // what separates "points" from "device pixels" at 2x.
-    NSPoint target = NSMakePoint(NSWidth(frame) / 4.0, NSHeight(frame) / 8.0);
+    CGPoint warpTarget = CGPointMake(NSWidth(frame) / 4.0, NSHeight(frame) / 8.0);
+    // The same place in Cocoa screen coordinates: y counts up from the bottom edge.
+    NSPoint target = NSMakePoint(NSMinX(frame) + warpTarget.x,
+                                 NSMaxY(frame) - warpTarget.y);
 
-    CGError error = CGWarpMouseCursorPosition(target);
+    CGError error = CGWarpMouseCursorPosition(warpTarget);
     assert_is_true(error == kCGErrorSuccess);
 
     // The X11 backend reads the pointer back with a synchronous XQueryPointer, but
@@ -60,7 +66,7 @@ int main() {
     assert_is_true(reported.y <= NSMaxY(frame) + tolerance);
 
     // Put the pointer back roughly centred so the test does not leave it in a corner.
-    CGWarpMouseCursorPosition(NSMakePoint(NSWidth(frame) / 2.0, NSHeight(frame) / 2.0));
+    CGWarpMouseCursorPosition(CGPointMake(NSWidth(frame) / 2.0, NSHeight(frame) / 2.0));
 
     // Sanity: the two spaces only coincide at 1x, which is why this test has to
     // exercise a non-central point to mean anything above 1x.

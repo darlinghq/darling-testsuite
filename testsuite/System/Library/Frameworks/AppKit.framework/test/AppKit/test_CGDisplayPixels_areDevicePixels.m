@@ -54,12 +54,16 @@ int main() {
         assert_is_true(high > (size_t) lround(NSHeight(frame)));
     }
 
-    // Each display index has to map to the screen at the same position, scaled by that
-    // screen's own scale. This catches both a wrong ordering and a scale borrowed from
-    // the wrong screen.
+    // Every screen has to match the display it names in its device description,
+    // scaled by that screen's own scale. This catches a scale borrowed from the
+    // wrong screen. (Display IDs are opaque numbers, so they are taken from the
+    // documented NSScreenNumber key rather than guessed from the screen's position.)
     NSArray<NSScreen*>* screens = [NSScreen screens];
     for (NSUInteger index = 0; index < [screens count]; index++) {
-        check_display((CGDirectDisplayID) (index + 1), [screens objectAtIndex: index]);
+        NSScreen* each = [screens objectAtIndex: index];
+        NSNumber* number = [[each deviceDescription] objectForKey: @"NSScreenNumber"];
+        assert_is_true(number != nil);
+        check_display((CGDirectDisplayID) [number unsignedIntValue], each);
     }
 
     return 0;

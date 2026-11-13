@@ -194,6 +194,7 @@ install(
         # NSWorkspace
         "${DARLING_IDENTIFIER}.test_NSWorkspace_openURL"
         "${DARLING_IDENTIFIER}.test_NSWorkspace_openFile_withApplication_andDeactivate"
+
         # NSEvent
         "${DARLING_IDENTIFIER}.test_NSEvent_mouseLocation_isInPoints"
 

@@ -1,6 +1,12 @@
 # SPDX-FileCopyrightText: 2026 Darling Team
 # SPDX-License-Identifier: MPL-2.0
 
+# AppKit
+
+add_executable("${DARLING_IDENTIFIER}.test_CGDisplayPixels_areDevicePixels" "AppKit/test_CGDisplayPixels_areDevicePixels.m")
+target_link_libraries("${DARLING_IDENTIFIER}.test_CGDisplayPixels_areDevicePixels" "-framework Foundation" "-framework AppKit" darling-testsuite-lib)
+add_test(NAME "${DARLING_PATH}/test_CGDisplayPixels_areDevicePixels" COMMAND "${DARLING_IDENTIFIER}.test_CGDisplayPixels_areDevicePixels")
+
 # NSApplication
 
 add_executable("${DARLING_IDENTIFIER}.test_NSApplication_helpMenu_setterDoesntAffectMainMenuStructure" "NSApplication/test_NSApplication_helpMenu_setterDoesntAffectMainMenuStructure.m")
@@ -126,6 +132,17 @@ install(TARGETS "NSApplicationDelegate_application_openFile"
 install(FILES "NSWorkspace/manual/NSApplicationDelegate_application_openFile.app/Contents/Info.plist"
     DESTINATION "${INSTALL_DIR_MANUAL}/NSApplicationDelegate_application_openFile.app/Contents"
 )
+# NSEvent
+
+add_executable("${DARLING_IDENTIFIER}.test_NSEvent_mouseLocation_isInPoints" "NSEvent/test_NSEvent_mouseLocation_isInPoints.m")
+target_link_libraries("${DARLING_IDENTIFIER}.test_NSEvent_mouseLocation_isInPoints" "-framework Foundation" "-framework AppKit" darling-testsuite-lib)
+add_test(NAME "${DARLING_PATH}/test_NSEvent_mouseLocation_isInPoints" COMMAND "${DARLING_IDENTIFIER}.test_NSEvent_mouseLocation_isInPoints")
+
+# NSScreen
+
+add_executable("${DARLING_IDENTIFIER}.test_NSScreen_backingScaleFactor_isPointsBased" "NSScreen/test_NSScreen_backingScaleFactor_isPointsBased.m")
+target_link_libraries("${DARLING_IDENTIFIER}.test_NSScreen_backingScaleFactor_isPointsBased" "-framework Foundation" "-framework AppKit" darling-testsuite-lib)
+add_test(NAME "${DARLING_PATH}/test_NSScreen_backingScaleFactor_isPointsBased" COMMAND "${DARLING_IDENTIFIER}.test_NSScreen_backingScaleFactor_isPointsBased")
 
 # Misc
 
@@ -135,6 +152,9 @@ add_test(NAME "${DARLING_PATH}/test_AppKit_variable" COMMAND "${DARLING_IDENTIFI
 
 install(
     TARGETS
+        # AppKit
+        "${DARLING_IDENTIFIER}.test_CGDisplayPixels_areDevicePixels"
+
         # NSApplication
         "${DARLING_IDENTIFIER}.test_NSApplication_helpMenu_setterDoesntAffectMainMenuStructure"
         "${DARLING_IDENTIFIER}.test_NSApplication_setPresentationOptions_verifyException"
@@ -174,6 +194,12 @@ install(
         # NSWorkspace
         "${DARLING_IDENTIFIER}.test_NSWorkspace_openURL"
         "${DARLING_IDENTIFIER}.test_NSWorkspace_openFile_withApplication_andDeactivate"
+
+        # NSEvent
+        "${DARLING_IDENTIFIER}.test_NSEvent_mouseLocation_isInPoints"
+
+        # NSScreen
+        "${DARLING_IDENTIFIER}.test_NSScreen_backingScaleFactor_isPointsBased"
 
         # Misc
         "${DARLING_IDENTIFIER}.test_AppKit_variable"
